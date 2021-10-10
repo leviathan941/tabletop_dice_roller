@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
 }
 
+def getVersionCode = { "$application_version".replace(".", "") as Integer }
+
 android {
     compileSdk 31
 
@@ -10,8 +12,8 @@ android {
         applicationId "org.leviathan941.tabletopdiceroller"
         minSdk 21
         targetSdk 31
-        versionCode 1
-        versionName "0.1"
+        versionCode getVersionCode()
+        versionName "$application_version"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
