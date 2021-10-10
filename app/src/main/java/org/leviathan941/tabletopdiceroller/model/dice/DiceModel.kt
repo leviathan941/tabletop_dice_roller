@@ -16,9 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.model.view
+package org.leviathan941.tabletopdiceroller.model.dice
 
-import androidx.lifecycle.ViewModel
+class DiceModel(
+    val dice: Dice,
+    init_result: Int = NO_RESULT
+) {
+    init {
+        require(dice.range.contains(init_result)) {
+            "Invalid initial value $init_result for ${dice::class.simpleName}:[${dice.range}]"
+        }
+    }
 
-class MainViewModel : ViewModel() {
+    var result: Int = init_result
+        private set
+
+    fun roll(): Int = dice.roll().also {
+        result = it
+    }
+
+    companion object {
+        const val NO_RESULT = -1
+    }
 }

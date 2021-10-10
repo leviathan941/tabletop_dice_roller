@@ -18,16 +18,16 @@
 
 package org.leviathan941.tabletopdiceroller.model.dice
 
-class SixSidedDice : Dice {
-    override fun previewImage(): Int {
-        TODO("Not yet implemented")
-    }
+import org.leviathan941.tabletopdiceroller.R
 
-    override fun sideImage(sideId: Int): Int {
-        TODO("Not yet implemented")
-    }
-
-    override fun roll(): Int {
-        TODO("Not yet implemented")
-    }
-}
+class SixSidedDice : GenericDice(
+    listOf(
+        R.drawable.ic_launcher_foreground,
+        R.drawable.ic_launcher_foreground,
+        R.drawable.ic_launcher_foreground,
+        R.drawable.ic_launcher_foreground,
+        R.drawable.ic_launcher_foreground,
+        R.drawable.ic_launcher_foreground
+    ),
+    R.drawable.ic_launcher_foreground
+)

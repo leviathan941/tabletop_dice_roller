@@ -18,20 +18,34 @@
 
 package org.leviathan941.tabletopdiceroller.ui.main
 
+import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.viewModels
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import org.leviathan941.tabletopdiceroller.ui.dice.DiceView
+import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
-@Preview
 @Composable
-fun MainView() {
+fun MainView(activity: ComponentActivity) {
+    val viewModel: MainViewModel by activity.viewModels()
+
     Scaffold(
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
             MainActionPanel()
         },
-    ) {
-
+    ) { innerPadding ->
+        val diceModels by viewModel.diceModels.observeAsState(initial = emptyList())
+        LazyColumn(contentPadding = innerPadding) {
+            items(diceModels) { diceModel ->
+                DiceView(diceModel.result.toString())
+            }
+        }
     }
 }

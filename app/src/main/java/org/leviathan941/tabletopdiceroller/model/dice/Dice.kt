@@ -21,7 +21,22 @@ package org.leviathan941.tabletopdiceroller.model.dice
 import androidx.annotation.DrawableRes
 
 interface Dice {
-    @DrawableRes fun previewImage(): Int
     @DrawableRes fun sideImage(sideId: Int): Int
+    @DrawableRes fun previewImage(): Int
     fun roll(): Int
+    val range: IntRange
+}
+
+sealed class GenericDice(
+    @DrawableRes private val sideImages: List<Int>,
+    @DrawableRes private val previewImage: Int
+    ) : Dice {
+
+    @DrawableRes override fun sideImage(sideId: Int): Int = sideImages[sideId]
+
+    override fun previewImage(): Int = previewImage
+
+    override fun roll(): Int = range.random()
+
+    override val range: IntRange = sideImages.indices
 }
