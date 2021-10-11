@@ -32,15 +32,20 @@ fun TabletopDiceRollerTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    // TODO: Support dark theme
-    val colors = lightColors(
-        primary = colorResource(id = R.color.light_primary),
-        primaryVariant = colorResource(id = R.color.light_primary_variant),
-        secondary = colorResource(id = R.color.light_secondary),
-        secondaryVariant = colorResource(id = R.color.light_secondary_variant),
-        background = colorResource(id = R.color.light_background),
-        onPrimary = colorResource(id = R.color.light_on_primary),
-        onSecondary = colorResource(id = R.color.light_on_secondary),
+    val colors = if (darkTheme) darkColors(
+        primary = colorResource(id = R.color.brown_400_dark),
+        primaryVariant = colorResource(id = R.color.brown_400),
+        secondary = colorResource(id = R.color.teal_400_dark),
+        secondaryVariant = colorResource(id = R.color.teal_400),
+        onPrimary = Color.White,
+        onSecondary = Color.Black,
+    ) else lightColors(
+        primary = colorResource(id = R.color.brown_400_light),
+        primaryVariant = colorResource(id = R.color.brown_400),
+        secondary = colorResource(id = R.color.teal_400_light),
+        secondaryVariant = colorResource(id = R.color.teal_400),
+        onPrimary = Color.White,
+        onSecondary = Color.Black,
     )
 
     MaterialTheme(

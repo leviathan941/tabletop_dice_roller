@@ -18,18 +18,17 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.rounded.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,37 +42,33 @@ fun DiceView(
     diceViewModel: DiceViewModel,
     onRemoveClick: () -> Unit,
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight(align = Alignment.CenterVertically)
-    ) {
-        Button(
-            onClick = onRemoveClick,
-            modifier = Modifier
-                .align(Alignment.CenterStart)
-                .padding(start = 10.dp)
-                .size(50.dp)
-        ) {
-            Image(
-                imageVector = Icons.Filled.Close,
-                contentScale = ContentScale.FillBounds,
-                contentDescription = stringResource(id = R.string.remove_dice_desc)
-            )
-        }
+    Box(modifier = Modifier.size(110.dp)) {
         Button(
             onClick = diceViewModel::roll,
             contentPadding = PaddingValues(all = 0.dp),
             modifier = Modifier
                 .align(Alignment.Center)
-                .border(width = 2.dp, color = Color.Cyan)
-                .size(100.dp),
+                .fillMaxSize()
+                .padding(all = 10.dp),
         ) {
             Text(
                 text = "${diceViewModel.result + 1}",
                 modifier = Modifier
                     .wrapContentSize(),
                 fontSize = 50.sp,
+            )
+        }
+        OutlinedButton(
+            onClick = onRemoveClick,
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .size(25.dp),
+            shape = CircleShape,
+            contentPadding = PaddingValues(0.dp),
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.Close,
+                contentDescription = stringResource(id = R.string.remove_dice_desc)
             )
         }
     }
