@@ -33,17 +33,17 @@ fun TabletopDiceRollerTheme(
     content: @Composable () -> Unit
 ) {
     val colors = if (darkTheme) darkColors(
-        primary = colorResource(id = R.color.brown_400_dark),
-        primaryVariant = colorResource(id = R.color.brown_400),
-        secondary = colorResource(id = R.color.teal_400_dark),
-        secondaryVariant = colorResource(id = R.color.teal_400),
+        primary = colorResource(id = R.color.brown_500_dark),
+        primaryVariant = colorResource(id = R.color.brown_500),
+        secondary = colorResource(id = R.color.custom_secondary_dark),
+        secondaryVariant = colorResource(id = R.color.custom_secondary),
         onPrimary = Color.White,
         onSecondary = Color.Black,
     ) else lightColors(
-        primary = colorResource(id = R.color.brown_400_light),
-        primaryVariant = colorResource(id = R.color.brown_400),
-        secondary = colorResource(id = R.color.teal_400_light),
-        secondaryVariant = colorResource(id = R.color.teal_400),
+        primary = colorResource(id = R.color.brown_500_light),
+        primaryVariant = colorResource(id = R.color.brown_500),
+        secondary = colorResource(id = R.color.custom_secondary_light),
+        secondaryVariant = colorResource(id = R.color.custom_secondary),
         onPrimary = Color.White,
         onSecondary = Color.Black,
     )

@@ -21,11 +21,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="brown_400_light">#ffbe9c91</color>
-    <color name="brown_400_dark">#ff5f4339</color>
-    <color name="brown_400">#ff8c6d62</color>
+    <color name="brown_500_light">#ffa98274</color>
+    <color name="brown_500_dark">#ff4b2c20</color>
+    <color name="brown_500">#ff795548</color>
 
     <color name="teal_400_light">#ff64d8cb</color>
     <color name="teal_400_dark">#ff00766c</color>
     <color name="teal_400">#ff26a69a</color>
+
+    <color name="custom_secondary">#ff27A684</color>
+    <color name="custom_secondary_light">#ff63d8b4</color>
+    <color name="custom_secondary_dark">#ff007657</color>
 </resources>
