@@ -3,4 +3,5 @@
 
     <string name="add_dice_fab_desc">Add one more default dice</string>
     <string name="roll_fab_desc">Roll selected dices</string>
+    <string name="remove_dice_desc">Remove dice</string>
 </resources>

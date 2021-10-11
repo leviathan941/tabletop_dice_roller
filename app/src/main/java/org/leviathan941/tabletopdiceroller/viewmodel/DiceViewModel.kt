@@ -16,23 +16,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.model.dice
+package org.leviathan941.tabletopdiceroller.viewmodel
 
-class DiceModel(
-    val dice: Dice,
+import androidx.annotation.DrawableRes
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.ViewModel
+import org.leviathan941.tabletopdiceroller.model.dice.Dice
+
+class DiceViewModel(
+    private val dice: Dice,
     init_result: Int = NO_RESULT
-) {
+) : ViewModel() {
+    var result by mutableStateOf(init_result)
+        private set
+
     init {
-        require(dice.range.contains(init_result)) {
+        require(dice.range.contains(init_result) || init_result == NO_RESULT) {
             "Invalid initial value $init_result for ${dice::class.simpleName}:[${dice.range}]"
         }
     }
 
-    var result: Int = init_result
-        private set
+    @DrawableRes fun resultImage(): Int =
+        if (result == NO_RESULT) dice.previewImage()
+        else dice.sideImage(result)
 
-    fun roll(): Int = dice.roll().also {
-        result = it
+    fun roll() {
+        result = dice.roll()
     }
 
     companion object {

@@ -18,27 +18,68 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.leviathan941.tabletopdiceroller.R
+import org.leviathan941.tabletopdiceroller.model.dice.defaultDice
+import org.leviathan941.tabletopdiceroller.viewmodel.DiceViewModel
+
+@Composable
+fun DiceView(
+    diceViewModel: DiceViewModel,
+    onRemoveClick: () -> Unit,
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight(align = Alignment.CenterVertically)
+    ) {
+        Button(
+            onClick = onRemoveClick,
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+                .padding(start = 10.dp)
+                .size(50.dp)
+        ) {
+            Image(
+                imageVector = Icons.Filled.Close,
+                contentScale = ContentScale.FillBounds,
+                contentDescription = stringResource(id = R.string.remove_dice_desc)
+            )
+        }
+        Button(
+            onClick = diceViewModel::roll,
+            contentPadding = PaddingValues(all = 0.dp),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .border(width = 2.dp, color = Color.Cyan)
+                .size(100.dp),
+        ) {
+            Text(
+                text = "${diceViewModel.result + 1}",
+                modifier = Modifier
+                    .wrapContentSize(),
+                fontSize = 50.sp,
+            )
+        }
+    }
+}
 
 @Preview
 @Composable
-fun DiceView(value: String = "2") {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Text(
-            text = value,
-            fontSize = 50.sp
-        )
-    }
-}
+private fun PreviewDiceView() =
+    DiceView(DiceViewModel(defaultDice()), onRemoveClick = {})

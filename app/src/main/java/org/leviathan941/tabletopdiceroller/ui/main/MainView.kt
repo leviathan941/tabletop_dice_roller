@@ -18,7 +18,6 @@
 
 package org.leviathan941.tabletopdiceroller.ui.main
 
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,8 +25,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
 import org.leviathan941.tabletopdiceroller.ui.dice.DiceView
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
@@ -38,13 +36,16 @@ fun MainView(activity: ComponentActivity) {
     Scaffold(
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
-            MainActionPanel()
+            MainActionPanel(
+                onAddDice = viewModel::addDefaultDice,
+                onRoll = viewModel::rollAll
+            )
         },
     ) { innerPadding ->
-        val diceModels by viewModel.diceModels.observeAsState(initial = emptyList())
+        val diceModels = remember { viewModel.diceModels }
         LazyColumn(contentPadding = innerPadding) {
             items(diceModels) { diceModel ->
-                DiceView(diceModel.result.toString())
+                DiceView(diceModel) { viewModel.removeDice(diceModel) }
             }
         }
     }

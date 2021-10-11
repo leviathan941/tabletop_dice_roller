@@ -18,22 +18,32 @@
 
 package org.leviathan941.tabletopdiceroller.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import org.leviathan941.tabletopdiceroller.model.dice.DiceModel
 import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDice
 
 class MainViewModel : ViewModel() {
-    private val _diceModels = MutableLiveData<List<DiceModel>>()
-    val diceModels: LiveData<List<DiceModel>> = _diceModels
+    var diceModels = mutableStateListOf<DiceViewModel>()
+        private set
 
     init {
         viewModelScope.launch {
             loadTable()
         }
+    }
+
+    fun addDefaultDice() {
+        diceModels.add(DiceViewModel(SixSidedDice()))
+    }
+
+    fun rollAll() {
+        diceModels.forEach { it.roll() }
+    }
+
+    fun removeDice(diceModel: DiceViewModel) {
+        diceModels.remove(diceModel)
     }
 
     suspend fun dumpTable() {
@@ -42,11 +52,11 @@ class MainViewModel : ViewModel() {
 
     private suspend fun loadTable() {
         // TODO: Load from database
-        _diceModels.postValue(
+        diceModels.addAll(
             listOf(
-                DiceModel(SixSidedDice(), 2),
-                DiceModel(SixSidedDice(), 5),
-                DiceModel(SixSidedDice(), 4),
+                DiceViewModel(SixSidedDice(), 2),
+                DiceViewModel(SixSidedDice(), 5),
+                DiceViewModel(SixSidedDice(), 4),
             )
         )
     }

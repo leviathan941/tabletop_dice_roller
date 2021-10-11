@@ -40,3 +40,5 @@ sealed class GenericDice(
 
     override val range: IntRange = sideImages.indices
 }
+
+fun defaultDice() = SixSidedDice()
