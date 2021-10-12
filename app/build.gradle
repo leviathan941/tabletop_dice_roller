@@ -3,17 +3,31 @@ plugins {
     id 'kotlin-android'
 }
 
-def getVersionCode = { "$application_version".replace(".", "") as Integer }
+static def fixVersionPart(String part) {
+    if (part.length() > 1) {
+        return part
+    } else {
+        return "0$part"
+    }
+}
+
+def getVersionCode = {
+    def major = "$versionMajor"
+    def minor = fixVersionPart("$versionMinor")
+    def patch = fixVersionPart("$versionPatch")
+    def versionCode = "$major$minor$patch" as Integer
+    return versionCode
+}
 
 android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "$application_id"
+        applicationId "$appId"
         minSdk 21
         targetSdk 31
         versionCode getVersionCode()
-        versionName "$application_version"
+        versionName "$versionMajor.$versionMinor.$versionPatch"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -21,7 +35,7 @@ android {
         }
 
         setProperty("archivesBaseName",
-                "$application_base_name-$application_version")
+                "$appBaseName-$versionName")
     }
 
     buildTypes {

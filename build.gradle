@@ -1,9 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        application_base_name = "tabletopdiceroller"
-        application_id = "org.leviathan941.$application_base_name"
-        application_version = '0.1.0'
+        appBaseName = "tabletopdiceroller"
+        appId = "org.leviathan941.$appBaseName"
+        versionMajor = '0'
+        versionMinor = '1'
+        versionPatch = '0'
 
         compose_version = '1.0.3'
         kotlin_version = '1.5.30'
