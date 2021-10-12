@@ -22,8 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import org.leviathan941.tabletopdiceroller.model.dice.Dice
-import org.leviathan941.tabletopdiceroller.model.dice.DiceResult
+import org.leviathan941.tabletopdiceroller.model.dice.*
 
 class DiceViewModel(
     private val dice: Dice,
@@ -31,6 +30,11 @@ class DiceViewModel(
 ) : ViewModel() {
     var sideResult by mutableStateOf(toSideResult(init_result))
         private set
+    val savableState: DiceState
+        get() = DiceState(type = dice.type, result = sideResult.result)
+
+    constructor(state: DiceState) :
+            this(DiceFactory.create(state.type), state.result)
 
     init {
         require(dice.range.contains(init_result) || init_result == NO_RESULT) {

@@ -18,19 +18,42 @@
 
 package org.leviathan941.tabletopdiceroller.viewmodel
 
+import android.os.Bundle
 import androidx.compose.runtime.mutableStateListOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import org.leviathan941.tabletopdiceroller.model.dice.DiceState
 import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDice
 
-class MainViewModel : ViewModel() {
+private const val TABLE_SAVED_STATE_KEY = "main_view_table"
+private const val DICE_MODELS_SAVED_STATE_KEY = "main_view_table_dice_models"
+
+class MainViewModel(savedState: SavedStateHandle) : ViewModel() {
     var diceModels = mutableStateListOf<DiceViewModel>()
         private set
 
     init {
-        viewModelScope.launch {
-            loadTable()
+        savedState.setSavedStateProvider(TABLE_SAVED_STATE_KEY) {
+            Bundle().apply {
+                putParcelableArrayList(DICE_MODELS_SAVED_STATE_KEY,
+                    ArrayList(diceModels.map { it.savableState }))
+            }
+        }
+
+        val savedModels = savedState.get<Bundle>(TABLE_SAVED_STATE_KEY)?.let { bundle ->
+            bundle.getParcelableArrayList<DiceState>(DICE_MODELS_SAVED_STATE_KEY)?.map {
+                    state -> DiceViewModel(state)
+            }
+        }
+        if (savedModels != null) {
+            diceModels.apply {
+                clear()
+                addAll(savedModels)
+            }
+        } else {
+            viewModelScope.launch { loadTable() }
         }
     }
 

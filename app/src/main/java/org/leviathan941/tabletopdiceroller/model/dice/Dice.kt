@@ -25,6 +25,7 @@ interface Dice {
     fun previewImage(): ImageResource
     fun roll(): Int
     val range: IntRange
+    val type: DiceType
 }
 
 sealed class GenericDice(
@@ -42,3 +43,13 @@ sealed class GenericDice(
 }
 
 fun defaultDice() = SixSidedDice()
+
+enum class DiceType {
+    SIX_SIDED,
+}
+
+object DiceFactory {
+    fun create(type: DiceType): Dice = when (type) {
+        DiceType.SIX_SIDED -> SixSidedDice()
+    }
+}
