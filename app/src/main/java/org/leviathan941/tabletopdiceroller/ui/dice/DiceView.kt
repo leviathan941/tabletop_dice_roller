@@ -18,21 +18,23 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.model.dice.defaultDice
 import org.leviathan941.tabletopdiceroller.viewmodel.DiceViewModel
@@ -42,27 +44,29 @@ fun DiceView(
     diceViewModel: DiceViewModel,
     onRemoveClick: () -> Unit,
 ) {
-    Box(modifier = Modifier.size(110.dp)) {
+    Box(modifier = Modifier.size(150.dp)) {
         Button(
             onClick = diceViewModel::roll,
             contentPadding = PaddingValues(all = 0.dp),
             modifier = Modifier
                 .align(Alignment.Center)
                 .fillMaxSize()
-                .padding(all = 10.dp),
+                .padding(all = 20.dp),
         ) {
-            Text(
-                text = "${diceViewModel.result + 1}",
+            val side = diceViewModel.sideResult.side
+            Image(
+                painter = painterResource(id = side.imageRes),
+                contentDescription = stringResource(id = side.contentDesc),
                 modifier = Modifier
-                    .wrapContentSize(),
-                fontSize = 50.sp,
+                    .fillMaxSize()
+                    .clip(shape = RectangleShape),
             )
         }
         OutlinedButton(
             onClick = onRemoveClick,
             modifier = Modifier
                 .align(Alignment.TopStart)
-                .size(25.dp),
+                .size(40.dp),
             shape = CircleShape,
             contentPadding = PaddingValues(0.dp),
         ) {

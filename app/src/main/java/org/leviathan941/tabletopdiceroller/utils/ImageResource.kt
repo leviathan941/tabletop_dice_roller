@@ -16,29 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.model.dice
+package org.leviathan941.tabletopdiceroller.utils
 
-import org.leviathan941.tabletopdiceroller.utils.ImageResource
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 
-interface Dice {
-    fun sideImage(sideId: Int): ImageResource
-    fun previewImage(): ImageResource
-    fun roll(): Int
-    val range: IntRange
-}
-
-sealed class GenericDice(
-    private val sideImages: List<ImageResource>,
-    private val previewImage: ImageResource
-    ) : Dice {
-
-    override fun sideImage(sideId: Int): ImageResource = sideImages[sideId]
-
-    override fun previewImage(): ImageResource = previewImage
-
-    override fun roll(): Int = range.random()
-
-    override val range: IntRange = sideImages.indices
-}
-
-fun defaultDice() = SixSidedDice()
+data class ImageResource(
+    @DrawableRes val imageRes: Int,
+    @StringRes val contentDesc: Int
+)

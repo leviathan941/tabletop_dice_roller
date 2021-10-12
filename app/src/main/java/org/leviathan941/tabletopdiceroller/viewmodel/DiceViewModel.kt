@@ -18,18 +18,18 @@
 
 package org.leviathan941.tabletopdiceroller.viewmodel
 
-import androidx.annotation.DrawableRes
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import org.leviathan941.tabletopdiceroller.model.dice.Dice
+import org.leviathan941.tabletopdiceroller.model.dice.DiceResult
 
 class DiceViewModel(
     private val dice: Dice,
     init_result: Int = NO_RESULT
 ) : ViewModel() {
-    var result by mutableStateOf(init_result)
+    var sideResult by mutableStateOf(toSideResult(init_result))
         private set
 
     init {
@@ -38,13 +38,16 @@ class DiceViewModel(
         }
     }
 
-    @DrawableRes fun resultImage(): Int =
-        if (result == NO_RESULT) dice.previewImage()
-        else dice.sideImage(result)
-
     fun roll() {
-        result = dice.roll()
+        sideResult = toSideResult(dice.roll())
     }
+
+    private fun toSideResult(result: Int) =
+        if (result == NO_RESULT) {
+            DiceResult(dice.previewImage(), result)
+        } else {
+            DiceResult(dice.sideImage(result), result)
+        }
 
     companion object {
         const val NO_RESULT = -1

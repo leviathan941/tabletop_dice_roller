@@ -4,4 +4,13 @@
     <string name="add_dice_fab_desc">Add one more default dice</string>
     <string name="roll_fab_desc">Roll selected dices</string>
     <string name="remove_dice_desc">Remove dice</string>
+
+    <string name="dice_no_result_content_desc">No result</string>
+
+    <string name="six_sided_dice_one_content_desc">One</string>
+    <string name="six_sided_dice_two_content_desc">Two</string>
+    <string name="six_sided_dice_three_content_desc">Three</string>
+    <string name="six_sided_dice_four_content_desc">Four</string>
+    <string name="six_sided_dice_five_content_desc">Five</string>
+    <string name="six_sided_dice_six_content_desc">Six</string>
 </resources>

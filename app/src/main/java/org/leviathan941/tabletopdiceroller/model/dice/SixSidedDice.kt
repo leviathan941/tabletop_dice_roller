@@ -19,15 +19,25 @@
 package org.leviathan941.tabletopdiceroller.model.dice
 
 import org.leviathan941.tabletopdiceroller.R
+import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
-class SixSidedDice : GenericDice(
-    listOf(
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground
-    ),
-    R.drawable.ic_launcher_foreground
-)
+class SixSidedDice : GenericDice(sideResources, previewResource) {
+    companion object {
+        private val sideResources = listOf(
+            ImageResource(R.drawable.six_sided_dice_one,
+                R.string.six_sided_dice_one_content_desc),
+            ImageResource(R.drawable.six_sided_dice_two,
+                R.string.six_sided_dice_two_content_desc),
+            ImageResource(R.drawable.six_sided_dice_three,
+                R.string.six_sided_dice_three_content_desc),
+            ImageResource(R.drawable.six_sided_dice_four,
+                R.string.six_sided_dice_four_content_desc),
+            ImageResource(R.drawable.six_sided_dice_five,
+                R.string.six_sided_dice_five_content_desc),
+            ImageResource(R.drawable.six_sided_dice_six,
+                R.string.six_sided_dice_six_content_desc)
+        )
+        private val previewResource = ImageResource(
+            R.drawable.six_sided_dice_six, R.string.dice_no_result_content_desc)
+    }
+}

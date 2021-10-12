@@ -20,25 +20,7 @@ package org.leviathan941.tabletopdiceroller.model.dice
 
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
-interface Dice {
-    fun sideImage(sideId: Int): ImageResource
-    fun previewImage(): ImageResource
-    fun roll(): Int
-    val range: IntRange
-}
-
-sealed class GenericDice(
-    private val sideImages: List<ImageResource>,
-    private val previewImage: ImageResource
-    ) : Dice {
-
-    override fun sideImage(sideId: Int): ImageResource = sideImages[sideId]
-
-    override fun previewImage(): ImageResource = previewImage
-
-    override fun roll(): Int = range.random()
-
-    override val range: IntRange = sideImages.indices
-}
-
-fun defaultDice() = SixSidedDice()
+data class DiceResult(
+    val side: ImageResource,
+    val result: Int
+)
