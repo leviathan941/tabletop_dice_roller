@@ -42,12 +42,13 @@ fun MainView(activity: ComponentActivity) {
     Scaffold(
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
-            MainActionPanel(
-                onAddDice = viewModel::addDefaultDice,
-                onRoll = viewModel::rollAll
-            )
+            RollFab(onClick = viewModel::rollAll)
         },
+        isFloatingActionButtonDocked = true,
         modifier = Modifier.padding(vertical = 10.dp),
+        bottomBar = {
+            MainBottomBar(onAddDice = viewModel::addDefaultDice)
+        }
     ) { innerPadding ->
         val diceModels = remember { viewModel.diceModels }
         LazyColumn(

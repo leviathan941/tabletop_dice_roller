@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">Tabletop Dice Roller</string>
 
-    <string name="add_dice_fab_desc">Add one more default dice</string>
+    <string name="add_dice_desc">Add one more default dice</string>
     <string name="roll_fab_desc">Roll selected dices</string>
     <string name="remove_dice_desc">Remove dice</string>
+    <string name="bottom_bar_menu_desc">Main menu</string>
 
     <string name="dice_no_result_content_desc">No result</string>
 
