@@ -25,7 +25,7 @@ import androidx.lifecycle.ViewModel
 import org.leviathan941.tabletopdiceroller.model.dice.*
 
 class DiceViewModel(
-    private val dice: Dice,
+    val dice: Dice,
     init_result: Int = NO_RESULT
 ) : ViewModel() {
     var sideResult by mutableStateOf(toSideResult(init_result))

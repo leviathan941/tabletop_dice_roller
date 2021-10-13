@@ -44,14 +44,14 @@ fun DiceView(
     diceViewModel: DiceViewModel,
     onRemoveClick: () -> Unit,
 ) {
-    Box(modifier = Modifier.size(150.dp)) {
+    Box(modifier = Modifier.size(DICE_VIEW_SIZE_DP)) {
         Button(
             onClick = diceViewModel::roll,
             contentPadding = PaddingValues(all = 0.dp),
             modifier = Modifier
                 .align(Alignment.Center)
                 .fillMaxSize()
-                .padding(all = 20.dp),
+                .padding(all = DICE_PADDING_ALL_DP),
         ) {
             val side = diceViewModel.sideResult.side
             Image(
@@ -66,7 +66,7 @@ fun DiceView(
             onClick = onRemoveClick,
             modifier = Modifier
                 .align(Alignment.TopStart)
-                .size(40.dp),
+                .size(30.dp),
             shape = CircleShape,
             contentPadding = PaddingValues(0.dp),
         ) {

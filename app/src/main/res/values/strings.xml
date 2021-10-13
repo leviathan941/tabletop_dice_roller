@@ -14,4 +14,6 @@
     <string name="six_sided_dice_four_content_desc">Four</string>
     <string name="six_sided_dice_five_content_desc">Five</string>
     <string name="six_sided_dice_six_content_desc">Six</string>
+
+    <string name="add_dice_to_row_content_desc">Add dice to row</string>
 </resources>

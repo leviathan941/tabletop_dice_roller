@@ -24,31 +24,24 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import org.leviathan941.tabletopdiceroller.model.dice.DiceState
-import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDice
 
 private const val TABLE_SAVED_STATE_KEY = "main_view_table"
 private const val DICE_MODELS_SAVED_STATE_KEY = "main_view_table_dice_models"
 
 class MainViewModel(savedState: SavedStateHandle) : ViewModel() {
-    var diceModels = mutableStateListOf<DiceViewModel>()
+    var rowModels = mutableStateListOf<DiceRowViewModel>()
         private set
 
     init {
         savedState.setSavedStateProvider(TABLE_SAVED_STATE_KEY) {
-            Bundle().apply {
-                putParcelableArrayList(DICE_MODELS_SAVED_STATE_KEY,
-                    ArrayList(diceModels.map { it.savableState }))
-            }
+            SaveUtils.toBundle(DICE_MODELS_SAVED_STATE_KEY, rowModels)
         }
 
-        val savedModels = savedState.get<Bundle>(TABLE_SAVED_STATE_KEY)?.let { bundle ->
-            bundle.getParcelableArrayList<DiceState>(DICE_MODELS_SAVED_STATE_KEY)?.map {
-                    state -> DiceViewModel(state)
-            }
+        val savedModels = savedState.get<Bundle>(TABLE_SAVED_STATE_KEY)?.let {
+            SaveUtils.fromBundle(DICE_MODELS_SAVED_STATE_KEY, it, this::removeRow)
         }
         if (savedModels != null) {
-            diceModels.apply {
+            rowModels.apply {
                 clear()
                 addAll(savedModels)
             }
@@ -57,16 +50,18 @@ class MainViewModel(savedState: SavedStateHandle) : ViewModel() {
         }
     }
 
-    fun addDefaultDice() {
-        diceModels.add(DiceViewModel(SixSidedDice()))
+    fun addDiceRow() {
+        rowModels.add(newRow())
     }
 
-    fun rollAll() {
-        diceModels.forEach { it.roll() }
+    fun roll() {
+        rowModels.forEach { it.roll() }
     }
 
-    fun removeDice(diceModel: DiceViewModel) {
-        diceModels.remove(diceModel)
+    private fun newRow() = DiceRowViewModel { removeRow(it) }
+
+    private fun removeRow(rowModel: DiceRowViewModel) {
+        rowModels.remove(rowModel)
     }
 
     suspend fun dumpTable() {
@@ -75,12 +70,6 @@ class MainViewModel(savedState: SavedStateHandle) : ViewModel() {
 
     private suspend fun loadTable() {
         // TODO: Load from database
-        diceModels.addAll(
-            listOf(
-                DiceViewModel(SixSidedDice(), 2),
-                DiceViewModel(SixSidedDice(), 5),
-                DiceViewModel(SixSidedDice(), 4),
-            )
-        )
+        rowModels.add(DiceRowViewModel(onLastDiceRemoved = this::removeRow))
     }
 }

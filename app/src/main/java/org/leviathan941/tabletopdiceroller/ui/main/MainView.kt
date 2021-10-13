@@ -20,8 +20,6 @@ package org.leviathan941.tabletopdiceroller.ui.main
 
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -32,7 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.leviathan941.tabletopdiceroller.ui.dice.DiceView
+import org.leviathan941.tabletopdiceroller.ui.dice.DiceRow
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @Composable
@@ -42,25 +40,23 @@ fun MainView(activity: ComponentActivity) {
     Scaffold(
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
-            RollFab(onClick = viewModel::rollAll)
+            RollFab(onClick = viewModel::roll)
         },
         isFloatingActionButtonDocked = true,
         modifier = Modifier.padding(vertical = 10.dp),
         bottomBar = {
-            MainBottomBar(onAddDice = viewModel::addDefaultDice)
+            MainBottomBar(onAddDice = viewModel::addDiceRow)
         }
     ) { innerPadding ->
-        val diceModels = remember { viewModel.diceModels }
+        val rowModels = remember { viewModel.rowModels }
         LazyColumn(
             contentPadding = innerPadding,
         ) {
-            items(diceModels) { diceModel ->
-                Row(
+            items(rowModels) { rowModel ->
+                DiceRow(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center,
-                ) {
-                    DiceView(diceModel) { viewModel.removeDice(diceModel) }
-                }
+                    rowModel = rowModel
+                )
             }
         }
     }

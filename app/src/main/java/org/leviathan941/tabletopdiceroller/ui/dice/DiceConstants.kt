@@ -16,19 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.model.dice
+package org.leviathan941.tabletopdiceroller.ui.dice
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import androidx.compose.ui.unit.dp
 
-@Parcelize
-data class DiceState(
-    val type: DiceType,
-    val result: Int
-) : Parcelable
+val DICE_VIEW_SIZE_DP = 120.dp
+val DICE_PADDING_ALL_DP = 13.dp
 
-@Parcelize
-data class DiceStateInRow(
-    val state: DiceState,
-    val rowIndex: Int
-) : Parcelable
+const val MAX_DICE_ROW_SIZE = 8
