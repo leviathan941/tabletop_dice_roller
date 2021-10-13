@@ -34,13 +34,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import org.leviathan941.tabletopdiceroller.R
 
 @Composable
-fun MainBottomBar(onAddDice: () -> Unit) {
+fun MainBottomBar(
+    onAddDiceClick: () -> Unit,
+    onMenuClick: () -> Unit,
+) {
     BottomAppBar {
 
         IconButton(
-            onClick = { /*TODO*/ },
+            onClick = onMenuClick,
             modifier = Modifier.weight(weight = 1f),
-            enabled = false
         ) {
             Icon(
                 imageVector = Icons.Filled.Menu,
@@ -49,7 +51,7 @@ fun MainBottomBar(onAddDice: () -> Unit) {
         }
 
         IconButton(
-            onClick = onAddDice,
+            onClick = onAddDiceClick,
             modifier = Modifier
                 .weight(weight = 6f)
                 .wrapContentSize(),
@@ -67,4 +69,4 @@ fun MainBottomBar(onAddDice: () -> Unit) {
 
 @Preview
 @Composable
-private fun PreviewMainBottomBar() = MainBottomBar {}
+private fun PreviewMainBottomBar() = MainBottomBar({}, {})

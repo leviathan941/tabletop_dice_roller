@@ -16,4 +16,6 @@
     <string name="six_sided_dice_six_content_desc">Six</string>
 
     <string name="add_dice_to_row_content_desc">Add dice to row</string>
+
+    <string name="clear_table_button_text">Clear table</string>
 </resources>

@@ -64,6 +64,10 @@ class MainViewModel(savedState: SavedStateHandle) : ViewModel() {
         rowModels.remove(rowModel)
     }
 
+    fun clear() {
+        rowModels.clear()
+    }
+
     suspend fun dumpTable() {
         TODO("Not yet implemented")
     }

@@ -26,10 +26,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import org.leviathan941.tabletopdiceroller.ui.dice.DiceRow
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
@@ -37,15 +40,35 @@ import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 fun MainView(activity: ComponentActivity) {
     val viewModel: MainViewModel by activity.viewModels()
 
+    val scaffoldState = rememberScaffoldState()
+    val coroutineScope = rememberCoroutineScope()
     Scaffold(
+        scaffoldState = scaffoldState,
+
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
             RollFab(onClick = viewModel::roll)
         },
         isFloatingActionButtonDocked = true,
-        modifier = Modifier.padding(vertical = 10.dp),
+
+        modifier = Modifier.padding(top = 10.dp),
+
         bottomBar = {
-            MainBottomBar(onAddDice = viewModel::addDiceRow)
+            MainBottomBar(
+                onAddDiceClick = viewModel::addDiceRow,
+                onMenuClick = {
+                    with(scaffoldState.drawerState) {
+                        coroutineScope.launch { if (isClosed) open() else close() }
+                    }
+                }
+            )
+        },
+
+        drawerContent = {
+            MainDrawer {
+                viewModel.clear()
+                coroutineScope.launch { scaffoldState.drawerState.close() }
+            }
         }
     ) { innerPadding ->
         val rowModels = remember { viewModel.rowModels }
