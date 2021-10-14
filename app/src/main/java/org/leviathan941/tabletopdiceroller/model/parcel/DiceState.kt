@@ -16,10 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.model.dice
+package org.leviathan941.tabletopdiceroller.model.parcel
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import org.leviathan941.tabletopdiceroller.model.dice.DiceType
 
 @Parcelize
 data class DiceState(

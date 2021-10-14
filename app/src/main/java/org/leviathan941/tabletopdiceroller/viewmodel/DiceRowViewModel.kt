@@ -21,8 +21,8 @@ package org.leviathan941.tabletopdiceroller.viewmodel
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import org.leviathan941.tabletopdiceroller.model.dice.DiceFactory
-import org.leviathan941.tabletopdiceroller.model.dice.DiceState
 import org.leviathan941.tabletopdiceroller.model.dice.defaultDice
+import org.leviathan941.tabletopdiceroller.model.parcel.DiceState
 
 class DiceRowViewModel(
     private val onLastDiceRemoved: (DiceRowViewModel) -> Unit

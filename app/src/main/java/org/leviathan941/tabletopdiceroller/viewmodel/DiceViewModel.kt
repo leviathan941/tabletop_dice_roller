@@ -23,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import org.leviathan941.tabletopdiceroller.model.dice.*
+import org.leviathan941.tabletopdiceroller.model.parcel.DiceState
 
 class DiceViewModel(
     val dice: Dice,

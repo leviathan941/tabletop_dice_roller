@@ -24,9 +24,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import org.leviathan941.tabletopdiceroller.model.parcel.Table
 
-private const val TABLE_SAVED_STATE_KEY = "main_view_table"
-private const val DICE_MODELS_SAVED_STATE_KEY = "main_view_table_dice_models"
+private const val TABLE_SAVED_STATE_BUNDLE_KEY = "main_view_table_state_bundle"
+private const val TABLE_STATE_KEY = "main_view_table"
 private const val ROW_COUNT_LIMIT = 100
 
 class MainViewModel(savedState: SavedStateHandle) : ViewModel() {
@@ -34,13 +35,14 @@ class MainViewModel(savedState: SavedStateHandle) : ViewModel() {
         private set
 
     init {
-        savedState.setSavedStateProvider(TABLE_SAVED_STATE_KEY) {
-            SaveUtils.toBundle(DICE_MODELS_SAVED_STATE_KEY, rowModels)
+        savedState.setSavedStateProvider(TABLE_SAVED_STATE_BUNDLE_KEY) {
+            Bundle().apply {
+                putParcelable(TABLE_STATE_KEY, Table.fromViewModel(rowModels))
+            }
         }
 
-        val savedModels = savedState.get<Bundle>(TABLE_SAVED_STATE_KEY)?.let {
-            SaveUtils.fromBundle(DICE_MODELS_SAVED_STATE_KEY, it, this::removeRow)
-        }
+        val savedModels = savedState.get<Bundle>(TABLE_SAVED_STATE_BUNDLE_KEY)
+            ?.getParcelable<Table>(TABLE_STATE_KEY)?.toViewModel(this::removeRow)
         if (savedModels != null) {
             rowModels.apply {
                 clear()

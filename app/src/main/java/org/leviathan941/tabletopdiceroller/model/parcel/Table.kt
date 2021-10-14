@@ -16,30 +16,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.viewmodel
+package org.leviathan941.tabletopdiceroller.model.parcel
 
-import android.os.Bundle
-import org.leviathan941.tabletopdiceroller.model.dice.DiceStateInRow
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+import org.leviathan941.tabletopdiceroller.viewmodel.DiceRowViewModel
 
-object SaveUtils {
-    fun toBundle(key: String,
-                 rowViewModels: List<DiceRowViewModel>): Bundle =
-        Bundle().apply {
-            val diceStates = rowViewModels.mapIndexed { index, model ->
-                model.diceStates.map { DiceStateInRow(it, index) }
-            }.flatten()
-            putParcelableArrayList(key, ArrayList(diceStates))
-        }
+@Parcelize
+data class Table(val diceRows: List<DiceStateInRow>) : Parcelable {
 
-    fun fromBundle(key: String,
-                   bundle: Bundle,
-                   onLastDiceRemoved: (DiceRowViewModel) -> Unit): List<DiceRowViewModel>? =
-        bundle.getParcelableArrayList<DiceStateInRow>(key)
-            ?.groupBy { it.rowIndex }?.toSortedMap()?.values
-            ?.map { statesInRow ->
+    fun toViewModel(onLastDiceRemoved: (DiceRowViewModel) -> Unit) =
+        diceRows.groupBy { it.rowIndex }.toSortedMap().values
+            .map { statesInRow ->
                 DiceRowViewModel(
                     states = statesInRow.map { stateInRow -> stateInRow.state },
                     onLastDiceRemoved = onLastDiceRemoved
                 )
             }
+
+
+    companion object {
+        fun fromViewModel(rowModels: List<DiceRowViewModel>): Table =
+            Table(
+                rowModels.mapIndexed { index, model ->
+                    model.diceStates.map { DiceStateInRow(it, index) }
+                }.flatten()
+            )
+    }
 }
