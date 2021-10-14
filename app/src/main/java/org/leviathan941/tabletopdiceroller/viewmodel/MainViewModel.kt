@@ -27,6 +27,7 @@ import kotlinx.coroutines.launch
 
 private const val TABLE_SAVED_STATE_KEY = "main_view_table"
 private const val DICE_MODELS_SAVED_STATE_KEY = "main_view_table_dice_models"
+private const val ROW_COUNT_LIMIT = 100
 
 class MainViewModel(savedState: SavedStateHandle) : ViewModel() {
     var rowModels = mutableStateListOf<DiceRowViewModel>()
@@ -50,8 +51,12 @@ class MainViewModel(savedState: SavedStateHandle) : ViewModel() {
         }
     }
 
-    fun addDiceRow() {
-        rowModels.add(newRow())
+    fun addDiceRow(onLimitExceeded: () -> Unit) {
+        if (rowModels.size >= ROW_COUNT_LIMIT) {
+            onLimitExceeded()
+        } else {
+            rowModels.add(newRow())
+        }
     }
 
     fun roll() {

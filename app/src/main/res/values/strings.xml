@@ -18,4 +18,7 @@
     <string name="add_dice_to_row_content_desc">Add dice to row</string>
 
     <string name="clear_table_button_text">Clear table</string>
+
+    <string name="row_limit_exceeded_toast_text">
+        Row count limit %d exceeded.\nPlease remove some.</string>
 </resources>

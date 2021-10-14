@@ -32,8 +32,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import org.leviathan941.tabletopdiceroller.ui.UiUtils
 import org.leviathan941.tabletopdiceroller.ui.dice.DiceRow
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
@@ -53,8 +55,13 @@ fun MainView(activity: ComponentActivity) {
         isFloatingActionButtonDocked = true,
 
         bottomBar = {
+            val context = LocalContext.current
             MainBottomBar(
-                onAddDiceClick = viewModel::addDiceRow,
+                onAddDiceClick = {
+                    viewModel.addDiceRow {
+                        UiUtils.showRowLimitExceededToast(context, viewModel.rowModels.size)
+                    }
+                 },
                 onMenuClick = {
                     with(scaffoldState.drawerState) {
                         coroutineScope.launch { if (isClosed) open() else close() }
