@@ -35,13 +35,13 @@ android {
             useSupportLibrary true
         }
 
-        setProperty("archivesBaseName",
-                "$appBaseName-$versionName")
+        setProperty("archivesBaseName", "$appBaseName-$versionName")
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
