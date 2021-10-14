@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.leviathan941.tabletopdiceroller.viewmodel.DiceRowViewModel
@@ -33,7 +32,7 @@ fun DiceRow(
     modifier: Modifier = Modifier,
     rowModel: DiceRowViewModel
 ) {
-    val diceModels = remember { rowModel.diceModels }
+    val diceModels = rowModel.diceModels
     LazyRow(
         horizontalArrangement = Arrangement.Center,
         modifier = modifier
