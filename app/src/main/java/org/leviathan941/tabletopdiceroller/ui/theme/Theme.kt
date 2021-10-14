@@ -39,6 +39,7 @@ fun TabletopDiceRollerTheme(
         secondaryVariant = colorResource(id = R.color.custom_secondary),
         onPrimary = Color.White,
         onSecondary = Color.Black,
+        background = colorResource(id = R.color.custom_background_dark),
     ) else lightColors(
         primary = colorResource(id = R.color.brown_500_light),
         primaryVariant = colorResource(id = R.color.brown_500),
