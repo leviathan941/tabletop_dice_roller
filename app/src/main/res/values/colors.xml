@@ -34,4 +34,6 @@
     <color name="custom_secondary_dark">#ff007657</color>
 
     <color name="custom_background_dark">#ff263238</color>
+
+    <color name="brown_200">#ffbcaaa4</color>
 </resources>

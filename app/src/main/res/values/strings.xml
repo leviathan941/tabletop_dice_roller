@@ -21,4 +21,7 @@
 
     <string name="row_limit_exceeded_toast_text">
         Row count limit %d exceeded.\nPlease remove some.</string>
+
+    <string name="dice_row_header_content_desc">Row can be scrolled left</string>
+    <string name="dice_row_footer_content_desc">Row can be scrolled right</string>
 </resources>
