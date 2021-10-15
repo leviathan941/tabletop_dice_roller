@@ -73,7 +73,7 @@ fun MainView(activity: ComponentActivity) {
                 Spacer(modifier = Modifier.height(10.dp))
             }
             item {
-                DiceRow(mainViewModel = viewModel)
+                DiceRow(activity, viewModel)
             }
         }
     }

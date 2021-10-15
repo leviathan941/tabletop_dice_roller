@@ -16,14 +16,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.model.parcel
+package org.leviathan941.tabletopdiceroller.db
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-import org.leviathan941.tabletopdiceroller.model.dice.DiceType
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import org.leviathan941.tabletopdiceroller.db.converters.DiceConverter
+import org.leviathan941.tabletopdiceroller.db.dao.TableDao
+import org.leviathan941.tabletopdiceroller.db.entity.TableDice
 
-@Parcelize
-data class DiceState(
-    val type: DiceType,
-    val result: Int
-) : Parcelable
+// Do not forget to update version and implement migration when table scheme changed.
+private const val VERSION = 1
+
+@Database(entities = [TableDice::class], version = VERSION)
+@TypeConverters(value = [DiceConverter::class])
+abstract class AppDatabase : RoomDatabase() {
+    abstract fun tableDao(): TableDao
+}

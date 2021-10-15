@@ -18,66 +18,60 @@
 
 package org.leviathan941.tabletopdiceroller.viewmodel
 
-import android.os.Bundle
-import androidx.compose.runtime.mutableStateListOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.leviathan941.tabletopdiceroller.model.dice.DiceFactory
+import org.leviathan941.tabletopdiceroller.app.Singletons
+import org.leviathan941.tabletopdiceroller.db.DICE_NO_RESULT
+import org.leviathan941.tabletopdiceroller.db.entity.TableDice
 import org.leviathan941.tabletopdiceroller.model.dice.defaultDice
-import org.leviathan941.tabletopdiceroller.model.parcel.Table
 
-private const val TABLE_SAVED_STATE_BUNDLE_KEY = "main_view_table_state_bundle"
-private const val TABLE_STATE_KEY = "main_view_table"
+class MainViewModel : ViewModel() {
 
-class MainViewModel(savedState: SavedStateHandle) : ViewModel() {
-    var diceModels = mutableStateListOf<DiceViewModel>()
-        private set
+    private val tableRepository = Singletons.tableRepository
+
+    private val _dicesState = MutableStateFlow(emptyList<TableDice>())
+    val dicesState: StateFlow<List<TableDice>> = _dicesState
 
     init {
-        savedState.setSavedStateProvider(TABLE_SAVED_STATE_BUNDLE_KEY) {
-            Bundle().apply {
-                putParcelable(TABLE_STATE_KEY, Table(diceModels.map { it.savableState }))
+        viewModelScope.launch(Dispatchers.IO) {
+            tableRepository.loadAllDices().collect {
+                _dicesState.value = it
             }
-        }
-
-        val savedModels = savedState.get<Bundle>(TABLE_SAVED_STATE_BUNDLE_KEY)
-            ?.getParcelable<Table>(TABLE_STATE_KEY)?.dices?.map { DiceViewModel(it) }
-        if (savedModels != null) {
-            diceModels.apply {
-                clear()
-                addAll(savedModels)
-            }
-        } else {
-            viewModelScope.launch { loadTable() }
         }
     }
 
     fun addDice() {
-        val newDice = diceModels.lastOrNull()?.dice?.type?.let {
-            DiceFactory.create(it)
-        } ?: defaultDice()
-        diceModels.add(DiceViewModel(dice = newDice))
+        val newDice = dicesState.value.lastOrNull()?.dice ?: defaultDice()
+        viewModelScope.launch(Dispatchers.IO) {
+            tableRepository.insertDice(
+                TableDice(dice = newDice, result = DICE_NO_RESULT)
+            )
+        }
     }
 
     fun roll() {
-        diceModels.forEach { it.roll() }
+        viewModelScope.launch(Dispatchers.IO) {
+            val updatedDices = dicesState.value.map {
+                TableDice(id = it.id, dice = it.dice, result = it.dice.roll())
+            }
+            tableRepository.updateDices(updatedDices)
+        }
     }
 
-    fun removeDice(diceModel: DiceViewModel) {
-        diceModels.remove(diceModel)
+    fun removeDice(dice: TableDice) {
+        viewModelScope.launch(Dispatchers.IO) {
+            tableRepository.deleteDice(dice)
+        }
     }
 
     fun clear() {
-        diceModels.clear()
-    }
-
-    suspend fun dumpTable() {
-        TODO("Not yet implemented")
-    }
-
-    private suspend fun loadTable() {
-        // TODO: Load from database
+        viewModelScope.launch(Dispatchers.IO) {
+            tableRepository.clear()
+        }
     }
 }

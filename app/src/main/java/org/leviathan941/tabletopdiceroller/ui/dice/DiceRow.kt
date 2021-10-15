@@ -18,7 +18,10 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
+import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
@@ -26,18 +29,19 @@ import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @Composable
 fun DiceRow(
+    activity: ComponentActivity,
     mainViewModel: MainViewModel
 ) {
-    val diceModels = mainViewModel.diceModels
+    val dicesState by mainViewModel.dicesState.collectAsState()
     FlowRow(
         mainAxisSize = SizeMode.Expand,
         mainAxisAlignment = FlowMainAxisAlignment.Center,
     ) {
-        for (diceModel in diceModels) {
-            DiceView(diceViewModel = diceModel) { mainViewModel.removeDice(diceModel) }
+        dicesState.forEach { dice ->
+            DiceView(activity, dice) { mainViewModel.removeDice(dice) }
         }
 
-        if (diceModels.size < MAX_DICES_COUNT) {
+        if (dicesState.size < MAX_DICES_COUNT) {
             DiceAddPlaceholder {
                 mainViewModel.addDice()
             }

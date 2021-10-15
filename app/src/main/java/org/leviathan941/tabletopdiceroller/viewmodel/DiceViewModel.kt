@@ -18,43 +18,47 @@
 
 package org.leviathan941.tabletopdiceroller.viewmodel
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import org.leviathan941.tabletopdiceroller.model.dice.*
-import org.leviathan941.tabletopdiceroller.model.parcel.DiceState
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import org.leviathan941.tabletopdiceroller.app.Singletons
+import org.leviathan941.tabletopdiceroller.db.entity.TableDice
 
 class DiceViewModel(
-    val dice: Dice,
-    init_result: Int = NO_RESULT
+    dice: TableDice
 ) : ViewModel() {
-    var sideResult by mutableStateOf(toSideResult(init_result))
-        private set
-    val savableState: DiceState
-        get() = DiceState(type = dice.type, result = sideResult.result)
 
-    constructor(state: DiceState) :
-            this(DiceFactory.create(state.type), state.result)
+    private val tableRepository = Singletons.tableRepository
+
+    private val _diceState = MutableStateFlow(dice)
+    val diceState: StateFlow<TableDice> = _diceState
 
     init {
-        require(dice.range.contains(init_result) || init_result == NO_RESULT) {
-            "Invalid initial value $init_result for ${dice::class.simpleName}:[${dice.range}]"
+        viewModelScope.launch(Dispatchers.IO) {
+            tableRepository.loadDiceById(dice.id).collect {
+                _diceState.value = it
+            }
         }
     }
 
     fun roll() {
-        sideResult = toSideResult(dice.roll())
+        viewModelScope.launch(Dispatchers.IO) {
+            with(diceState.value) {
+                tableRepository.updateDice(
+                    TableDice(id = id, dice = dice, result = dice.roll())
+                )
+            }
+        }
     }
 
-    private fun toSideResult(result: Int) =
-        if (result == NO_RESULT) {
-            DiceResult(dice.previewImage(), result)
-        } else {
-            DiceResult(dice.sideImage(result), result)
-        }
-
-    companion object {
-        const val NO_RESULT = -1
+    class Factory(private val dice: TableDice) : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+            DiceViewModel(dice) as T
     }
 }

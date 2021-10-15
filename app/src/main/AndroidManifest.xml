@@ -21,6 +21,7 @@
     package="org.leviathan941.tabletopdiceroller">
 
     <application
+        android:name=".app.DiceRollerApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

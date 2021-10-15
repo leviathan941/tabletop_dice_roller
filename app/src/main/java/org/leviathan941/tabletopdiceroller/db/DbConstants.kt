@@ -16,10 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.model.parcel
+package org.leviathan941.tabletopdiceroller.db
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
-data class Table(val dices: List<DiceState>) : Parcelable
+const val TABLE_DB_TABLE_NAME = "table"
+const val DICE_NO_RESULT = -1

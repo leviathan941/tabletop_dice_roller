@@ -16,11 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.model.dice
+package org.leviathan941.tabletopdiceroller.db.converters
 
-import org.leviathan941.tabletopdiceroller.utils.ImageResource
+import androidx.room.TypeConverter
+import org.leviathan941.tabletopdiceroller.model.dice.Dice
+import org.leviathan941.tabletopdiceroller.model.dice.DiceFactory
 
-data class DiceResult(
-    val side: ImageResource,
-    val result: Int
-)
+class DiceConverter {
+    @TypeConverter
+    fun toDice(diceTypeName: String) = DiceFactory.create(enumValueOf(diceTypeName))
+
+    @TypeConverter
+    fun fromDice(dice: Dice) = dice.type.name
+}
