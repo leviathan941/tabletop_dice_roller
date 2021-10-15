@@ -18,13 +18,15 @@
 
 package org.leviathan941.tabletopdiceroller.ui.main
 
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import org.leviathan941.tabletopdiceroller.R
 
 @Preview
@@ -32,8 +34,9 @@ import org.leviathan941.tabletopdiceroller.R
 fun RollFab(onClick: () -> Unit = {}) {
     FloatingActionButton(onClick = onClick) {
         Icon(
-            imageVector = Icons.Filled.Refresh,
-            contentDescription = stringResource(id = R.string.roll_fab_desc)
+            painter = painterResource(id = R.drawable.roll),
+            contentDescription = stringResource(id = R.string.roll_fab_desc),
+            modifier = Modifier.size(30.dp)
         )
     }
 }
