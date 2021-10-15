@@ -38,7 +38,7 @@ class SixSidedDice : GenericDice(sideResources, previewResource) {
                 R.string.six_sided_dice_six_content_desc)
         )
         private val previewResource = ImageResource(
-            R.drawable.six_sided_dice_six, R.string.dice_no_result_content_desc)
+            R.drawable.six_sided_dice_preview, R.string.dice_no_result_content_desc)
     }
 
     override val type: DiceType = DiceType.SIX_SIDED
