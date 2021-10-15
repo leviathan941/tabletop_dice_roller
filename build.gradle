@@ -3,7 +3,7 @@ buildscript {
         appBaseName = "tabletopdiceroller"
         appId = "org.leviathan941.$appBaseName"
         versionMajor = '0'
-        versionMinor = '4'
+        versionMinor = '5'
         versionPatch = '0'
 
         compose_version = '1.0.4'
