@@ -18,120 +18,29 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntSize
-import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
-import org.leviathan941.tabletopdiceroller.R
-import org.leviathan941.tabletopdiceroller.viewmodel.DiceRowViewModel
+import androidx.compose.runtime.Composable
+import com.google.accompanist.flowlayout.FlowMainAxisAlignment
+import com.google.accompanist.flowlayout.FlowRow
+import com.google.accompanist.flowlayout.SizeMode
+import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @Composable
 fun DiceRow(
-    modifier: Modifier = Modifier,
-    rowModel: DiceRowViewModel
+    mainViewModel: MainViewModel
 ) {
-    val diceModels = rowModel.diceModels
-    val rowState = rememberLazyListState()
-    Box(
-        modifier = Modifier.fillMaxWidth()
+    val diceModels = mainViewModel.diceModels
+    FlowRow(
+        mainAxisSize = SizeMode.Expand,
+        mainAxisAlignment = FlowMainAxisAlignment.Center,
     ) {
-
-        var rowSize by remember { mutableStateOf(IntSize.Zero) }
-        var scrollToLast by remember { mutableStateOf(false) }
-        val coroutineScope = rememberCoroutineScope()
-        LazyRow(
-            state = rowState,
-            horizontalArrangement = Arrangement.Center,
-            modifier = modifier
-                .align(Alignment.Center)
-                .onSizeChanged { rowSize = it },
-        ) {
-            items(diceModels) { diceModel ->
-                DiceView(diceViewModel = diceModel) { rowModel.removeDice(diceModel) }
-            }
-            if (diceModels.size < MAX_DICE_ROW_SIZE) {
-                item {
-                    DiceAddPlaceholder {
-                        rowModel.addDice()
-                        scrollToLast = true
-                    }
-                }
-            }
-
-            if (scrollToLast) {
-                scrollToLast = false
-                coroutineScope.launch {
-                    rowState.animateScrollToItem(rowState.lastItemIndex())
-                }
-            }
+        for (diceModel in diceModels) {
+            DiceView(diceViewModel = diceModel) { mainViewModel.removeDice(diceModel) }
         }
 
-        Header(Modifier.align(Alignment.CenterStart), rowState)
-
-        Footer(Modifier.align(Alignment.CenterEnd), rowState, rowSize)
+        if (diceModels.size < MAX_DICES_COUNT) {
+            DiceAddPlaceholder {
+                mainViewModel.addDice()
+            }
+        }
     }
 }
-
-@Composable
-private fun Header(
-    modifier: Modifier,
-    rowState: LazyListState,
-) {
-    if (rowState.firstVisibleItemIndex > 0 ||
-        rowState.firstVisibleItemScrollOffset > 0) {
-        Icon(
-            imageVector = Icons.Filled.KeyboardArrowLeft,
-            contentDescription = stringResource(id = R.string.dice_row_header_content_desc),
-            modifier = modifier.size(40.dp),
-            tint = colorResource(id = R.color.brown_200),
-        )
-    }
-}
-
-@Composable
-private fun Footer(
-    modifier: Modifier,
-    rowState: LazyListState,
-    rowSize: IntSize
-) {
-    if (rowState.isScrolledToEnd(rowWidth = rowSize.width)) {
-        Icon(
-            imageVector = Icons.Filled.KeyboardArrowRight,
-            contentDescription = stringResource(id = R.string.dice_row_footer_content_desc),
-            modifier = modifier.size(40.dp),
-            tint = colorResource(id = R.color.brown_200),
-        )
-    }
-}
-
-private fun LazyListState.lastItemIndex(): Int = layoutInfo.totalItemsCount - 1
-
-private fun LazyListState.isScrolledToEnd(rowWidth: Int): Boolean =
-    layoutInfo.visibleItemsInfo.lastOrNull()?.let { lastItem ->
-        lastItem.index < layoutInfo.totalItemsCount - 1 ||
-                lastItem.offset + lastItem.size > rowWidth
-    } ?: false
-
-@Preview
-@Composable
-private fun PreviewDiceRow() = DiceRow(
-    rowModel = DiceRowViewModel {}
-)

@@ -20,27 +20,6 @@ package org.leviathan941.tabletopdiceroller.model.parcel
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import org.leviathan941.tabletopdiceroller.viewmodel.DiceRowViewModel
 
 @Parcelize
-data class Table(val diceRows: List<DiceStateInRow>) : Parcelable {
-
-    fun toViewModel(onLastDiceRemoved: (DiceRowViewModel) -> Unit) =
-        diceRows.groupBy { it.rowIndex }.toSortedMap().values
-            .map { statesInRow ->
-                DiceRowViewModel(
-                    states = statesInRow.map { stateInRow -> stateInRow.state },
-                    onLastDiceRemoved = onLastDiceRemoved
-                )
-            }
-
-
-    companion object {
-        fun fromViewModel(rowModels: List<DiceRowViewModel>): Table =
-            Table(
-                rowModels.mapIndexed { index, model ->
-                    model.diceStates.map { DiceStateInRow(it, index) }
-                }.flatten()
-            )
-    }
-}
+data class Table(val dices: List<DiceState>) : Parcelable

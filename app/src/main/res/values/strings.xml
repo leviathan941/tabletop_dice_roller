@@ -15,13 +15,5 @@
     <string name="six_sided_dice_five_content_desc">Five</string>
     <string name="six_sided_dice_six_content_desc">Six</string>
 
-    <string name="add_dice_to_row_content_desc">Add dice to row</string>
-
     <string name="clear_table_button_text">Clear table</string>
-
-    <string name="row_limit_exceeded_toast_text">
-        Row count limit %d exceeded.\nPlease remove some.</string>
-
-    <string name="dice_row_header_content_desc">Row can be scrolled left</string>
-    <string name="dice_row_footer_content_desc">Row can be scrolled right</string>
 </resources>

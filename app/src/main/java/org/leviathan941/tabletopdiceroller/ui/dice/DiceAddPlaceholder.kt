@@ -43,7 +43,7 @@ fun DiceAddPlaceholder(
     ) {
         Icon(
             imageVector = Icons.Outlined.Add,
-            contentDescription = stringResource(id = R.string.add_dice_to_row_content_desc),
+            contentDescription = stringResource(id = R.string.add_dice_desc),
             modifier = Modifier
                 .size(50.dp),
         )

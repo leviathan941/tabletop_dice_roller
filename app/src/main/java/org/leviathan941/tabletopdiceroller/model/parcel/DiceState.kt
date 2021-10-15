@@ -27,9 +27,3 @@ data class DiceState(
     val type: DiceType,
     val result: Int
 ) : Parcelable
-
-@Parcelize
-data class DiceStateInRow(
-    val state: DiceState,
-    val rowIndex: Int
-) : Parcelable

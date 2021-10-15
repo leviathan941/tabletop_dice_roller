@@ -18,55 +18,32 @@
 
 package org.leviathan941.tabletopdiceroller.ui.main
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.leviathan941.tabletopdiceroller.R
 
 @Composable
 fun MainBottomBar(
-    onAddDiceClick: () -> Unit,
     onMenuClick: () -> Unit,
 ) {
     BottomAppBar {
-
         IconButton(
             onClick = onMenuClick,
-            modifier = Modifier.weight(weight = 1f),
         ) {
             Icon(
                 imageVector = Icons.Filled.Menu,
                 contentDescription = stringResource(id = R.string.bottom_bar_menu_desc),
             )
         }
-
-        IconButton(
-            onClick = onAddDiceClick,
-            modifier = Modifier
-                .weight(weight = 6f)
-                .wrapContentSize(),
-        ) {
-            Icon(
-                imageVector = Icons.Filled.Add,
-                contentDescription = stringResource(id = R.string.add_dice_desc),
-                modifier = Modifier.fillMaxSize(),
-            )
-        }
-
-        Spacer(modifier = Modifier.weight(weight = 1f))
     }
 }
 
 @Preview
 @Composable
-private fun PreviewMainBottomBar() = MainBottomBar({}, {})
+private fun PreviewMainBottomBar() = MainBottomBar {}
