@@ -20,7 +20,6 @@ package org.leviathan941.tabletopdiceroller.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -38,7 +37,7 @@ class MainViewModel : ViewModel() {
     val dicesState: StateFlow<List<TableDice>> = _dicesState
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             tableRepository.loadAllDices().collect {
                 _dicesState.value = it
             }
@@ -47,7 +46,7 @@ class MainViewModel : ViewModel() {
 
     fun addDice() {
         val newDice = dicesState.value.lastOrNull()?.dice ?: defaultDice()
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             tableRepository.insertDice(
                 TableDice(dice = newDice, result = DICE_NO_RESULT)
             )
@@ -55,7 +54,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun roll() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             val updatedDices = dicesState.value.map {
                 TableDice(id = it.id, dice = it.dice, result = it.dice.roll())
             }
@@ -64,13 +63,13 @@ class MainViewModel : ViewModel() {
     }
 
     fun removeDice(dice: TableDice) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             tableRepository.deleteDice(dice)
         }
     }
 
     fun clear() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             tableRepository.clear()
         }
     }

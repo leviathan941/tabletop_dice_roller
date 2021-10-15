@@ -21,7 +21,6 @@ package org.leviathan941.tabletopdiceroller.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -30,7 +29,7 @@ import org.leviathan941.tabletopdiceroller.app.Singletons
 import org.leviathan941.tabletopdiceroller.db.entity.TableDice
 
 class DiceViewModel(
-    dice: TableDice
+    private val dice: TableDice
 ) : ViewModel() {
 
     private val tableRepository = Singletons.tableRepository
@@ -39,15 +38,16 @@ class DiceViewModel(
     val diceState: StateFlow<TableDice> = _diceState
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             tableRepository.loadDiceById(dice.id).collect {
-                _diceState.value = it
+                // TODO: do not load separately from main list?
+                if (it != null) _diceState.value = it
             }
         }
     }
 
     fun roll() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             with(diceState.value) {
                 tableRepository.updateDice(
                     TableDice(id = id, dice = dice, result = dice.roll())

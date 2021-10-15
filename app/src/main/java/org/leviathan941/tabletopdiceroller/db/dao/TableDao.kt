@@ -44,5 +44,5 @@ interface TableDao {
     suspend fun clear()
 
     @Query("SELECT * FROM `$TABLE_DB_TABLE_NAME` WHERE id = :id")
-    fun loadDiceById(id: Int): Flow<TableDice>
+    fun loadDiceById(id: Int): Flow<TableDice?>
 }
