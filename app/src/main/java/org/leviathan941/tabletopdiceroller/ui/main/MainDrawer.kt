@@ -18,6 +18,7 @@
 
 package org.leviathan941.tabletopdiceroller.ui.main
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -28,17 +29,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.leviathan941.tabletopdiceroller.BuildConfig
 import org.leviathan941.tabletopdiceroller.R
 
 @Composable
 fun ColumnScope.MainDrawer(
     onClearClick: () -> Unit
 ) {
+    AppHeader(modifier = Modifier.fillMaxWidth())
+
     Spacer(modifier = Modifier.weight(1f))
 
     DrawerMenuItem(
@@ -77,6 +84,54 @@ fun DrawerMenuItem(
         )
     }
 }
+
+@Composable
+private fun AppHeader(modifier: Modifier) {
+    Box(modifier = modifier) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_launcher_background),
+            contentDescription = stringResource(id = R.string.main_drawer_app_header_content_desc),
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier
+                .height(100.dp)
+                .fillMaxWidth(),
+        )
+
+        Row(
+            modifier = Modifier
+                .padding(horizontal = 15.dp)
+                .fillMaxWidth()
+                .align(Alignment.Center),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = stringResource(id = R.string.app_name),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+            )
+
+            Image(
+                painter = painterResource(id = R.drawable.six_sided_dice_preview),
+                contentDescription = stringResource(id = R.string.main_drawer_app_header_content_desc),
+                modifier = Modifier
+                    .size(60.dp),
+            )
+        }
+
+        Text(
+            text = "v.${BuildConfig.VERSION_NAME}",
+            fontSize = 13.sp,
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(horizontal = 5.dp),
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewAppHeader() = AppHeader(modifier = Modifier)
 
 @Preview
 @Composable
