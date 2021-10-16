@@ -45,7 +45,7 @@ fun MainView(activity: ComponentActivity) {
 
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
-            RollFab(onClick = viewModel::roll)
+            RollFab(onClick = viewModel::rollAll)
         },
         isFloatingActionButtonDocked = true,
 
@@ -73,7 +73,7 @@ fun MainView(activity: ComponentActivity) {
                 Spacer(modifier = Modifier.height(10.dp))
             }
             item {
-                DiceRow(activity, viewModel)
+                DiceRow(viewModel)
             }
         }
     }

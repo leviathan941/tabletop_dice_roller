@@ -53,12 +53,22 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun roll() {
+    fun rollAll() {
         viewModelScope.launch {
             val updatedDices = dicesState.value.map {
                 TableDice(id = it.id, dice = it.dice, result = it.dice.roll())
             }
             tableRepository.updateDices(updatedDices)
+        }
+    }
+
+    fun roll(tableDice: TableDice) {
+        viewModelScope.launch {
+            with(tableDice) {
+                tableRepository.updateDice(
+                    TableDice(id = id, dice = dice, result = dice.roll())
+                )
+            }
         }
     }
 

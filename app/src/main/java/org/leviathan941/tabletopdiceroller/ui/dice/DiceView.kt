@@ -18,7 +18,6 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -28,46 +27,38 @@ import androidx.compose.material.OutlinedButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.db.DICE_NO_RESULT
 import org.leviathan941.tabletopdiceroller.db.entity.TableDice
-import org.leviathan941.tabletopdiceroller.viewmodel.DiceViewModel
+import org.leviathan941.tabletopdiceroller.model.dice.defaultDice
 
 @Composable
 fun DiceView(
-    activity: ComponentActivity,
     dice: TableDice,
+    onRoll: () -> Unit,
     onRemoveClick: () -> Unit,
 ) {
-    val diceViewModel: DiceViewModel = viewModel(
-        viewModelStoreOwner = activity,
-        key = "DiceViewModel_${dice.id}",
-        factory = DiceViewModel.Factory(dice)
-    )
 
     Box(modifier = Modifier.size(DICE_VIEW_SIZE_DP)) {
         Button(
-            onClick = diceViewModel::roll,
+            onClick = onRoll,
             contentPadding = PaddingValues(all = 0.dp),
             modifier = Modifier
                 .align(Alignment.Center)
                 .fillMaxSize()
                 .padding(all = DICE_PADDING_ALL_DP),
         ) {
-            val diceState by diceViewModel.diceState.collectAsState()
             Image(
-                painter = painterResource(id = diceState.image().imageRes),
-                contentDescription = stringResource(id = diceState.image().contentDesc),
+                painter = painterResource(id = dice.image().imageRes),
+                contentDescription = stringResource(id = dice.image().contentDesc),
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(shape = RectangleShape),
@@ -95,3 +86,11 @@ private fun TableDice.image() =
     } else {
         dice.sideImage(result)
     }
+
+@Preview
+@Composable
+private fun PreviewDiceView() = DiceView(
+    dice = TableDice(dice = defaultDice(), result = DICE_NO_RESULT),
+    onRoll = {},
+    onRemoveClick = {}
+)
