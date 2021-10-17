@@ -15,6 +15,7 @@ buildscript {
         lifecycleVersion = '2.3.1'
         accompanistVersion = '0.19.0'
         roomVersion = '2.3.0'
+        dataStoreVersion = '1.0.0'
     }
     repositories {
         google()

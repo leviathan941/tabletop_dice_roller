@@ -18,4 +18,14 @@
     <string name="clear_table_button_text">Clear table</string>
 
     <string name="main_drawer_app_header_content_desc">Application menu header</string>
+
+    <string name="munchkin_dungeon_dice_empty_content_desc">Empty</string>
+    <string name="munchkin_dungeon_dice_lightning_content_desc">Lightning</string>
+    <string name="munchkin_dungeon_dice_sword_content_desc">Sword</string>
+    <string name="munchkin_dungeon_dice_double_swords_content_desc">Double sword</string>
+    <string name="munchkin_dungeon_dice_shield_content_desc">Shield</string>
+
+    <string name="change_default_dice_type_content_dec">Change new dice type</string>
+
+    <string name="choose_dice_type_dialog_title">Choose Dice Type</string>
 </resources>

@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.dp
 import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.db.DICE_NO_RESULT
 import org.leviathan941.tabletopdiceroller.db.entity.TableDice
-import org.leviathan941.tabletopdiceroller.model.dice.defaultDice
+import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDice
 
 @Composable
 fun DiceView(
@@ -90,7 +90,7 @@ private fun TableDice.image() =
 @Preview
 @Composable
 private fun PreviewDiceView() = DiceView(
-    dice = TableDice(dice = defaultDice(), result = DICE_NO_RESULT),
+    dice = TableDice(dice = SixSidedDice(), result = DICE_NO_RESULT),
     onRoll = {},
     onRemoveClick = {}
 )

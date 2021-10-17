@@ -42,14 +42,14 @@ sealed class GenericDice(
     override val range: IntRange = sideImages.indices
 }
 
-fun defaultDice() = SixSidedDice()
-
 enum class DiceType {
     SIX_SIDED,
+    MUNCHKIN_DUNGEON,
 }
 
 object DiceFactory {
     fun create(type: DiceType): Dice = when (type) {
         DiceType.SIX_SIDED -> SixSidedDice()
+        DiceType.MUNCHKIN_DUNGEON -> MunchkinDungeonDice()
     }
 }

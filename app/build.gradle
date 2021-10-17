@@ -90,5 +90,7 @@ dependencies {
     implementation "androidx.room:room-ktx:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
 
+    implementation "androidx.datastore:datastore-preferences:$dataStoreVersion"
+
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 }

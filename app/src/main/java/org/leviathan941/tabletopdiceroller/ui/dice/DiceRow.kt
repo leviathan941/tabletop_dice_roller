@@ -42,9 +42,7 @@ fun DiceRow(mainViewModel: MainViewModel) {
         }
 
         if (dicesState.size < MAX_DICES_COUNT) {
-            DiceAddPlaceholder {
-                mainViewModel.addDice()
-            }
+            DiceAddPlaceholder(onClick = mainViewModel::addDice)
         }
     }
 }

@@ -26,8 +26,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
@@ -40,6 +39,9 @@ fun MainView(activity: ComponentActivity) {
 
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
+
+    var openDiceTypeDialog by remember { mutableStateOf(false) }
+
     Scaffold(
         scaffoldState = scaffoldState,
 
@@ -55,6 +57,9 @@ fun MainView(activity: ComponentActivity) {
                     with(scaffoldState.drawerState) {
                         coroutineScope.launch { if (isClosed) open() else close() }
                     }
+                },
+                onChangeDiceType = {
+                    openDiceTypeDialog = true
                 }
             )
         },
@@ -77,4 +82,16 @@ fun MainView(activity: ComponentActivity) {
             }
         }
     }
+
+    if (openDiceTypeDialog) {
+        val dismissDialog = { openDiceTypeDialog = false }
+        ChooseDiceTypeDialog(
+            onDismiss = dismissDialog,
+            onTypeChosen = {
+                viewModel.changeNewDiceType(it)
+                dismissDialog()
+            },
+        )
+    }
+
 }

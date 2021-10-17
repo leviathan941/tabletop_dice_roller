@@ -23,18 +23,23 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.leviathan941.tabletopdiceroller.app.Singletons
 import org.leviathan941.tabletopdiceroller.db.DICE_NO_RESULT
 import org.leviathan941.tabletopdiceroller.db.entity.TableDice
-import org.leviathan941.tabletopdiceroller.model.dice.defaultDice
+import org.leviathan941.tabletopdiceroller.model.dice.DiceFactory
+import org.leviathan941.tabletopdiceroller.model.dice.DiceType
 
 class MainViewModel : ViewModel() {
 
     private val tableRepository = Singletons.tableRepository
+    private val prefsRepository = Singletons.prefsRepository
 
     private val _dicesState = MutableStateFlow(emptyList<TableDice>())
     val dicesState: StateFlow<List<TableDice>> = _dicesState
+
+    private val uiPrefs = prefsRepository.uiPreferences
 
     init {
         viewModelScope.launch {
@@ -45,10 +50,12 @@ class MainViewModel : ViewModel() {
     }
 
     fun addDice() {
-        val newDice = dicesState.value.lastOrNull()?.dice ?: defaultDice()
         viewModelScope.launch {
             tableRepository.insertDice(
-                TableDice(dice = newDice, result = DICE_NO_RESULT)
+                TableDice(
+                    dice = DiceFactory.create(uiPrefs.first().newDiceType),
+                    result = DICE_NO_RESULT
+                )
             )
         }
     }
@@ -81,6 +88,12 @@ class MainViewModel : ViewModel() {
     fun clear() {
         viewModelScope.launch {
             tableRepository.clear()
+        }
+    }
+
+    fun changeNewDiceType(type: DiceType) {
+        viewModelScope.launch {
+            prefsRepository.updateNewDiceType(type)
         }
     }
 }
