@@ -24,7 +24,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,7 +49,7 @@ fun ColumnScope.MainDrawer(
     Spacer(modifier = Modifier.weight(1f))
 
     DrawerMenuItem(
-        icon = Icons.Filled.Clear,
+        icon = Icons.Filled.Delete,
         text = stringResource(id = R.string.clear_table_button_text),
         onCLick = onClearClick
     )
@@ -136,5 +136,5 @@ private fun PreviewAppHeader() = AppHeader(modifier = Modifier)
 @Preview
 @Composable
 private fun PreviewDrawerMenuItem() = DrawerMenuItem(
-    icon = Icons.Filled.Clear,
+    icon = Icons.Filled.Delete,
     text = stringResource(id = R.string.clear_table_button_text)) {}
