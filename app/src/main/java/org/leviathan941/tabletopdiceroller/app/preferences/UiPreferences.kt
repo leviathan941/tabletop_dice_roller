@@ -22,4 +22,8 @@ import org.leviathan941.tabletopdiceroller.model.dice.DiceType
 
 data class UiPreferences(
     val newDiceType: DiceType,
-)
+) {
+    companion object {
+        val initial = UiPreferences(DiceType.SIX_SIDED)
+    }
+}

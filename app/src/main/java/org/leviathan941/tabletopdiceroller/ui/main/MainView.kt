@@ -30,6 +30,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import org.leviathan941.tabletopdiceroller.app.preferences.UiPreferences
 import org.leviathan941.tabletopdiceroller.ui.dice.DiceRow
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
@@ -83,9 +84,11 @@ fun MainView(activity: ComponentActivity) {
         }
     }
 
+    val newDiceState = viewModel.uiPrefs.collectAsState(initial = UiPreferences.initial)
     if (openDiceTypeDialog) {
         val dismissDialog = { openDiceTypeDialog = false }
         ChooseDiceTypeDialog(
+            newDiceType = newDiceState.value.newDiceType,
             onDismiss = dismissDialog,
             onTypeChosen = {
                 viewModel.changeNewDiceType(it)

@@ -20,11 +20,11 @@ package org.leviathan941.tabletopdiceroller.db.converters
 
 import androidx.room.TypeConverter
 import org.leviathan941.tabletopdiceroller.model.dice.Dice
-import org.leviathan941.tabletopdiceroller.model.dice.DiceFactory
+import org.leviathan941.tabletopdiceroller.model.dice.DiceType
 
 class DiceConverter {
     @TypeConverter
-    fun toDice(diceTypeName: String) = DiceFactory.create(enumValueOf(diceTypeName))
+    fun toDice(diceTypeName: String) = enumValueOf<DiceType>(diceTypeName).toDice()
 
     @TypeConverter
     fun fromDice(dice: Dice) = dice.type.name

@@ -24,6 +24,7 @@ import androidx.compose.runtime.getValue
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
+import org.leviathan941.tabletopdiceroller.app.preferences.UiPreferences
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @Composable
@@ -41,8 +42,12 @@ fun DiceRow(mainViewModel: MainViewModel) {
             )
         }
 
+        val newDiceState = mainViewModel.uiPrefs.collectAsState(initial = UiPreferences.initial)
         if (dicesState.size < MAX_DICES_COUNT) {
-            DiceAddPlaceholder(onClick = mainViewModel::addDice)
+            DiceAddPlaceholder(
+                newDice = newDiceState.value.newDiceType.toDice(),
+                onClick = mainViewModel::addDice,
+            )
         }
     }
 }

@@ -28,7 +28,6 @@ import kotlinx.coroutines.launch
 import org.leviathan941.tabletopdiceroller.app.Singletons
 import org.leviathan941.tabletopdiceroller.db.DICE_NO_RESULT
 import org.leviathan941.tabletopdiceroller.db.entity.TableDice
-import org.leviathan941.tabletopdiceroller.model.dice.DiceFactory
 import org.leviathan941.tabletopdiceroller.model.dice.DiceType
 
 class MainViewModel : ViewModel() {
@@ -39,7 +38,7 @@ class MainViewModel : ViewModel() {
     private val _dicesState = MutableStateFlow(emptyList<TableDice>())
     val dicesState: StateFlow<List<TableDice>> = _dicesState
 
-    private val uiPrefs = prefsRepository.uiPreferences
+    val uiPrefs = prefsRepository.uiPreferences
 
     init {
         viewModelScope.launch {
@@ -53,7 +52,7 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             tableRepository.insertDice(
                 TableDice(
-                    dice = DiceFactory.create(uiPrefs.first().newDiceType),
+                    dice = uiPrefs.first().newDiceType.toDice(),
                     result = DICE_NO_RESULT
                 )
             )

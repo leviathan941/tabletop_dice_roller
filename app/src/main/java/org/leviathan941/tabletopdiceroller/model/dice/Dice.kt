@@ -45,11 +45,10 @@ sealed class GenericDice(
 enum class DiceType {
     SIX_SIDED,
     MUNCHKIN_DUNGEON,
-}
+    ;
 
-object DiceFactory {
-    fun create(type: DiceType): Dice = when (type) {
-        DiceType.SIX_SIDED -> SixSidedDice()
-        DiceType.MUNCHKIN_DUNGEON -> MunchkinDungeonDice()
+    fun toDice(): Dice = when (this) {
+        SIX_SIDED -> SixSidedDice()
+        MUNCHKIN_DUNGEON -> MunchkinDungeonDice()
     }
 }

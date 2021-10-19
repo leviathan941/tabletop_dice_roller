@@ -18,21 +18,27 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.leviathan941.tabletopdiceroller.R
+import org.leviathan941.tabletopdiceroller.model.dice.Dice
+import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDice
+import org.leviathan941.tabletopdiceroller.ui.theme.Shapes
 
 @Composable
 fun DiceAddPlaceholder(
+    newDice: Dice,
     onClick: () -> Unit
 ) {
     OutlinedButton(
@@ -40,16 +46,30 @@ fun DiceAddPlaceholder(
         modifier = Modifier
             .size(DICE_VIEW_SIZE_DP)
             .padding(all = DICE_PADDING_ALL_DP),
+        contentPadding = PaddingValues(0.dp),
     ) {
-        Icon(
-            imageVector = Icons.Outlined.Add,
-            contentDescription = stringResource(id = R.string.add_dice_desc),
-            modifier = Modifier
-                .size(50.dp),
-        )
+        Box(modifier = Modifier.fillMaxSize()) {
+            Icon(
+                imageVector = Icons.Outlined.Add,
+                contentDescription = stringResource(id = R.string.add_dice_desc),
+                modifier = Modifier
+                    .size(50.dp)
+                    .align(Alignment.TopStart),
+            )
+
+            Icon(
+                painter = painterResource(id = newDice.previewImage().imageRes),
+                contentDescription = stringResource(id = newDice.previewImage().contentDesc),
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(end = 10.dp, bottom = 10.dp)
+                    .clip(Shapes.small),
+            )
+        }
     }
 }
 
 @Preview
 @Composable
-private fun PreviewDiceAddPlaceholder() = DiceAddPlaceholder {}
+private fun PreviewDiceAddPlaceholder() =
+    DiceAddPlaceholder(SixSidedDice()) {}

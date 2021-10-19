@@ -19,12 +19,14 @@
 package org.leviathan941.tabletopdiceroller.ui.main
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -47,6 +49,7 @@ import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDice
 
 @Composable
 fun ChooseDiceTypeDialog(
+    newDiceType: DiceType,
     onDismiss: () -> Unit,
     onTypeChosen: (DiceType) -> Unit,
 ) {
@@ -69,6 +72,7 @@ fun ChooseDiceTypeDialog(
                 DiceUtils.allDices().forEach {
                     DiceTypeButton(
                         dice = it,
+                        selected = it.type == newDiceType,
                         onClick = { onTypeChosen(it.type) }
                     )
                 }
@@ -81,12 +85,23 @@ fun ChooseDiceTypeDialog(
 @Composable
 private fun DiceTypeButton(
     dice: Dice = SixSidedDice(),
+    selected: Boolean = false,
     onClick: () -> Unit = {},
 ) {
+    val modifier = if (selected) {
+        Modifier.border(
+            width = 3.dp,
+            color = ButtonDefaults
+                .buttonColors()
+                .backgroundColor(enabled = true).value
+        )
+    } else {
+        Modifier
+    }
     Button(
         onClick = onClick,
         contentPadding = PaddingValues(all = 0.dp),
-        modifier = Modifier.size(90.dp),
+        modifier = modifier.size(90.dp),
     ) {
         Image(
             painter = painterResource(id = dice.previewImage().imageRes),
