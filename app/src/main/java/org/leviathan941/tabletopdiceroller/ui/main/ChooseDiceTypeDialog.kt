@@ -19,14 +19,12 @@
 package org.leviathan941.tabletopdiceroller.ui.main
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -88,25 +86,20 @@ private fun DiceTypeButton(
     selected: Boolean = false,
     onClick: () -> Unit = {},
 ) {
-    val modifier = if (selected) {
-        Modifier.border(
-            width = 3.dp,
-            color = ButtonDefaults
-                .buttonColors()
-                .backgroundColor(enabled = true).value
-        )
+    val imageModifier = if (selected) {
+        Modifier.padding(all = 3.dp)
     } else {
         Modifier
     }
     Button(
         onClick = onClick,
         contentPadding = PaddingValues(all = 0.dp),
-        modifier = modifier.size(90.dp),
+        modifier = Modifier.size(90.dp),
     ) {
         Image(
             painter = painterResource(id = dice.previewImage().imageRes),
             contentDescription = stringResource(id = dice.previewImage().contentDesc),
-            modifier = Modifier
+            modifier = imageModifier
                 .fillMaxSize()
                 .clip(shape = RectangleShape),
         )
