@@ -18,12 +18,12 @@
 
 package org.leviathan941.tabletopdiceroller.app.preferences
 
-import org.leviathan941.tabletopdiceroller.model.dice.DiceType
+import org.leviathan941.tabletopdiceroller.model.dice.DieType
 
 data class UiPreferences(
-    val newDiceType: DiceType,
+    val newDieType: DieType,
 ) {
     companion object {
-        val initial = UiPreferences(DiceType.SIX_SIDED)
+        val initial = UiPreferences(DieType.SIX_SIDED)
     }
 }

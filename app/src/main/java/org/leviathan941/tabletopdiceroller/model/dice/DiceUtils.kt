@@ -20,5 +20,5 @@ package org.leviathan941.tabletopdiceroller.model.dice
 
 object DiceUtils {
     fun allDices() =
-        DiceType.values().map { it.toDice() }
+        DieType.values().map { it.toDie() }
 }

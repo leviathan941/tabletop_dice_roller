@@ -40,16 +40,16 @@ import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
 import org.leviathan941.tabletopdiceroller.R
-import org.leviathan941.tabletopdiceroller.model.dice.Dice
-import org.leviathan941.tabletopdiceroller.model.dice.DiceType
+import org.leviathan941.tabletopdiceroller.model.dice.Die
+import org.leviathan941.tabletopdiceroller.model.dice.DieType
 import org.leviathan941.tabletopdiceroller.model.dice.DiceUtils
-import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDice
+import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDie
 
 @Composable
 fun ChooseDiceTypeDialog(
-    newDiceType: DiceType,
+    newDieType: DieType,
     onDismiss: () -> Unit,
-    onTypeChosen: (DiceType) -> Unit,
+    onTypeChosen: (DieType) -> Unit,
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -69,8 +69,8 @@ fun ChooseDiceTypeDialog(
             ) {
                 DiceUtils.allDices().forEach {
                     DiceTypeButton(
-                        dice = it,
-                        selected = it.type == newDiceType,
+                        die = it,
+                        selected = it.type == newDieType,
                         onClick = { onTypeChosen(it.type) }
                     )
                 }
@@ -82,7 +82,7 @@ fun ChooseDiceTypeDialog(
 @Preview
 @Composable
 private fun DiceTypeButton(
-    dice: Dice = SixSidedDice(),
+    die: Die = SixSidedDie(),
     selected: Boolean = false,
     onClick: () -> Unit = {},
 ) {
@@ -97,8 +97,8 @@ private fun DiceTypeButton(
         modifier = Modifier.size(90.dp),
     ) {
         Image(
-            painter = painterResource(id = dice.previewImage().imageRes),
-            contentDescription = stringResource(id = dice.previewImage().contentDesc),
+            painter = painterResource(id = die.previewImage().imageRes),
+            contentDescription = stringResource(id = die.previewImage().contentDesc),
             modifier = imageModifier
                 .fillMaxSize()
                 .clip(shape = RectangleShape),

@@ -21,25 +21,25 @@ package org.leviathan941.tabletopdiceroller.model.dice
 import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
-class SixSidedDice : GenericDice(sideResources, previewResource) {
+class SixSidedDie : GenericDie(sideResources, previewResource) {
     companion object {
         private val sideResources = listOf(
-            ImageResource(R.drawable.six_sided_dice_one,
+            ImageResource(R.drawable.six_sided_die_one,
                 R.string.six_sided_dice_one_content_desc),
-            ImageResource(R.drawable.six_sided_dice_two,
+            ImageResource(R.drawable.six_sided_die_two,
                 R.string.six_sided_dice_two_content_desc),
-            ImageResource(R.drawable.six_sided_dice_three,
+            ImageResource(R.drawable.six_sided_die_three,
                 R.string.six_sided_dice_three_content_desc),
-            ImageResource(R.drawable.six_sided_dice_four,
+            ImageResource(R.drawable.six_sided_die_four,
                 R.string.six_sided_dice_four_content_desc),
-            ImageResource(R.drawable.six_sided_dice_five,
+            ImageResource(R.drawable.six_sided_die_five,
                 R.string.six_sided_dice_five_content_desc),
-            ImageResource(R.drawable.six_sided_dice_six,
+            ImageResource(R.drawable.six_sided_die_six,
                 R.string.six_sided_dice_six_content_desc)
         )
         private val previewResource = ImageResource(
-            R.drawable.six_sided_dice_preview, R.string.dice_no_result_content_desc)
+            R.drawable.six_sided_die_preview, R.string.dice_no_result_content_desc)
     }
 
-    override val type: DiceType = DiceType.SIX_SIDED
+    override val type: DieType = DieType.SIX_SIDED
 }

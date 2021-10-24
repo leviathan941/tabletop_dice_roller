@@ -19,21 +19,21 @@
 package org.leviathan941.tabletopdiceroller.app
 
 import org.leviathan941.tabletopdiceroller.db.dao.TableDao
-import org.leviathan941.tabletopdiceroller.db.entity.TableDice
+import org.leviathan941.tabletopdiceroller.db.entity.TableDie
 
 class TableRepository(private val tableDao: TableDao) {
 
-    fun loadAllDices() = tableDao.loadAllDices()
+    fun loadAllDice() = tableDao.loadAllDice()
 
-    suspend fun insertDice(dice: TableDice) = tableDao.insertDice(dice)
+    suspend fun insertDie(die: TableDie) = tableDao.insertDie(die)
 
-    suspend fun deleteDice(dice: TableDice) = tableDao.deleteDice(dice)
+    suspend fun deleteDie(die: TableDie) = tableDao.deleteDie(die)
 
-    suspend fun updateDices(dices: List<TableDice>) = tableDao.updateDices(dices)
+    suspend fun updateDice(dice: List<TableDie>) = tableDao.updateDice(dice)
 
-    suspend fun updateDice(dice: TableDice) = tableDao.updateDice(dice)
+    suspend fun updateDie(die: TableDie) = tableDao.updateDie(die)
 
     suspend fun clear() = tableDao.clear()
 
-    fun loadDiceById(id: Int) = tableDao.loadDiceById(id)
+    fun loadDieById(id: Int) = tableDao.loadDieById(id)
 }

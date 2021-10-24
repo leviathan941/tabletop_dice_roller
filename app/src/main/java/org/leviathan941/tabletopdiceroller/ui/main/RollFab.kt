@@ -34,7 +34,7 @@ import org.leviathan941.tabletopdiceroller.R
 fun RollFab(onClick: () -> Unit = {}) {
     FloatingActionButton(onClick = onClick) {
         Image(
-            painter = painterResource(id = R.drawable.six_sided_dice_3d),
+            painter = painterResource(id = R.drawable.six_sided_die_3d),
             contentDescription = stringResource(id = R.string.roll_fab_desc),
             modifier = Modifier.size(30.dp)
         )

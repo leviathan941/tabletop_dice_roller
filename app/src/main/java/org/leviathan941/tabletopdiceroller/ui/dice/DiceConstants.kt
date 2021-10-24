@@ -20,7 +20,7 @@ package org.leviathan941.tabletopdiceroller.ui.dice
 
 import androidx.compose.ui.unit.dp
 
-val DICE_VIEW_SIZE_DP = 120.dp
-val DICE_PADDING_ALL_DP = 13.dp
+val DIE_VIEW_SIZE_DP = 120.dp
+val DIE_PADDING_ALL_DP = 13.dp
 
 const val MAX_DICES_COUNT = 200

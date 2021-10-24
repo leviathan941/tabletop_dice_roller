@@ -29,24 +29,24 @@ import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @Composable
 fun DiceRow(mainViewModel: MainViewModel) {
-    val dicesState by mainViewModel.dicesState.collectAsState()
+    val diceState by mainViewModel.diceState.collectAsState()
     FlowRow(
         mainAxisSize = SizeMode.Expand,
         mainAxisAlignment = FlowMainAxisAlignment.Center,
     ) {
-        dicesState.forEach { dice ->
+        diceState.forEach { dice ->
             DiceView(
-                dice = dice,
+                die = dice,
                 onRoll = { mainViewModel.roll(dice) },
-                onRemoveClick = { mainViewModel.removeDice(dice) }
+                onRemoveClick = { mainViewModel.removeDie(dice) }
             )
         }
 
         val newDiceState = mainViewModel.uiPrefs.collectAsState(initial = UiPreferences.initial)
-        if (dicesState.size < MAX_DICES_COUNT) {
+        if (diceState.size < MAX_DICES_COUNT) {
             DiceAddPlaceholder(
-                newDice = newDiceState.value.newDiceType.toDice(),
-                onClick = mainViewModel::addDice,
+                newDie = newDiceState.value.newDieType.toDie(),
+                onClick = mainViewModel::addDie,
             )
         }
     }

@@ -21,5 +21,5 @@ package org.leviathan941.tabletopdiceroller.app.preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 
 object PreferencesKeys {
-    val NEW_DICE_TYPE = stringPreferencesKey("new_dice_type")
+    val NEW_DIE_TYPE = stringPreferencesKey("new_dice_type")
 }

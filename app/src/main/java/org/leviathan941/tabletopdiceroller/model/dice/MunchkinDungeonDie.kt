@@ -21,25 +21,25 @@ package org.leviathan941.tabletopdiceroller.model.dice
 import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
-class MunchkinDungeonDice : GenericDice(sideResources, previewResource) {
+class MunchkinDungeonDie : GenericDie(sideResources, previewResource) {
     companion object {
         private val sideResources = listOf(
-            ImageResource(R.drawable.munchkin_dungeon_dice_empty,
+            ImageResource(R.drawable.munchkin_dungeon_die_empty,
                 R.string.munchkin_dungeon_dice_empty_content_desc),
-            ImageResource(R.drawable.munchkin_dungeon_dice_lightning,
+            ImageResource(R.drawable.munchkin_dungeon_die_lightning,
                 R.string.munchkin_dungeon_dice_lightning_content_desc),
-            ImageResource(R.drawable.munchkin_dungeon_dice_sword,
+            ImageResource(R.drawable.munchkin_dungeon_die_sword,
                 R.string.munchkin_dungeon_dice_sword_content_desc),
-            ImageResource(R.drawable.munchkin_dungeon_dice_shield,
+            ImageResource(R.drawable.munchkin_dungeon_die_shield,
                 R.string.munchkin_dungeon_dice_shield_content_desc),
-            ImageResource(R.drawable.munchkin_dungeon_dice_lightning,
+            ImageResource(R.drawable.munchkin_dungeon_die_lightning,
                 R.string.munchkin_dungeon_dice_lightning_content_desc),
-            ImageResource(R.drawable.munchkin_dungeon_dice_double_swords,
+            ImageResource(R.drawable.munchkin_dungeon_die_double_swords,
                 R.string.munchkin_dungeon_dice_double_swords_content_desc)
         )
         private val previewResource = ImageResource(
-            R.drawable.munchkin_dungeon_dice_preview, R.string.dice_no_result_content_desc)
+            R.drawable.munchkin_dungeon_die_preview, R.string.dice_no_result_content_desc)
     }
 
-    override val type: DiceType = DiceType.MUNCHKIN_DUNGEON
+    override val type: DieType = DieType.MUNCHKIN_DUNGEON
 }

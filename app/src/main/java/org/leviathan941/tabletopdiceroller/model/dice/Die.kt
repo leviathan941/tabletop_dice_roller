@@ -20,18 +20,18 @@ package org.leviathan941.tabletopdiceroller.model.dice
 
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
-interface Dice {
+interface Die {
     fun sideImage(sideId: Int): ImageResource
     fun previewImage(): ImageResource
     fun roll(): Int
     val range: IntRange
-    val type: DiceType
+    val type: DieType
 }
 
-sealed class GenericDice(
+sealed class GenericDie(
     private val sideImages: List<ImageResource>,
     private val previewImage: ImageResource
-    ) : Dice {
+    ) : Die {
 
     override fun sideImage(sideId: Int): ImageResource = sideImages[sideId]
 
@@ -42,13 +42,13 @@ sealed class GenericDice(
     override val range: IntRange = sideImages.indices
 }
 
-enum class DiceType {
+enum class DieType {
     SIX_SIDED,
     MUNCHKIN_DUNGEON,
     ;
 
-    fun toDice(): Dice = when (this) {
-        SIX_SIDED -> SixSidedDice()
-        MUNCHKIN_DUNGEON -> MunchkinDungeonDice()
+    fun toDie(): Die = when (this) {
+        SIX_SIDED -> SixSidedDie()
+        MUNCHKIN_DUNGEON -> MunchkinDungeonDie()
     }
 }

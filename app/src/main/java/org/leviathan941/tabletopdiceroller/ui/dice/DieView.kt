@@ -36,29 +36,29 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.leviathan941.tabletopdiceroller.R
-import org.leviathan941.tabletopdiceroller.db.DICE_NO_RESULT
-import org.leviathan941.tabletopdiceroller.db.entity.TableDice
-import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDice
+import org.leviathan941.tabletopdiceroller.db.DIE_NO_RESULT
+import org.leviathan941.tabletopdiceroller.db.entity.TableDie
+import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDie
 
 @Composable
 fun DiceView(
-    dice: TableDice,
+    die: TableDie,
     onRoll: () -> Unit,
     onRemoveClick: () -> Unit,
 ) {
 
-    Box(modifier = Modifier.size(DICE_VIEW_SIZE_DP)) {
+    Box(modifier = Modifier.size(DIE_VIEW_SIZE_DP)) {
         Button(
             onClick = onRoll,
             contentPadding = PaddingValues(all = 0.dp),
             modifier = Modifier
                 .align(Alignment.Center)
                 .fillMaxSize()
-                .padding(all = DICE_PADDING_ALL_DP),
+                .padding(all = DIE_PADDING_ALL_DP),
         ) {
             Image(
-                painter = painterResource(id = dice.image().imageRes),
-                contentDescription = stringResource(id = dice.image().contentDesc),
+                painter = painterResource(id = die.image().imageRes),
+                contentDescription = stringResource(id = die.image().contentDesc),
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(shape = RectangleShape),
@@ -80,17 +80,17 @@ fun DiceView(
     }
 }
 
-private fun TableDice.image() =
-    if (result == DICE_NO_RESULT) {
-        dice.previewImage()
+private fun TableDie.image() =
+    if (result == DIE_NO_RESULT) {
+        die.previewImage()
     } else {
-        dice.sideImage(result)
+        die.sideImage(result)
     }
 
 @Preview
 @Composable
 private fun PreviewDiceView() = DiceView(
-    dice = TableDice(dice = SixSidedDice(), result = DICE_NO_RESULT),
+    die = TableDie(die = SixSidedDie(), result = DIE_NO_RESULT),
     onRoll = {},
     onRemoveClick = {}
 )

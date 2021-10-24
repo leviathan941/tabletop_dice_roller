@@ -19,13 +19,13 @@
 package org.leviathan941.tabletopdiceroller.db.converters
 
 import androidx.room.TypeConverter
-import org.leviathan941.tabletopdiceroller.model.dice.Dice
-import org.leviathan941.tabletopdiceroller.model.dice.DiceType
+import org.leviathan941.tabletopdiceroller.model.dice.Die
+import org.leviathan941.tabletopdiceroller.model.dice.DieType
 
-class DiceConverter {
+class DieConverter {
     @TypeConverter
-    fun toDice(diceTypeName: String) = enumValueOf<DiceType>(diceTypeName).toDice()
+    fun toDie(dieTypeName: String) = enumValueOf<DieType>(dieTypeName).toDie()
 
     @TypeConverter
-    fun fromDice(dice: Dice) = dice.type.name
+    fun fromDie(die: Die) = die.type.name
 }

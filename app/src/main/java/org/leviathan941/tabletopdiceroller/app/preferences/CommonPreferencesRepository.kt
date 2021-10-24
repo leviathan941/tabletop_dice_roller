@@ -23,20 +23,20 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import org.leviathan941.tabletopdiceroller.model.dice.DiceType
+import org.leviathan941.tabletopdiceroller.model.dice.DieType
 
 class CommonPreferencesRepository(
     private val dataStore: DataStore<Preferences>,
 ) {
     val uiPreferences: Flow<UiPreferences> =
         dataStore.data.map { prefs ->
-            val newDiceType = prefs[PreferencesKeys.NEW_DICE_TYPE] ?: DiceType.SIX_SIDED.name
-            UiPreferences(enumValueOf(newDiceType))
+            val newDieType = prefs[PreferencesKeys.NEW_DIE_TYPE] ?: DieType.SIX_SIDED.name
+            UiPreferences(enumValueOf(newDieType))
         }
 
-    suspend fun updateNewDiceType(type: DiceType) {
+    suspend fun updateNewDieType(type: DieType) {
         dataStore.edit { prefs ->
-            prefs[PreferencesKeys.NEW_DICE_TYPE] = type.name
+            prefs[PreferencesKeys.NEW_DIE_TYPE] = type.name
         }
     }
 }

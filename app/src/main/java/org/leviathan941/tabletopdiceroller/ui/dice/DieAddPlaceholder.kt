@@ -32,20 +32,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.leviathan941.tabletopdiceroller.R
-import org.leviathan941.tabletopdiceroller.model.dice.Dice
-import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDice
+import org.leviathan941.tabletopdiceroller.model.dice.Die
+import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDie
 import org.leviathan941.tabletopdiceroller.ui.theme.Shapes
 
 @Composable
 fun DiceAddPlaceholder(
-    newDice: Dice,
+    newDie: Die,
     onClick: () -> Unit
 ) {
     OutlinedButton(
         onClick = onClick,
         modifier = Modifier
-            .size(DICE_VIEW_SIZE_DP)
-            .padding(all = DICE_PADDING_ALL_DP),
+            .size(DIE_VIEW_SIZE_DP)
+            .padding(all = DIE_PADDING_ALL_DP),
         contentPadding = PaddingValues(0.dp),
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
@@ -58,8 +58,8 @@ fun DiceAddPlaceholder(
             )
 
             Icon(
-                painter = painterResource(id = newDice.previewImage().imageRes),
-                contentDescription = stringResource(id = newDice.previewImage().contentDesc),
+                painter = painterResource(id = newDie.previewImage().imageRes),
+                contentDescription = stringResource(id = newDie.previewImage().contentDesc),
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(end = 10.dp, bottom = 10.dp)
@@ -72,4 +72,4 @@ fun DiceAddPlaceholder(
 @Preview
 @Composable
 private fun PreviewDiceAddPlaceholder() =
-    DiceAddPlaceholder(SixSidedDice()) {}
+    DiceAddPlaceholder(SixSidedDie()) {}

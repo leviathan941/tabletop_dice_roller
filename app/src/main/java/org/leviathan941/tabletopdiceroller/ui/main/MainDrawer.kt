@@ -112,7 +112,7 @@ private fun AppHeader(modifier: Modifier) {
             )
 
             Image(
-                painter = painterResource(id = R.drawable.six_sided_dice_preview),
+                painter = painterResource(id = R.drawable.six_sided_die_preview),
                 contentDescription = stringResource(id = R.string.main_drawer_app_header_content_desc),
                 modifier = Modifier
                     .size(60.dp),

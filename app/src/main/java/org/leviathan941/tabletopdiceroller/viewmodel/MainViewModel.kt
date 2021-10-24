@@ -26,34 +26,34 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.leviathan941.tabletopdiceroller.app.Singletons
-import org.leviathan941.tabletopdiceroller.db.DICE_NO_RESULT
-import org.leviathan941.tabletopdiceroller.db.entity.TableDice
-import org.leviathan941.tabletopdiceroller.model.dice.DiceType
+import org.leviathan941.tabletopdiceroller.db.DIE_NO_RESULT
+import org.leviathan941.tabletopdiceroller.db.entity.TableDie
+import org.leviathan941.tabletopdiceroller.model.dice.DieType
 
 class MainViewModel : ViewModel() {
 
     private val tableRepository = Singletons.tableRepository
     private val prefsRepository = Singletons.prefsRepository
 
-    private val _dicesState = MutableStateFlow(emptyList<TableDice>())
-    val dicesState: StateFlow<List<TableDice>> = _dicesState
+    private val _diceState = MutableStateFlow(emptyList<TableDie>())
+    val diceState: StateFlow<List<TableDie>> = _diceState
 
     val uiPrefs = prefsRepository.uiPreferences
 
     init {
         viewModelScope.launch {
-            tableRepository.loadAllDices().collect {
-                _dicesState.value = it
+            tableRepository.loadAllDice().collect {
+                _diceState.value = it
             }
         }
     }
 
-    fun addDice() {
+    fun addDie() {
         viewModelScope.launch {
-            tableRepository.insertDice(
-                TableDice(
-                    dice = uiPrefs.first().newDiceType.toDice(),
-                    result = DICE_NO_RESULT
+            tableRepository.insertDie(
+                TableDie(
+                    die = uiPrefs.first().newDieType.toDie(),
+                    result = DIE_NO_RESULT
                 )
             )
         }
@@ -61,26 +61,26 @@ class MainViewModel : ViewModel() {
 
     fun rollAll() {
         viewModelScope.launch {
-            val updatedDices = dicesState.value.map {
-                TableDice(id = it.id, dice = it.dice, result = it.dice.roll())
+            val updatedDices = diceState.value.map {
+                TableDie(id = it.id, die = it.die, result = it.die.roll())
             }
-            tableRepository.updateDices(updatedDices)
+            tableRepository.updateDice(updatedDices)
         }
     }
 
-    fun roll(tableDice: TableDice) {
+    fun roll(tableDie: TableDie) {
         viewModelScope.launch {
-            with(tableDice) {
-                tableRepository.updateDice(
-                    TableDice(id = id, dice = dice, result = dice.roll())
+            with(tableDie) {
+                tableRepository.updateDie(
+                    TableDie(id = id, die = die, result = die.roll())
                 )
             }
         }
     }
 
-    fun removeDice(dice: TableDice) {
+    fun removeDie(die: TableDie) {
         viewModelScope.launch {
-            tableRepository.deleteDice(dice)
+            tableRepository.deleteDie(die)
         }
     }
 
@@ -90,9 +90,9 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun changeNewDiceType(type: DiceType) {
+    fun changeNewDieType(type: DieType) {
         viewModelScope.launch {
-            prefsRepository.updateNewDiceType(type)
+            prefsRepository.updateNewDieType(type)
         }
     }
 }

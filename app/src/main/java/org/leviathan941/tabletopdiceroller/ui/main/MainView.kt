@@ -88,10 +88,10 @@ fun MainView(activity: ComponentActivity) {
     if (openDiceTypeDialog) {
         val dismissDialog = { openDiceTypeDialog = false }
         ChooseDiceTypeDialog(
-            newDiceType = newDiceState.value.newDiceType,
+            newDieType = newDiceState.value.newDieType,
             onDismiss = dismissDialog,
             onTypeChosen = {
-                viewModel.changeNewDiceType(it)
+                viewModel.changeNewDieType(it)
                 dismissDialog()
             },
         )
