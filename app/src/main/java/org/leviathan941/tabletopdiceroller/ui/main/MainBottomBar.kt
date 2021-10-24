@@ -52,7 +52,7 @@ fun MainBottomBar(
             Icon(
                 painter = painterResource(id = R.drawable.ic_baseline_flip_24),
                 contentDescription = stringResource(
-                    id = R.string.change_default_dice_type_content_dec),
+                    id = R.string.change_default_die_type_content_dec),
                 modifier = Modifier.size(ICON_SIZE.dp),
             )
         }

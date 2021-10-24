@@ -25,17 +25,17 @@ class SixSidedDie : GenericDie(sideResources, previewResource) {
     companion object {
         private val sideResources = listOf(
             ImageResource(R.drawable.six_sided_die_one,
-                R.string.six_sided_dice_one_content_desc),
+                R.string.six_sided_die_one_content_desc),
             ImageResource(R.drawable.six_sided_die_two,
-                R.string.six_sided_dice_two_content_desc),
+                R.string.six_sided_die_two_content_desc),
             ImageResource(R.drawable.six_sided_die_three,
-                R.string.six_sided_dice_three_content_desc),
+                R.string.six_sided_die_three_content_desc),
             ImageResource(R.drawable.six_sided_die_four,
-                R.string.six_sided_dice_four_content_desc),
+                R.string.six_sided_die_four_content_desc),
             ImageResource(R.drawable.six_sided_die_five,
-                R.string.six_sided_dice_five_content_desc),
+                R.string.six_sided_die_five_content_desc),
             ImageResource(R.drawable.six_sided_die_six,
-                R.string.six_sided_dice_six_content_desc)
+                R.string.six_sided_die_six_content_desc)
         )
         private val previewResource = ImageResource(
             R.drawable.six_sided_die_preview, R.string.dice_no_result_content_desc)

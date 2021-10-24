@@ -74,7 +74,7 @@ fun DiceView(
         ) {
             Icon(
                 imageVector = Icons.Rounded.Close,
-                contentDescription = stringResource(id = R.string.remove_dice_desc)
+                contentDescription = stringResource(id = R.string.remove_die_desc)
             )
         }
     }

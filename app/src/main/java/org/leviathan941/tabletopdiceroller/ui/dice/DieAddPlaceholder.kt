@@ -51,7 +51,7 @@ fun DiceAddPlaceholder(
         Box(modifier = Modifier.fillMaxSize()) {
             Icon(
                 imageVector = Icons.Outlined.Add,
-                contentDescription = stringResource(id = R.string.add_dice_desc),
+                contentDescription = stringResource(id = R.string.add_die_desc),
                 modifier = Modifier
                     .size(50.dp)
                     .align(Alignment.TopStart),

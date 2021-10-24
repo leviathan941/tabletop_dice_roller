@@ -1,31 +1,31 @@
 <resources>
     <string name="app_name">Tabletop Dice Roller</string>
 
-    <string name="add_dice_desc">Add one more default dice</string>
-    <string name="roll_fab_desc">Roll selected dices</string>
-    <string name="remove_dice_desc">Remove dice</string>
+    <string name="add_die_desc">Add one more default die</string>
+    <string name="roll_fab_desc">Roll selected dice</string>
+    <string name="remove_die_desc">Remove die</string>
     <string name="bottom_bar_menu_desc">Main menu</string>
 
     <string name="dice_no_result_content_desc">No result</string>
 
-    <string name="six_sided_dice_one_content_desc">One</string>
-    <string name="six_sided_dice_two_content_desc">Two</string>
-    <string name="six_sided_dice_three_content_desc">Three</string>
-    <string name="six_sided_dice_four_content_desc">Four</string>
-    <string name="six_sided_dice_five_content_desc">Five</string>
-    <string name="six_sided_dice_six_content_desc">Six</string>
+    <string name="six_sided_die_one_content_desc">One</string>
+    <string name="six_sided_die_two_content_desc">Two</string>
+    <string name="six_sided_die_three_content_desc">Three</string>
+    <string name="six_sided_die_four_content_desc">Four</string>
+    <string name="six_sided_die_five_content_desc">Five</string>
+    <string name="six_sided_die_six_content_desc">Six</string>
 
     <string name="clear_table_button_text">Clear Board</string>
 
     <string name="main_drawer_app_header_content_desc">Application menu header</string>
 
-    <string name="munchkin_dungeon_dice_empty_content_desc">Empty</string>
-    <string name="munchkin_dungeon_dice_lightning_content_desc">Lightning</string>
-    <string name="munchkin_dungeon_dice_sword_content_desc">Sword</string>
-    <string name="munchkin_dungeon_dice_double_swords_content_desc">Double sword</string>
-    <string name="munchkin_dungeon_dice_shield_content_desc">Shield</string>
+    <string name="munchkin_dungeon_die_empty_content_desc">Empty</string>
+    <string name="munchkin_dungeon_die_lightning_content_desc">Lightning</string>
+    <string name="munchkin_dungeon_die_sword_content_desc">Sword</string>
+    <string name="munchkin_dungeon_die_double_swords_content_desc">Double sword</string>
+    <string name="munchkin_dungeon_die_shield_content_desc">Shield</string>
 
-    <string name="change_default_dice_type_content_dec">Change new dice type</string>
+    <string name="change_default_die_type_content_dec">Change new die type</string>
 
-    <string name="choose_dice_type_dialog_title">Choose Dice Type</string>
+    <string name="choose_die_type_dialog_title">Choose Die Type</string>
 </resources>

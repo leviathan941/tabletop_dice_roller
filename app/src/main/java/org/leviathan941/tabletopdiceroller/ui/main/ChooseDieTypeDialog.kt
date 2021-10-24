@@ -55,7 +55,7 @@ fun ChooseDiceTypeDialog(
         onDismissRequest = onDismiss,
         title = {
             Text(
-                text = stringResource(id = R.string.choose_dice_type_dialog_title),
+                text = stringResource(id = R.string.choose_die_type_dialog_title),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
             )
