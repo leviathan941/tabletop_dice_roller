@@ -4,7 +4,7 @@ buildscript {
         appId = "org.leviathan941.$appBaseName"
         versionMajor = '0'
         versionMinor = '8'
-        versionPatch = '0'
+        versionPatch = '1'
 
         compose_version = '1.0.4'
         kotlin_version = '1.5.31'
