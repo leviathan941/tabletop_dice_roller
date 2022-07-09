@@ -70,9 +70,9 @@ android {
 dependencies {
 
     implementation "androidx.core:core-ktx:$androidCoreVersion"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
 
-    implementation "com.google.android.material:material:$material_version"
+    implementation "com.google.android.material:material:$materialVersion"
 
     implementation "androidx.compose.ui:ui:$composeVersion"
     implementation "androidx.compose.runtime:runtime-livedata:$composeVersion"
