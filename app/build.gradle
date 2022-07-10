@@ -37,6 +37,14 @@ android {
         }
 
         setProperty("archivesBaseName", "$appBaseName-$versionName")
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation": "$projectDir/db_schemas".toString()
+                ]
+            }
+        }
     }
 
     buildTypes {
