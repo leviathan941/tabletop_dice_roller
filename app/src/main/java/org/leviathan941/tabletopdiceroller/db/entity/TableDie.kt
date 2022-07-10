@@ -18,15 +18,14 @@
 
 package org.leviathan941.tabletopdiceroller.db.entity
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import org.leviathan941.tabletopdiceroller.db.TABLE_DB_TABLE_NAME
+import org.leviathan941.tabletopdiceroller.db.DICE_DB_TABLE_NAME
 import org.leviathan941.tabletopdiceroller.model.dice.Die
 
-@Entity(tableName = TABLE_DB_TABLE_NAME)
+@Entity(tableName = DICE_DB_TABLE_NAME)
 data class TableDie(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo(name = "dice") val die: Die,
+    val die: Die,
     val result: Int
 )

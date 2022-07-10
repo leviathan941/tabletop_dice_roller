@@ -20,11 +20,11 @@ package org.leviathan941.tabletopdiceroller.db.dao
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
-import org.leviathan941.tabletopdiceroller.db.TABLE_DB_TABLE_NAME
+import org.leviathan941.tabletopdiceroller.db.DICE_DB_TABLE_NAME
 import org.leviathan941.tabletopdiceroller.db.entity.TableDie
 
 @Dao
-interface TableDao {
+interface DiceDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDie(die: TableDie)
 
@@ -37,12 +37,12 @@ interface TableDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateDie(die: TableDie)
 
-    @Query("SELECT * FROM `$TABLE_DB_TABLE_NAME`")
+    @Query("SELECT * FROM `$DICE_DB_TABLE_NAME`")
     fun loadAllDice(): Flow<List<TableDie>>
 
-    @Query("DELETE FROM `$TABLE_DB_TABLE_NAME`")
+    @Query("DELETE FROM `$DICE_DB_TABLE_NAME`")
     suspend fun clear()
 
-    @Query("SELECT * FROM `$TABLE_DB_TABLE_NAME` WHERE id = :id")
+    @Query("SELECT * FROM `$DICE_DB_TABLE_NAME` WHERE id = :id")
     fun loadDieById(id: Int): Flow<TableDie?>
 }

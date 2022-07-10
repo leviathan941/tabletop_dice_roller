@@ -18,5 +18,5 @@
 
 package org.leviathan941.tabletopdiceroller.db
 
-const val TABLE_DB_TABLE_NAME = "table"
+const val DICE_DB_TABLE_NAME = "dice"
 const val DIE_NO_RESULT = -1
