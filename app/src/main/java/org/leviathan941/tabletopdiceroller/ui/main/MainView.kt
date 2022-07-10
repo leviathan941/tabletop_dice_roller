@@ -20,15 +20,10 @@ package org.leviathan941.tabletopdiceroller.ui.main
 
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.leviathan941.tabletopdiceroller.app.preferences.UiPreferences
 import org.leviathan941.tabletopdiceroller.ui.dice.DiceRow
@@ -72,16 +67,7 @@ fun MainView(activity: ComponentActivity) {
             }
         }
     ) { innerPadding ->
-        LazyColumn(
-            contentPadding = innerPadding,
-        ) {
-            item {
-                Spacer(modifier = Modifier.height(10.dp))
-            }
-            item {
-                DiceRow(viewModel)
-            }
-        }
+        DiceRow(mainViewModel = viewModel, contentPadding = innerPadding)
     }
 
     val newDiceState = viewModel.uiPrefs.collectAsState(initial = UiPreferences.initial)

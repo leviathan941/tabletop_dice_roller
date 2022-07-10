@@ -18,9 +18,12 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
@@ -28,12 +31,22 @@ import org.leviathan941.tabletopdiceroller.app.preferences.UiPreferences
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @Composable
-fun DiceRow(mainViewModel: MainViewModel) {
+fun DiceRow(mainViewModel: MainViewModel, contentPadding: PaddingValues) {
     val diceState by mainViewModel.diceState.collectAsState()
+    val scrollState = rememberScrollState(0)
+    val diceCountState = remember { mutableStateOf(diceState.size) }
+
     FlowRow(
+        modifier = Modifier
+            .verticalScroll(scrollState)
+            .padding(contentPadding),
         mainAxisSize = SizeMode.Expand,
         mainAxisAlignment = FlowMainAxisAlignment.Center,
     ) {
+        Spacer(modifier = Modifier
+            .height(10.dp)
+            .fillMaxWidth())
+
         diceState.forEach { dice ->
             DiceView(
                 die = dice,
@@ -49,5 +62,12 @@ fun DiceRow(mainViewModel: MainViewModel) {
                 onClick = mainViewModel::addDie,
             )
         }
+    }
+
+    LaunchedEffect(diceState, diceCountState) {
+        if (diceState.size > diceCountState.value) {
+            scrollState.scrollTo(scrollState.maxValue)
+        }
+        diceCountState.value = diceState.size
     }
 }
