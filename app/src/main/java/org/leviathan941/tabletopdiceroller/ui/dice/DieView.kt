@@ -21,7 +21,6 @@ package org.leviathan941.tabletopdiceroller.ui.dice
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.icons.Icons
@@ -43,14 +42,14 @@ import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDie
 @Composable
 fun DiceView(
     die: TableDie,
-    onRoll: () -> Unit,
+    onDieClick: () -> Unit,
     onRemoveClick: () -> Unit,
+    onDieLongClick: () -> Unit,
 ) {
-
     Box(modifier = Modifier.size(DIE_VIEW_SIZE_DP)) {
-        Button(
-            onClick = onRoll,
-            contentPadding = PaddingValues(all = 0.dp),
+        DieButton(
+            onClick = onDieClick,
+            onLongClick = onDieLongClick,
             modifier = Modifier
                 .align(Alignment.Center)
                 .fillMaxSize()
@@ -82,15 +81,16 @@ fun DiceView(
 
 private fun TableDie.image() =
     if (result == DIE_NO_RESULT) {
-        die.previewImage()
+        die.previewImage
     } else {
-        die.sideImage(result)
+        die.sideImages[result]
     }
 
 @Preview
 @Composable
 private fun PreviewDiceView() = DiceView(
     die = TableDie(die = SixSidedDie(), result = DIE_NO_RESULT),
-    onRoll = {},
-    onRemoveClick = {}
+    onDieClick = {},
+    onRemoveClick = {},
+    onDieLongClick = {},
 )

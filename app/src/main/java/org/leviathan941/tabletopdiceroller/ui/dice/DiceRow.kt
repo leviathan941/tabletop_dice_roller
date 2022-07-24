@@ -23,11 +23,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
+import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.app.preferences.UiPreferences
+import org.leviathan941.tabletopdiceroller.db.entity.TableDie
+import org.leviathan941.tabletopdiceroller.ui.main.ChooseDieDialog
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @Composable
@@ -35,6 +39,7 @@ fun DiceRow(mainViewModel: MainViewModel, contentPadding: PaddingValues) {
     val diceState by mainViewModel.diceState.collectAsState()
     val scrollState = rememberScrollState(0)
     val diceCountState = remember { mutableStateOf(diceState.size) }
+    var manualChooseSideOf by remember { mutableStateOf<TableDie?>(null) }
 
     FlowRow(
         modifier = Modifier
@@ -47,11 +52,13 @@ fun DiceRow(mainViewModel: MainViewModel, contentPadding: PaddingValues) {
             .height(10.dp)
             .fillMaxWidth())
 
-        diceState.forEach { dice ->
+        diceState.forEach { die ->
+            val dieState by rememberUpdatedState(die)
             DiceView(
-                die = dice,
-                onRoll = { mainViewModel.roll(dice) },
-                onRemoveClick = { mainViewModel.removeDie(dice) }
+                die = dieState,
+                onDieClick = { mainViewModel.roll(dieState) },
+                onRemoveClick = { mainViewModel.removeDie(dieState) },
+                onDieLongClick = { manualChooseSideOf = dieState }
             )
         }
 
@@ -69,5 +76,24 @@ fun DiceRow(mainViewModel: MainViewModel, contentPadding: PaddingValues) {
             scrollState.scrollTo(scrollState.maxValue)
         }
         diceCountState.value = diceState.size
+    }
+
+    manualChooseSideOf?.let { die ->
+        val dismissDialog = { manualChooseSideOf = null }
+        ChooseDieDialog(
+            titleText = stringResource(id = R.string.choose_die_manually_title),
+            onDismiss = dismissDialog,
+        ) {
+            die.die.sideImages.distinct().forEachIndexed { index, imageResource ->
+                DieDialogButton(
+                    dieImage = imageResource,
+                    selected = imageResource == die.die.sideImages[die.result],
+                    onClick = {
+                        dismissDialog()
+                        mainViewModel.setDieResult(die, index)
+                    }
+                )
+            }
+        }
     }
 }

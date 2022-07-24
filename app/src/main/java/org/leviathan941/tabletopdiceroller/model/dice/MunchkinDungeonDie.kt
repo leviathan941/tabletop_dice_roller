@@ -21,7 +21,7 @@ package org.leviathan941.tabletopdiceroller.model.dice
 import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
-class MunchkinDungeonDie : GenericDie(sideResources, previewResource) {
+class MunchkinDungeonDie : GenericDie(sideResources, previewResource, DieType.MUNCHKIN_DUNGEON) {
     companion object {
         private val sideResources = listOf(
             ImageResource(R.drawable.munchkin_dungeon_die_empty,
@@ -40,6 +40,4 @@ class MunchkinDungeonDie : GenericDie(sideResources, previewResource) {
         private val previewResource = ImageResource(
             R.drawable.munchkin_dungeon_die_preview, R.string.dice_no_result_content_desc)
     }
-
-    override val type: DieType = DieType.MUNCHKIN_DUNGEON
 }

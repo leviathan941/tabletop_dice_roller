@@ -58,8 +58,8 @@ fun DiceAddPlaceholder(
             )
 
             Icon(
-                painter = painterResource(id = newDie.previewImage().imageRes),
-                contentDescription = stringResource(id = newDie.previewImage().contentDesc),
+                painter = painterResource(id = newDie.previewImage.imageRes),
+                contentDescription = stringResource(id = newDie.previewImage.contentDesc),
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(end = 10.dp, bottom = 10.dp)

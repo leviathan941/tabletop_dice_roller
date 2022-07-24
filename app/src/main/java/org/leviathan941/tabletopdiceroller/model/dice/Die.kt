@@ -21,21 +21,18 @@ package org.leviathan941.tabletopdiceroller.model.dice
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
 interface Die {
-    fun sideImage(sideId: Int): ImageResource
-    fun previewImage(): ImageResource
+    val sideImages: List<ImageResource>
+    val previewImage: ImageResource
     fun roll(): Int
     val range: IntRange
     val type: DieType
 }
 
 sealed class GenericDie(
-    private val sideImages: List<ImageResource>,
-    private val previewImage: ImageResource
+    final override val sideImages: List<ImageResource>,
+    final override val previewImage: ImageResource,
+    final override val type: DieType,
     ) : Die {
-
-    override fun sideImage(sideId: Int): ImageResource = sideImages[sideId]
-
-    override fun previewImage(): ImageResource = previewImage
 
     override fun roll(): Int = range.random()
 

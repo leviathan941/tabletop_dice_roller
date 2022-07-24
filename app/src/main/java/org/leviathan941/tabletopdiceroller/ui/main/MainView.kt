@@ -24,9 +24,13 @@ import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
+import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
+import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.app.preferences.UiPreferences
+import org.leviathan941.tabletopdiceroller.model.dice.DiceUtils
 import org.leviathan941.tabletopdiceroller.ui.dice.DiceRow
+import org.leviathan941.tabletopdiceroller.ui.dice.DieDialogButton
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @Composable
@@ -73,14 +77,20 @@ fun MainView(activity: ComponentActivity) {
     val newDiceState = viewModel.uiPrefs.collectAsState(initial = UiPreferences.initial)
     if (openDiceTypeDialog) {
         val dismissDialog = { openDiceTypeDialog = false }
-        ChooseDiceTypeDialog(
-            newDieType = newDiceState.value.newDieType,
+        ChooseDieDialog(
+            titleText = stringResource(id = R.string.choose_die_type_dialog_title),
             onDismiss = dismissDialog,
-            onTypeChosen = {
-                viewModel.changeNewDieType(it)
-                dismissDialog()
-            },
-        )
+        ) {
+            DiceUtils.allDices().forEach {
+                DieDialogButton(
+                    dieImage = it.previewImage,
+                    selected = it.type == newDiceState.value.newDieType,
+                    onClick = {
+                        viewModel.changeNewDieType(it.type)
+                        dismissDialog()
+                    }
+                )
+            }
+        }
     }
-
 }

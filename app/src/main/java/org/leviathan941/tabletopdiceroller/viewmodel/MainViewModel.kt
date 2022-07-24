@@ -22,7 +22,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.leviathan941.tabletopdiceroller.app.Singletons
@@ -69,13 +68,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun roll(tableDie: TableDie) {
-        viewModelScope.launch {
-            with(tableDie) {
-                tableRepository.updateDie(
-                    TableDie(id = id, die = die, result = die.roll())
-                )
-            }
-        }
+        setDieResult(tableDie, tableDie.die.roll())
     }
 
     fun removeDie(die: TableDie) {
@@ -93,6 +86,16 @@ class MainViewModel : ViewModel() {
     fun changeNewDieType(type: DieType) {
         viewModelScope.launch {
             prefsRepository.updateNewDieType(type)
+        }
+    }
+
+    fun setDieResult(tableDie: TableDie, result: Int) {
+        viewModelScope.launch {
+            with(tableDie) {
+                tableRepository.updateDie(
+                    TableDie(id = id, die = die, result = result)
+                )
+            }
         }
     }
 }

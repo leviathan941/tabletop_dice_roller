@@ -28,4 +28,5 @@
     <string name="change_default_die_type_content_dec">Change new die type</string>
 
     <string name="choose_die_type_dialog_title">Choose Die Type</string>
+    <string name="choose_die_manually_title">Choose Die Side</string>
 </resources>
