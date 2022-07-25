@@ -22,12 +22,12 @@ def getVersionCode = {
 }
 
 android {
-    compileSdk 31
+    compileSdk 32
 
     defaultConfig {
         applicationId "$appId"
         minSdk 21
-        targetSdk 31
+        targetSdk 32
         versionCode getVersionCode()
         versionName "$versionMajor.$versionMinor.$versionPatch"
 
