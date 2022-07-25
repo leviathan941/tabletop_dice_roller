@@ -1,3 +1,7 @@
+import org.leviathan941.tabletopdiceroller.AndroidSdk
+import org.leviathan941.tabletopdiceroller.Dependencies
+import org.leviathan941.tabletopdiceroller.Versions
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -22,12 +26,12 @@ def getVersionCode = {
 }
 
 android {
-    compileSdk 32
+    compileSdk AndroidSdk.INSTANCE.COMPILE_SDK_VERSION
 
     defaultConfig {
         applicationId "$appId"
-        minSdk 21
-        targetSdk 32
+        minSdk AndroidSdk.INSTANCE.MIN_SDK_VERSION
+        targetSdk AndroidSdk.INSTANCE.TARGET_SDK_VERSION
         versionCode getVersionCode()
         versionName "$versionMajor.$versionMinor.$versionPatch"
 
@@ -69,7 +73,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion composeVersion
+        kotlinCompilerExtensionVersion Versions.INSTANCE.KOTLIN
     }
     packagingOptions {
         resources {
@@ -80,28 +84,28 @@ android {
 
 dependencies {
 
-    implementation "androidx.core:core-ktx:$androidCoreVersion"
-    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation Dependencies.INSTANCE.androidCoreKtx
+    implementation Dependencies.INSTANCE.appCompat
 
-    implementation "com.google.android.material:material:$materialVersion"
+    implementation Dependencies.INSTANCE.material
 
-    implementation "androidx.compose.ui:ui:$composeVersion"
-    implementation "androidx.compose.runtime:runtime-livedata:$composeVersion"
-    implementation "androidx.compose.material:material:$composeVersion"
-    implementation "androidx.compose.ui:ui-tooling-preview:$composeVersion"
+    implementation Dependencies.INSTANCE.compose.ui
+    implementation Dependencies.INSTANCE.compose.runtimeLivedata
+    implementation Dependencies.INSTANCE.compose.material
+    implementation Dependencies.INSTANCE.compose.uiToolingPreview
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion"
+    implementation Dependencies.INSTANCE.lifecycle.livedataKtx
+    implementation Dependencies.INSTANCE.lifecycle.viewModelKtx
+    implementation Dependencies.INSTANCE.lifecycle.viewModelSavedState
 
-    implementation "androidx.activity:activity-compose:$activityComposeVersion"
+    implementation Dependencies.INSTANCE.activityCompose
 
-    implementation "com.google.accompanist:accompanist-flowlayout:$accompanistVersion"
+    implementation Dependencies.INSTANCE.accompanistFlowLayout
 
-    implementation "androidx.room:room-ktx:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation Dependencies.INSTANCE.room.ktx
+    kapt Dependencies.INSTANCE.room.compiler
 
-    implementation "androidx.datastore:datastore-preferences:$dataStoreVersion"
+    implementation Dependencies.INSTANCE.dataStorePreferences
 
-    debugImplementation "androidx.compose.ui:ui-tooling:$composeVersion"
+    debugImplementation Dependencies.INSTANCE.compose.uiTooling
 }
