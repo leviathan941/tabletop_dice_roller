@@ -84,12 +84,10 @@ fun DiceRow(mainViewModel: MainViewModel, contentPadding: PaddingValues) {
             titleText = stringResource(id = R.string.choose_die_manually_title),
             onDismiss = dismissDialog,
         ) {
-            // TODO: Make better solution
-            die.die.sideImages.mapIndexed { index, image -> image to index }.toMap().forEach {
-                    (image, index) ->
+            die.die.resultImages.forEach { (image, index) ->
                 DieDialogButton(
                     dieImage = image,
-                    selected = image == die.die.sideImages[die.result],
+                    selected = image == die.resultImage(),
                     onClick = {
                         dismissDialog()
                         mainViewModel.setDieResult(die, index)

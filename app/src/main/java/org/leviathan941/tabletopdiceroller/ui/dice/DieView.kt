@@ -56,8 +56,8 @@ fun DiceView(
                 .padding(all = DIE_PADDING_ALL_DP),
         ) {
             Image(
-                painter = painterResource(id = die.image().imageRes),
-                contentDescription = stringResource(id = die.image().contentDesc),
+                painter = painterResource(id = die.resultImage().imageRes),
+                contentDescription = stringResource(id = die.resultImage().contentDesc),
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(shape = RectangleShape),
@@ -78,13 +78,6 @@ fun DiceView(
         }
     }
 }
-
-private fun TableDie.image() =
-    if (result == DIE_NO_RESULT) {
-        die.previewImage
-    } else {
-        die.sideImages[result]
-    }
 
 @Preview
 @Composable

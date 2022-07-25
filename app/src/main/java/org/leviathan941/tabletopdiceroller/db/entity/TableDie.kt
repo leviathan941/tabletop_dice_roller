@@ -21,11 +21,19 @@ package org.leviathan941.tabletopdiceroller.db.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.leviathan941.tabletopdiceroller.db.DICE_DB_TABLE_NAME
+import org.leviathan941.tabletopdiceroller.db.DIE_NO_RESULT
 import org.leviathan941.tabletopdiceroller.model.dice.Die
+import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
 @Entity(tableName = DICE_DB_TABLE_NAME)
 data class TableDie(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val die: Die,
     val result: Int
-)
+) {
+    fun resultImage(): ImageResource = if (result == DIE_NO_RESULT) {
+        die.previewImage
+    } else {
+        die.sideImages[result]
+    }
+}
