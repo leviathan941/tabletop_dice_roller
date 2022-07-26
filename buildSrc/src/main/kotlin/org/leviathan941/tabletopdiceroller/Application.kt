@@ -18,16 +18,8 @@
 
 package org.leviathan941.tabletopdiceroller
 
-object Versions {
-    const val ANDROID_GRADLE_PLUGIN = "7.2.0"
-    const val COMPOSE = "1.1.1"
-    const val KOTLIN = "1.6.10"
-    const val APP_COMPAT = "1.4.2"
-    const val ANDROID_CORE = "1.8.0"
-    const val ACTIVITY_COMPOSE = "1.5.0"
-    const val MATERIAL = "1.6.1"
-    const val LIFECYCLE = "2.5.0"
-    const val ACCOMPANIST = "0.23.1"
-    const val ROOM = "2.4.2"
-    const val DATA_STORE = "1.0.0"
+object Application {
+    const val BASE_NAME = "tabletopdiceroller"
+    const val ID = "org.leviathan941.$BASE_NAME"
+    val version = AppVersion()
 }

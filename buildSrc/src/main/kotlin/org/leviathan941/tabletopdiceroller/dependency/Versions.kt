@@ -16,10 +16,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller
+package org.leviathan941.tabletopdiceroller.dependency
 
-object AndroidSdk {
-    const val COMPILE_SDK_VERSION = 32
-    const val MIN_SDK_VERSION = 21
-    const val TARGET_SDK_VERSION = 32
+object Versions {
+    const val ACCOMPANIST = "0.23.1"
+    const val ACTIVITY_COMPOSE = "1.5.0"
+    const val ANDROID_CORE = "1.8.0"
+    const val ANDROID_PLUGIN = "7.2.0"
+    const val APP_COMPAT = "1.4.2"
+    const val COMPOSE = "1.1.1"
+    const val DATA_STORE = "1.0.0"
+    const val KOTLIN_JVM = "1.8"
+    const val KOTLIN_PLUGIN = "1.6.10"
+    const val LIFECYCLE = "2.5.0"
+    const val MATERIAL = "1.6.1"
+    const val ROOM = "2.4.2"
 }

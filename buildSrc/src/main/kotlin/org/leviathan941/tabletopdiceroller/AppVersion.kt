@@ -18,8 +18,24 @@
 
 package org.leviathan941.tabletopdiceroller
 
-object AndroidSdk {
-    const val COMPILE_SDK_VERSION = 32
-    const val MIN_SDK_VERSION = 21
-    const val TARGET_SDK_VERSION = 32
+class AppVersion {
+    val code: Int by lazy {
+        val minor = fixVersionPart(MINOR)
+        val patch = fixVersionPart(PATCH)
+        "$MAJOR$minor$patch".toInt()
+    }
+
+    val name = "$MAJOR.$MINOR.$PATCH"
+
+    private fun fixVersionPart(part: String) = if (part.length > 1) {
+        part
+    } else {
+        "0$part"
+    }
+
+    companion object {
+        const val MAJOR = "0"
+        const val MINOR = "11" // from 0 to 99
+        const val PATCH = "0" // from 0 to 99
+    }
 }

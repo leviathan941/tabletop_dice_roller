@@ -1,0 +1,95 @@
+import org.leviathan941.tabletopdiceroller.AndroidSdk
+import org.leviathan941.tabletopdiceroller.Application
+import org.leviathan941.tabletopdiceroller.dependency.Deps
+import org.leviathan941.tabletopdiceroller.dependency.Versions
+
+plugins {
+    id("com.android.application")
+    kotlin("android")
+    kotlin("plugin.parcelize")
+    kotlin("kapt")
+}
+
+android {
+    compileSdk = AndroidSdk.COMPILE_SDK_VERSION
+
+    defaultConfig {
+        applicationId = Application.ID
+        minSdk = AndroidSdk.MIN_SDK_VERSION
+        targetSdk = AndroidSdk.TARGET_SDK_VERSION
+        versionCode = Application.version.code
+        versionName = Application.version.name
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+
+        setProperty("archivesBaseName", "${Application.BASE_NAME}-${Application.version.name}")
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ("room.schemaLocation" to "$projectDir/db_schemas")
+            }
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        getByName("debug") {
+            versionNameSuffix = "-SNAPSHOT"
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = Versions.KOTLIN_JVM
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.COMPOSE
+    }
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+}
+
+dependencies {
+    implementation(Deps.androidCoreKtx)
+    implementation(Deps.appCompat)
+
+    implementation(Deps.material)
+
+    implementation(Deps.compose.ui)
+    implementation(Deps.compose.runtimeLivedata)
+    implementation(Deps.compose.material)
+    implementation(Deps.compose.uiToolingPreview)
+
+    implementation(Deps.lifecycle.livedataKtx)
+    implementation(Deps.lifecycle.viewModelKtx)
+    implementation(Deps.lifecycle.viewModelSavedState)
+
+    implementation(Deps.activityCompose)
+
+    implementation(Deps.accompanistFlowLayout)
+
+    implementation(Deps.room.ktx)
+    kapt(Deps.room.compiler)
+
+    implementation(Deps.dataStorePreferences)
+
+    debugImplementation(Deps.compose.uiTooling)
+}
