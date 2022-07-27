@@ -16,13 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.db.converters
+package org.leviathan941.tabletopdiceroller.db.internal.converters
 
 import androidx.room.TypeConverter
 import org.leviathan941.tabletopdiceroller.model.dice.Die
 import org.leviathan941.tabletopdiceroller.model.dice.DieType
 
-class DieConverter {
+internal class DieConverter {
     @TypeConverter
     fun toDie(dieTypeName: String) = enumValueOf<DieType>(dieTypeName).toDie()
 

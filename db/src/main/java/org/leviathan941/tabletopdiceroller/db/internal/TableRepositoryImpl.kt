@@ -16,24 +16,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.app
+package org.leviathan941.tabletopdiceroller.db.internal
 
-import org.leviathan941.tabletopdiceroller.db.dao.DiceDao
+import org.leviathan941.tabletopdiceroller.db.TableRepository
+import org.leviathan941.tabletopdiceroller.db.internal.dao.DiceDao
 import org.leviathan941.tabletopdiceroller.db.entity.TableDie
 
-class TableRepository(private val diceDao: DiceDao) {
+internal class TableRepositoryImpl(private val diceDao: DiceDao) : TableRepository {
 
-    fun loadAllDice() = diceDao.loadAllDice()
+    override fun loadAllDice() = diceDao.loadAllDice()
 
-    suspend fun insertDie(die: TableDie) = diceDao.insertDie(die)
+    override suspend fun insertDie(die: TableDie) = diceDao.insertDie(die)
 
-    suspend fun deleteDie(die: TableDie) = diceDao.deleteDie(die)
+    override suspend fun deleteDie(die: TableDie) = diceDao.deleteDie(die)
 
-    suspend fun updateDice(dice: List<TableDie>) = diceDao.updateDice(dice)
+    override suspend fun updateDice(dice: List<TableDie>) = diceDao.updateDice(dice)
 
-    suspend fun updateDie(die: TableDie) = diceDao.updateDie(die)
+    override suspend fun updateDie(die: TableDie) = diceDao.updateDie(die)
 
-    suspend fun clear() = diceDao.clear()
-
-    fun loadDieById(id: Int) = diceDao.loadDieById(id)
+    override suspend fun clear() = diceDao.clear()
 }

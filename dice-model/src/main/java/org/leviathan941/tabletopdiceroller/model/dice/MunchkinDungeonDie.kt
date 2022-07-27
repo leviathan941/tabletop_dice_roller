@@ -18,7 +18,6 @@
 
 package org.leviathan941.tabletopdiceroller.model.dice
 
-import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
 class MunchkinDungeonDie : GenericDie(sideResources, previewResource, DieType.MUNCHKIN_DUNGEON) {

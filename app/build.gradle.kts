@@ -26,12 +26,6 @@ android {
         }
 
         setProperty("archivesBaseName", "${Application.BASE_NAME}-${Application.version.name}")
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += ("room.schemaLocation" to "$projectDir/db_schemas")
-            }
-        }
     }
 
     buildTypes {
@@ -68,6 +62,10 @@ android {
 }
 
 dependencies {
+    implementation(project(":db"))
+    implementation(project(":dice-model"))
+    implementation(project(":utils"))
+
     implementation(Deps.androidCoreKtx)
     implementation(Deps.appCompat)
 
@@ -85,9 +83,6 @@ dependencies {
     implementation(Deps.activityCompose)
 
     implementation(Deps.accompanistFlowLayout)
-
-    implementation(Deps.room.ktx)
-    kapt(Deps.room.compiler)
 
     implementation(Deps.dataStorePreferences)
 

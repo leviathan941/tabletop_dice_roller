@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Tabletop Dice Roller
+  ~ Copyright (C) 2022 Alexey Kuzin
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="dice_no_result_content_desc">No result</string>
+
+    <string name="six_sided_die_one_content_desc">One</string>
+    <string name="six_sided_die_two_content_desc">Two</string>
+    <string name="six_sided_die_three_content_desc">Three</string>
+    <string name="six_sided_die_four_content_desc">Four</string>
+    <string name="six_sided_die_five_content_desc">Five</string>
+    <string name="six_sided_die_six_content_desc">Six</string>
+
+    <string name="munchkin_dungeon_die_empty_content_desc">Empty</string>
+    <string name="munchkin_dungeon_die_lightning_content_desc">Lightning</string>
+    <string name="munchkin_dungeon_die_sword_content_desc">Sword</string>
+    <string name="munchkin_dungeon_die_double_swords_content_desc">Double sword</string>
+    <string name="munchkin_dungeon_die_shield_content_desc">Shield</string>
+</resources>

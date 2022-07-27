@@ -22,12 +22,10 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.room.Room
 import org.leviathan941.tabletopdiceroller.app.preferences.CommonPreferencesRepository
 import org.leviathan941.tabletopdiceroller.db.AppDatabase
 
 object Singletons {
-    private const val DATABASE_NAME = "tabletop_dice_roller_db"
     private const val COMMON_PREFS_NAME = "common_preferences"
 
     private lateinit var database: AppDatabase
@@ -35,13 +33,12 @@ object Singletons {
     private val Context.commonDataStore: DataStore<Preferences> by
             preferencesDataStore(name = COMMON_PREFS_NAME)
 
-    val tableRepository by lazy { TableRepository(database.tableDao()) }
+    val tableRepository get() = database.tableRepository
 
     lateinit var prefsRepository: CommonPreferencesRepository
 
     fun init(context: Context) {
-        database = Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-            .build()
+        database = AppDatabase.create(context)
         prefsRepository = CommonPreferencesRepository(context.commonDataStore)
     }
 }
