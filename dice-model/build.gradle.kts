@@ -38,8 +38,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = Versions.JAVA_COMPAT
+        targetCompatibility = Versions.JAVA_COMPAT
     }
     kotlinOptions {
         jvmTarget = Versions.KOTLIN_JVM
