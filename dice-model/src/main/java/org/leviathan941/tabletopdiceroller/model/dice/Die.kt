@@ -19,6 +19,7 @@
 package org.leviathan941.tabletopdiceroller.model.dice
 
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
+import kotlin.random.Random
 
 interface Die {
     val sideImages: List<ImageResource>
@@ -35,7 +36,7 @@ sealed class GenericDie(
     final override val type: DieType,
     ) : Die {
 
-    override fun roll(): Int = range.random()
+    override fun roll(): Int = range.random(Random(System.nanoTime()))
 
     override val range: IntRange = sideImages.indices
 
