@@ -21,10 +21,10 @@ package org.leviathan941.tabletopdiceroller.dependency
 import org.gradle.api.JavaVersion
 
 object Versions {
-    const val ACCOMPANIST = "0.24.13-rc"
+    const val ACCOMPANIST = "0.25.0"
     const val ACTIVITY_COMPOSE = "1.5.1"
     const val ANDROID_CORE = "1.8.0"
-    const val ANDROID_PLUGIN = "7.2.0"
+    const val ANDROID_PLUGIN = "7.2.2"
     const val APP_COMPAT = "1.4.2"
     const val COMPOSE = "1.2.0"
     const val DATA_STORE = "1.0.0"
