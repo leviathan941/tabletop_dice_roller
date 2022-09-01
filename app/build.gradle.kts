@@ -52,7 +52,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.COMPOSE
+        kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER
     }
     packagingOptions {
         resources {
@@ -71,6 +71,7 @@ dependencies {
 
     implementation(Deps.material)
 
+    implementation(Deps.composeCompiler)
     implementation(Deps.compose.ui)
     implementation(Deps.compose.runtimeLivedata)
     implementation(Deps.compose.material)

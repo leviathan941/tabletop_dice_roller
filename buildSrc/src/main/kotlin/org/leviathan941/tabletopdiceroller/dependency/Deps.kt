@@ -29,6 +29,7 @@ object Deps {
     val androidCoreKtx by lazy { "androidx.core:core-ktx:${Versions.ANDROID_CORE}" }
     val appCompat by lazy { "androidx.appcompat:appcompat:${Versions.APP_COMPAT}" }
     val compose = ComposeDependency(Versions.COMPOSE)
+    val composeCompiler by lazy { "androidx.compose.compiler:compiler:${Versions.COMPOSE_COMPILER}" }
     val dataStorePreferences by lazy { "androidx.datastore:datastore-preferences:${Versions.DATA_STORE}" }
     val lifecycle = LifecycleDependency(Versions.LIFECYCLE)
     val material by lazy { "com.google.android.material:material:${Versions.MATERIAL}" }
