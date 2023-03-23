@@ -11,6 +11,7 @@ plugins {
 }
 
 android {
+    namespace = "org.leviathan941.tabletopdiceroller"
     compileSdk = AndroidSdk.COMPILE_SDK_VERSION
 
     defaultConfig {
@@ -45,8 +46,8 @@ android {
         sourceCompatibility = Versions.JAVA_COMPAT
         targetCompatibility = Versions.JAVA_COMPAT
     }
-    kotlinOptions {
-        jvmTarget = Versions.KOTLIN_JVM
+    kotlin {
+        jvmToolchain(Versions.KOTLIN_JVM)
     }
     buildFeatures {
         compose = true

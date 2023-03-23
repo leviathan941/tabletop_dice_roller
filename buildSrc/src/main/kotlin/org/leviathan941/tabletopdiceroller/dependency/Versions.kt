@@ -29,11 +29,11 @@ object Versions {
     const val COMPOSE = "1.4.0"
     const val COMPOSE_COMPILER = "1.4.4"
     const val DATA_STORE = "1.0.0"
-    const val KOTLIN_JVM = "11"
     const val KOTLIN_PLUGIN = "1.8.10"
     const val LIFECYCLE = "2.6.1"
     const val MATERIAL = "1.8.0"
     const val ROOM = "2.5.1"
 
     val JAVA_COMPAT = JavaVersion.VERSION_11
+    const val KOTLIN_JVM = 11
 }

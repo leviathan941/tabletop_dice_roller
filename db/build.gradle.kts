@@ -27,11 +27,11 @@ plugins {
 }
 
 android {
+    namespace = "org.leviathan941.tabletopdiceroller.db"
     compileSdk = AndroidSdk.COMPILE_SDK_VERSION
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK_VERSION
-        targetSdk = AndroidSdk.TARGET_SDK_VERSION
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -44,8 +44,8 @@ android {
         sourceCompatibility = Versions.JAVA_COMPAT
         targetCompatibility = Versions.JAVA_COMPAT
     }
-    kotlinOptions {
-        jvmTarget = Versions.KOTLIN_JVM
+    kotlin {
+        jvmToolchain(Versions.KOTLIN_JVM)
     }
 }
 
