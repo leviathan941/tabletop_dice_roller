@@ -66,7 +66,7 @@ fun DiceView(
         OutlinedButton(
             onClick = onRemoveClick,
             modifier = Modifier
-                .align(Alignment.TopStart)
+                .align(Alignment.TopEnd)
                 .size(30.dp),
             shape = CircleShape,
             contentPadding = PaddingValues(0.dp),

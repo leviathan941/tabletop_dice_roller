@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.leviathan941.tabletopdiceroller.app.Singletons
@@ -41,8 +42,8 @@ class MainViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            tableRepository.loadAllDice().collect {
-                _diceState.value = it
+            tableRepository.loadAllDice().collectLatest {
+                _diceState.value = it.reversed()
             }
         }
     }

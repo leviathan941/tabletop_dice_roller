@@ -52,6 +52,14 @@ fun DiceRow(mainViewModel: MainViewModel, contentPadding: PaddingValues) {
             .height(10.dp)
             .fillMaxWidth())
 
+        val newDiceState = mainViewModel.uiPrefs.collectAsState(initial = UiPreferences.initial)
+        if (diceState.size < MAX_DICES_COUNT) {
+            DiceAddPlaceholder(
+                newDie = newDiceState.value.newDieType.toDie(),
+                onClick = mainViewModel::addDie,
+            )
+        }
+
         diceState.forEach { die ->
             val dieState by rememberUpdatedState(die)
             DiceView(
@@ -59,14 +67,6 @@ fun DiceRow(mainViewModel: MainViewModel, contentPadding: PaddingValues) {
                 onDieClick = { mainViewModel.roll(dieState) },
                 onRemoveClick = { mainViewModel.removeDie(dieState) },
                 onDieLongClick = { manualChooseSideOf = dieState }
-            )
-        }
-
-        val newDiceState = mainViewModel.uiPrefs.collectAsState(initial = UiPreferences.initial)
-        if (diceState.size < MAX_DICES_COUNT) {
-            DiceAddPlaceholder(
-                newDie = newDiceState.value.newDieType.toDie(),
-                onClick = mainViewModel::addDie,
             )
         }
     }
