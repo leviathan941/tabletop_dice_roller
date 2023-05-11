@@ -34,6 +34,7 @@ object Versions {
     const val MATERIAL = "1.8.0"
     const val ROOM = "2.5.1"
 
-    val JAVA_COMPAT = JavaVersion.VERSION_11
+    val JAVA_SRC_COMPAT = JavaVersion.VERSION_11
+    val JAVA_TARGET_COMPAT = JavaVersion.VERSION_11
     const val KOTLIN_JVM = 11
 }
