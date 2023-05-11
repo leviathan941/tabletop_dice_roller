@@ -44,6 +44,9 @@ sealed class GenericDie(
         get() = sideImages.mapIndexed { index, image -> image to index }.toMap()
 }
 
+/**
+ * DO NOT modify element names, because they are stored in DB.
+ */
 enum class DieType {
     SIX_SIDED,
     MUNCHKIN_DUNGEON,

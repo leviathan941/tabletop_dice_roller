@@ -18,14 +18,16 @@
 
 package org.leviathan941.tabletopdiceroller.db.internal
 
-import androidx.room.*
-import androidx.room.migration.AutoMigrationSpec
+import androidx.room.AutoMigration
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import org.leviathan941.tabletopdiceroller.db.AppDatabase
-import org.leviathan941.tabletopdiceroller.db.DICE_DB_TABLE_NAME
+import org.leviathan941.tabletopdiceroller.db.Migration1To2
 import org.leviathan941.tabletopdiceroller.db.TableRepository
+import org.leviathan941.tabletopdiceroller.db.entity.TableDie
 import org.leviathan941.tabletopdiceroller.db.internal.converters.DieConverter
 import org.leviathan941.tabletopdiceroller.db.internal.dao.DiceDao
-import org.leviathan941.tabletopdiceroller.db.entity.TableDie
 
 // Do not forget to update version and implement migration when table scheme changed.
 private const val DB_VERSION = 2
@@ -37,7 +39,7 @@ private const val DB_VERSION = 2
         AutoMigration(
             from = 1,
             to = 2,
-            spec = AppDatabaseRoom.Migration1To2::class
+            spec = Migration1To2::class
         )
     ]
 )
@@ -46,8 +48,4 @@ internal abstract class AppDatabaseRoom : RoomDatabase(), AppDatabase {
     abstract fun tableDao(): DiceDao
 
     override val tableRepository: TableRepository by lazy { TableRepositoryImpl(tableDao()) }
-
-    @RenameTable(fromTableName = "table", toTableName = DICE_DB_TABLE_NAME)
-    @RenameColumn(tableName = "table", fromColumnName = "dice", toColumnName = "die")
-    class Migration1To2: AutoMigrationSpec
 }

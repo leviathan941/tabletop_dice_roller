@@ -1,6 +1,6 @@
 /*
  * Tabletop Dice Roller
- * Copyright (C) 2021 Alexey Kuzin
+ * Copyright (C) 2023 Alexey Kuzin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,16 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.db.internal.converters
+package org.leviathan941.tabletopdiceroller.db
 
-import androidx.room.TypeConverter
-import org.leviathan941.tabletopdiceroller.model.dice.Die
-import org.leviathan941.tabletopdiceroller.model.dice.DieType
+import androidx.room.RenameColumn
+import androidx.room.RenameTable
+import androidx.room.migration.AutoMigrationSpec
 
-internal class DieConverter {
-    @TypeConverter
-    fun fromStringToDie(dieTypeName: String) = enumValueOf<DieType>(dieTypeName).toDie()
-
-    @TypeConverter
-    fun fromDieToString(die: Die) = die.type.name
-}
+@RenameTable(fromTableName = "table", toTableName = DICE_DB_TABLE_NAME)
+@RenameColumn(tableName = "table", fromColumnName = "dice", toColumnName = "die")
+internal class Migration1To2: AutoMigrationSpec

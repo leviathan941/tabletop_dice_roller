@@ -37,9 +37,9 @@ internal interface DiceDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateDie(die: TableDie)
 
-    @Query("SELECT * FROM `$DICE_DB_TABLE_NAME`")
+    @Query("SELECT * FROM dice")
     fun loadAllDice(): Flow<List<TableDie>>
 
-    @Query("DELETE FROM `$DICE_DB_TABLE_NAME`")
+    @Query("DELETE FROM dice")
     suspend fun clear()
 }
