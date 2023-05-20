@@ -24,12 +24,13 @@ object Plugins {
 }
 
 object Deps {
-    val accompanistFlowLayout by lazy { "com.google.accompanist:accompanist-flowlayout:${Versions.ACCOMPANIST}" }
+    val accompanist = AccompanistDependency(Versions.ACCOMPANIST)
     val activityCompose by lazy { "androidx.activity:activity-compose:${Versions.ACTIVITY_COMPOSE}" }
     val androidCoreKtx by lazy { "androidx.core:core-ktx:${Versions.ANDROID_CORE}" }
     val appCompat by lazy { "androidx.appcompat:appcompat:${Versions.APP_COMPAT}" }
     val compose = ComposeDependency(Versions.COMPOSE)
     val composeCompiler by lazy { "androidx.compose.compiler:compiler:${Versions.COMPOSE_COMPILER}" }
+    val composeMaterial3 by lazy { "androidx.compose.material3:material3:${Versions.COMPOSE_MATERIAL_3}" }
     val dataStorePreferences by lazy { "androidx.datastore:datastore-preferences:${Versions.DATA_STORE}" }
     val lifecycle = LifecycleDependency(Versions.LIFECYCLE)
     val material by lazy { "com.google.android.material:material:${Versions.MATERIAL}" }
@@ -39,7 +40,6 @@ object Deps {
 class ComposeDependency(private val version: String) {
     val ui by lazy { "androidx.compose.ui:ui:$version" }
     val runtimeLivedata by lazy { "androidx.compose.runtime:runtime-livedata:$version" }
-    val material by lazy { "androidx.compose.material:material:$version" }
     val uiToolingPreview by lazy { "androidx.compose.ui:ui-tooling-preview:$version" }
     val uiTooling by lazy { "androidx.compose.ui:ui-tooling:$version" }
 }
@@ -53,4 +53,9 @@ class LifecycleDependency(private val version: String) {
 class RoomDependency(private val version: String) {
     val compiler by lazy { "androidx.room:room-compiler:$version" }
     val ktx by lazy { "androidx.room:room-ktx:$version" }
+}
+
+class AccompanistDependency(private val version: String) {
+    val flowLayout by lazy { "com.google.accompanist:accompanist-flowlayout:$version" }
+    val material3ThemeAdapter by lazy { "com.google.accompanist:accompanist-themeadapter-material3:$version" }
 }

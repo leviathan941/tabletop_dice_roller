@@ -19,11 +19,11 @@
 package org.leviathan941.tabletopdiceroller.ui.main
 
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -38,27 +38,33 @@ private const val ICON_SIZE = 25
 fun MainBottomBar(
     onMenuClick: () -> Unit,
     onChangeDiceType: () -> Unit,
+    onFloatingButtonClicked: () -> Unit,
 ) {
-    BottomAppBar {
-        IconButton(onClick = onMenuClick) {
-            Icon(
-                imageVector = Icons.Filled.Menu,
-                contentDescription = stringResource(id = R.string.bottom_bar_menu_desc),
-                modifier = Modifier.size(ICON_SIZE.dp)
-            )
-        }
+    BottomAppBar(
+        actions = {
+            IconButton(onClick = onMenuClick) {
+                Icon(
+                    imageVector = Icons.Filled.Menu,
+                    contentDescription = stringResource(id = R.string.bottom_bar_menu_desc),
+                    modifier = Modifier.size(ICON_SIZE.dp)
+                )
+            }
 
-        IconButton(onClick = onChangeDiceType) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_baseline_flip_24),
-                contentDescription = stringResource(
-                    id = R.string.change_default_die_type_content_dec),
-                modifier = Modifier.size(ICON_SIZE.dp),
-            )
+            IconButton(onClick = onChangeDiceType) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_flip_24),
+                    contentDescription = stringResource(
+                        id = R.string.change_default_die_type_content_dec),
+                    modifier = Modifier.size(ICON_SIZE.dp),
+                )
+            }
+        },
+        floatingActionButton = {
+            RollFab(onFloatingButtonClicked)
         }
-    }
+    )
 }
 
 @Preview
 @Composable
-private fun PreviewMainBottomBar() = MainBottomBar({}, {})
+private fun PreviewMainBottomBar() = MainBottomBar({}, {}, {})

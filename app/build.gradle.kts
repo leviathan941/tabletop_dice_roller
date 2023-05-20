@@ -77,7 +77,7 @@ dependencies {
     implementation(Deps.composeCompiler)
     implementation(Deps.compose.ui)
     implementation(Deps.compose.runtimeLivedata)
-    implementation(Deps.compose.material)
+    implementation(Deps.composeMaterial3)
     implementation(Deps.compose.uiToolingPreview)
 
     implementation(Deps.lifecycle.livedataKtx)
@@ -86,7 +86,8 @@ dependencies {
 
     implementation(Deps.activityCompose)
 
-    implementation(Deps.accompanistFlowLayout)
+    implementation(Deps.accompanist.flowLayout)
+    implementation(Deps.accompanist.material3ThemeAdapter)
 
     implementation(Deps.dataStorePreferences)
 

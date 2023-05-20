@@ -22,7 +22,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Button
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -36,10 +37,11 @@ fun DieDialogButton(
     selected: Boolean = false,
     onClick: () -> Unit = {},
 ) {
-    val imagePadding = if (selected) 3.dp else 0.dp
+    val imagePadding = if (selected) 4.dp else 0.dp
     Button(
         onClick = onClick,
         contentPadding = PaddingValues(all = imagePadding),
+        shape = MaterialTheme.shapes.extraSmall,
         modifier = Modifier.size(90.dp),
     ) {
         Image(

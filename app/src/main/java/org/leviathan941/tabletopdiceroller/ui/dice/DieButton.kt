@@ -18,35 +18,27 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
-import androidx.compose.material.*
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.unit.dp
 
 @Composable
 fun DieButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     onLongClick: () -> Unit = {},
-    enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    elevation: ButtonElevation? = ButtonDefaults.elevation(),
-    shape: Shape = MaterialTheme.shapes.small,
-    border: BorderStroke? = null,
-    colors: ButtonColors = ButtonDefaults.buttonColors(),
     content: @Composable () -> Unit
 ) {
-    val contentColor by colors.contentColor(enabled)
+    val interactionSource = remember { MutableInteractionSource() }
     Surface(
         modifier = modifier
             .indication(interactionSource, LocalIndication.current)
@@ -62,11 +54,9 @@ fun DieButton(
                     onLongPress = { onLongClick() }
                 )
             },
-        border = border,
-        shape = shape,
-        color = colors.backgroundColor(enabled = true).value,
-        contentColor = contentColor.copy(alpha = 1f),
-        elevation = elevation?.elevation(enabled, interactionSource)?.value ?: 0.dp,
+        color = MaterialTheme.colorScheme.tertiary,
+        border = ButtonDefaults.outlinedButtonBorder,
+        shape = MaterialTheme.shapes.small,
         content = content,
     )
 }

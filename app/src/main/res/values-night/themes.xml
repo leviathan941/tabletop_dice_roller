@@ -16,19 +16,36 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.TabletopDiceRoller" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+<resources>
+    <style name="Theme.TabletopDiceRoller" parent="Theme.Material3.Dark">
+        <item name="colorPrimary">@color/dark_primary</item>
+        <item name="colorOnPrimary">@color/dark_onPrimary</item>
+        <item name="colorPrimaryInverse">@color/dark_inversePrimary</item>
+        <item name="colorPrimaryContainer">@color/dark_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/dark_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/dark_secondary</item>
+        <item name="colorOnSecondary">@color/dark_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/dark_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/dark_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/dark_tertiary</item>
+        <item name="colorOnTertiary">@color/dark_onTertiaryContainer</item>
+        <item name="colorTertiaryContainer">@color/dark_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/dark_onTertiaryContainer</item>
+        <item name="android:colorBackground">@color/dark_background</item>
+        <item name="colorOnBackground">@color/dark_onBackground</item>
+        <item name="colorSurface">@color/dark_surface</item>
+        <item name="colorOnSurface">@color/dark_onSurface</item>
+        <item name="colorSurfaceVariant">@color/dark_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/dark_onSurfaceVariant</item>
+        <item name="colorSurfaceInverse">@color/dark_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/dark_onSurfaceVariant</item>
+        <item name="colorOutline">@color/dark_outline</item>
+        <item name="colorOutlineVariant">@color/dark_outlineVariant</item>
+        <item name="colorError">@color/dark_error</item>
+        <item name="colorOnError">@color/dark_onError</item>
+        <item name="colorErrorContainer">@color/dark_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/dark_onErrorContainer</item>
 
-        <item name="colorPrimary">@color/brown_500_dark</item>
-        <item name="colorPrimaryVariant">@color/brown_500</item>
-        <item name="colorOnPrimary">@color/white</item>
-
-        <item name="colorSecondary">@color/custom_secondary_dark</item>
-        <item name="colorSecondaryVariant">@color/custom_secondary</item>
-        <item name="colorOnSecondary">@color/black</item>
-
-        <item name="backgroundColor">@color/custom_background_dark</item>
-
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
     </style>
 </resources>

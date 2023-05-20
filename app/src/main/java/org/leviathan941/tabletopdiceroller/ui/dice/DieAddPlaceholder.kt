@@ -18,11 +18,16 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.OutlinedButton
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +39,6 @@ import androidx.compose.ui.unit.dp
 import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.model.dice.Die
 import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDie
-import org.leviathan941.tabletopdiceroller.ui.theme.Shapes
 
 @Composable
 fun DiceAddPlaceholder(
@@ -47,6 +51,7 @@ fun DiceAddPlaceholder(
             .size(DIE_VIEW_SIZE_DP)
             .padding(all = DIE_PADDING_ALL_DP),
         contentPadding = PaddingValues(0.dp),
+        shape = MaterialTheme.shapes.small
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Icon(
@@ -63,7 +68,7 @@ fun DiceAddPlaceholder(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(end = 10.dp, bottom = 10.dp)
-                    .clip(Shapes.small),
+                    .clip(MaterialTheme.shapes.extraSmall),
             )
         }
     }

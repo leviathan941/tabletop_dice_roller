@@ -20,10 +20,18 @@ package org.leviathan941.tabletopdiceroller.ui.main
 
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
-import androidx.compose.material.FabPosition
-import androidx.compose.material.Scaffold
-import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.*
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.rememberDrawerState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
 import org.leviathan941.tabletopdiceroller.R
@@ -37,41 +45,40 @@ import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 fun MainView(activity: ComponentActivity) {
     val viewModel: MainViewModel by activity.viewModels()
 
-    val scaffoldState = rememberScaffoldState()
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
     val coroutineScope = rememberCoroutineScope()
 
     var openDiceTypeDialog by remember { mutableStateOf(false) }
 
-    Scaffold(
-        scaffoldState = scaffoldState,
-
-        floatingActionButtonPosition = FabPosition.End,
-        floatingActionButton = {
-            RollFab(onClick = viewModel::rollAll)
-        },
-        isFloatingActionButtonDocked = true,
-
-        bottomBar = {
-            MainBottomBar(
-                onMenuClick = {
-                    with(scaffoldState.drawerState) {
-                        coroutineScope.launch { if (isClosed) open() else close() }
-                    }
-                },
-                onChangeDiceType = {
-                    openDiceTypeDialog = true
-                }
-            )
-        },
-
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        gesturesEnabled = true,
         drawerContent = {
-            MainDrawer {
-                viewModel.clear()
-                coroutineScope.launch { scaffoldState.drawerState.close() }
+            ModalDrawerSheet {
+                MainDrawer {
+                    viewModel.clear()
+                    coroutineScope.launch { drawerState.close() }
+                }
             }
+        },
+    ) {
+        Scaffold(
+            bottomBar = {
+                MainBottomBar(
+                    onMenuClick = {
+                        with(drawerState) {
+                            coroutineScope.launch { if (isClosed) open() else close() }
+                        }
+                    },
+                    onChangeDiceType = {
+                        openDiceTypeDialog = true
+                    },
+                    onFloatingButtonClicked = viewModel::rollAll,
+                )
+            },
+        ) { innerPadding ->
+            DiceRow(mainViewModel = viewModel, contentPadding = innerPadding)
         }
-    ) { innerPadding ->
-        DiceRow(mainViewModel = viewModel, contentPadding = innerPadding)
     }
 
     val newDiceState = viewModel.uiPrefs.collectAsState(initial = UiPreferences.initial)

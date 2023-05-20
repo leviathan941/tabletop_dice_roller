@@ -19,12 +19,20 @@
 package org.leviathan941.tabletopdiceroller.ui.main
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,7 +59,7 @@ fun ColumnScope.MainDrawer(
     DrawerMenuItem(
         icon = Icons.Filled.Delete,
         text = stringResource(id = R.string.clear_table_button_text),
-        onCLick = onClearClick
+        onClick = onClearClick
     )
 
     Spacer(modifier = Modifier.height(10.dp))
@@ -61,28 +69,28 @@ fun ColumnScope.MainDrawer(
 fun DrawerMenuItem(
     icon: ImageVector,
     text: String,
-    onCLick: () -> Unit
+    onClick: () -> Unit
 ) {
-    Row(
+    NavigationDrawerItem(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = onCLick)
             .padding(vertical = 10.dp),
-        horizontalArrangement = Arrangement.Start,
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = text,
-            modifier = Modifier
-                .padding(horizontal = 20.dp)
-                .align(Alignment.CenterVertically)
-        )
-        Text(
-            text = text,
-            fontSize = 20.sp,
-            textAlign = TextAlign.Start
-        )
-    }
+        onClick = onClick,
+        icon = {
+            Icon(
+                imageVector = icon,
+                contentDescription = text,
+            )
+        },
+        label = {
+            Text(
+                text = text,
+                fontSize = 20.sp,
+                textAlign = TextAlign.Start
+            )
+        },
+        selected = false // TODO: Do I need to support this?
+    )
 }
 
 @Composable
