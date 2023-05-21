@@ -18,10 +18,20 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -38,7 +48,6 @@ import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 fun DiceRow(mainViewModel: MainViewModel, contentPadding: PaddingValues) {
     val diceState by mainViewModel.diceState.collectAsState()
     val scrollState = rememberScrollState(0)
-    val diceCountState = remember { mutableStateOf(diceState.size) }
     var manualChooseSideOf by remember { mutableStateOf<TableDie?>(null) }
 
     FlowRow(
@@ -69,13 +78,6 @@ fun DiceRow(mainViewModel: MainViewModel, contentPadding: PaddingValues) {
                 onDieLongClick = { manualChooseSideOf = dieState }
             )
         }
-    }
-
-    LaunchedEffect(diceState, diceCountState) {
-        if (diceState.size > diceCountState.value) {
-            scrollState.scrollTo(scrollState.maxValue)
-        }
-        diceCountState.value = diceState.size
     }
 
     manualChooseSideOf?.let { die ->
