@@ -19,6 +19,7 @@
 package org.leviathan941.tabletopdiceroller.ui.dice
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -28,7 +29,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDie
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
 @Composable
@@ -37,12 +40,18 @@ fun DieDialogButton(
     selected: Boolean = false,
     onClick: () -> Unit = {},
 ) {
-    val imagePadding = if (selected) 4.dp else 0.dp
+    val imagePadding = if (selected) 3.dp else 0.dp
     Button(
         onClick = onClick,
         contentPadding = PaddingValues(all = imagePadding),
-        shape = MaterialTheme.shapes.extraSmall,
-        modifier = Modifier.size(90.dp),
+        shape = dieShape(),
+        modifier = Modifier.size(90.dp).let {
+            if (selected) it.border(
+                width = imagePadding,
+                color = MaterialTheme.colorScheme.onBackground,
+                shape = dieShape(),
+            ) else it
+        },
     ) {
         Image(
             painter = painterResource(id = dieImage.imageRes),
@@ -50,4 +59,10 @@ fun DieDialogButton(
             modifier = Modifier.fillMaxSize()
         )
     }
+}
+
+@Preview
+@Composable
+fun DieDialogButtonPreview() {
+    DieDialogButton(dieImage = SixSidedDie().previewImage, selected = true)
 }

@@ -28,7 +28,7 @@
         <item name="colorSecondaryContainer">@color/dark_secondaryContainer</item>
         <item name="colorOnSecondaryContainer">@color/dark_onSecondaryContainer</item>
         <item name="colorTertiary">@color/dark_tertiary</item>
-        <item name="colorOnTertiary">@color/dark_onTertiaryContainer</item>
+        <item name="colorOnTertiary">@color/dark_onTertiary</item>
         <item name="colorTertiaryContainer">@color/dark_tertiaryContainer</item>
         <item name="colorOnTertiaryContainer">@color/dark_onTertiaryContainer</item>
         <item name="android:colorBackground">@color/dark_background</item>
@@ -38,14 +38,12 @@
         <item name="colorSurfaceVariant">@color/dark_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/dark_onSurfaceVariant</item>
         <item name="colorSurfaceInverse">@color/dark_inverseSurface</item>
-        <item name="colorOnSurfaceInverse">@color/dark_onSurfaceVariant</item>
+        <item name="colorOnSurfaceInverse">@color/dark_inverseOnSurface</item>
         <item name="colorOutline">@color/dark_outline</item>
         <item name="colorOutlineVariant">@color/dark_outlineVariant</item>
         <item name="colorError">@color/dark_error</item>
         <item name="colorOnError">@color/dark_onError</item>
         <item name="colorErrorContainer">@color/dark_errorContainer</item>
         <item name="colorOnErrorContainer">@color/dark_onErrorContainer</item>
-
-        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
     </style>
 </resources>

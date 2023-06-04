@@ -43,5 +43,6 @@ android {
 }
 
 dependencies {
-    implementation(Deps.androidCoreKtx)
+    api(Deps.androidCoreKtx)
+    api(Deps.compose.ui)
 }

@@ -54,13 +54,15 @@ fun ChooseDieDialog(
             tonalElevation = AlertDialogDefaults.TonalElevation
         ) {
             Column {
-                Text(
-                    modifier = Modifier
-                        .padding(top = 10.dp)
-                        .align(Alignment.CenterHorizontally),
-                    text = titleText,
-                    style = MaterialTheme.typography.titleLarge,
-                )
+                if (titleText.isNotEmpty()) {
+                    Text(
+                        modifier = Modifier
+                            .padding(top = 10.dp)
+                            .align(Alignment.CenterHorizontally),
+                        text = titleText,
+                        style = MaterialTheme.typography.titleLarge,
+                    )
+                }
                 FlowRow(
                     mainAxisSize = SizeMode.Wrap,
                     mainAxisAlignment = FlowMainAxisAlignment.SpaceEvenly,

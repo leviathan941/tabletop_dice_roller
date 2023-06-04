@@ -1,6 +1,6 @@
 /*
  * Tabletop Dice Roller
- * Copyright (C) 2021 Alexey Kuzin
+ * Copyright (C) 2023 Alexey Kuzin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,9 +18,9 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
-import androidx.compose.ui.unit.dp
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Shape
 
-val DIE_VIEW_SIZE_DP = 120.dp
-val DIE_PADDING_ALL_DP = 13.dp
-
-const val MAX_DICE_COUNT = 200
+@Composable
+internal fun dieShape(): Shape = MaterialTheme.shapes.extraSmall

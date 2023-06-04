@@ -23,7 +23,6 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -54,9 +53,8 @@ fun DieButton(
                     onLongPress = { onLongClick() }
                 )
             },
-        color = MaterialTheme.colorScheme.tertiary,
-        border = ButtonDefaults.outlinedButtonBorder,
-        shape = MaterialTheme.shapes.small,
-        content = content,
+        color = MaterialTheme.colorScheme.primary,
+        shape = dieShape(),
+        content = content
     )
 }

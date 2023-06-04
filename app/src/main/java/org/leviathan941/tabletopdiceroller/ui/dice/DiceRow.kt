@@ -33,12 +33,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
-import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.app.preferences.UiPreferences
 import org.leviathan941.tabletopdiceroller.db.entity.TableDie
 import org.leviathan941.tabletopdiceroller.ui.main.ChooseDieDialog
@@ -62,7 +60,7 @@ fun DiceRow(mainViewModel: MainViewModel, contentPadding: PaddingValues) {
             .fillMaxWidth())
 
         val newDiceState = mainViewModel.uiPrefs.collectAsState(initial = UiPreferences.initial)
-        if (diceState.size < MAX_DICES_COUNT) {
+        if (diceState.size < MAX_DICE_COUNT) {
             DiceAddPlaceholder(
                 newDie = newDiceState.value.newDieType.toDie(),
                 onClick = mainViewModel::addDie,
@@ -83,7 +81,6 @@ fun DiceRow(mainViewModel: MainViewModel, contentPadding: PaddingValues) {
     manualChooseSideOf?.let { die ->
         val dismissDialog = { manualChooseSideOf = null }
         ChooseDieDialog(
-            titleText = stringResource(id = R.string.choose_die_manually_title),
             onDismiss = dismissDialog,
         ) {
             die.die.resultImages.forEach { (image, index) ->

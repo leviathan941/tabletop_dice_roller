@@ -38,15 +38,13 @@
         <item name="colorSurfaceVariant">@color/light_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/light_onSurfaceVariant</item>
         <item name="colorSurfaceInverse">@color/light_inverseSurface</item>
-        <item name="colorOnSurfaceInverse">@color/light_onSurfaceVariant</item>
+        <item name="colorOnSurfaceInverse">@color/light_inverseOnSurface</item>
         <item name="colorOutline">@color/light_outline</item>
         <item name="colorOutlineVariant">@color/light_outlineVariant</item>
         <item name="colorError">@color/light_error</item>
         <item name="colorOnError">@color/light_onError</item>
         <item name="colorErrorContainer">@color/light_errorContainer</item>
         <item name="colorOnErrorContainer">@color/light_onErrorContainer</item>
-
-        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
     </style>
 
     <style name="Theme.TabletopDiceRoller.NoActionBar">

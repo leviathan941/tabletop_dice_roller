@@ -19,24 +19,36 @@
 package org.leviathan941.tabletopdiceroller.ui.main
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.leviathan941.tabletopdiceroller.R
 
 @Preview
 @Composable
 fun RollFab(onClick: () -> Unit = {}) {
-    FloatingActionButton(onClick = onClick) {
-        Image(
-            painter = painterResource(id = R.drawable.six_sided_die_3d),
-            contentDescription = stringResource(id = R.string.roll_fab_desc),
-            modifier = Modifier.size(30.dp)
-        )
-    }
+    ExtendedFloatingActionButton(
+        text = {
+               Text(
+                   text = stringResource(id = R.string.roll_fab_text),
+                   fontSize = 16.sp,
+               )
+        },
+        icon = {
+            Image(
+                painter = painterResource(id = R.drawable.dice_multiple),
+                contentDescription = stringResource(id = R.string.roll_fab_desc),
+            )
+        },
+        onClick = onClick,
+        shape = FloatingActionButtonDefaults.smallShape,
+        containerColor = MaterialTheme.colorScheme.tertiary,
+        contentColor = MaterialTheme.colorScheme.onTertiary,
+    )
 }

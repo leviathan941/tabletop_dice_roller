@@ -18,6 +18,7 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,13 +26,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,13 +46,17 @@ fun DiceAddPlaceholder(
     newDie: Die,
     onClick: () -> Unit
 ) {
-    OutlinedButton(
+    ElevatedButton(
         onClick = onClick,
         modifier = Modifier
             .size(DIE_VIEW_SIZE_DP)
             .padding(all = DIE_PADDING_ALL_DP),
         contentPadding = PaddingValues(0.dp),
-        shape = MaterialTheme.shapes.small
+        shape = dieShape(),
+        colors = ButtonDefaults.elevatedButtonColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary,
+        ),
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Icon(
@@ -66,9 +71,10 @@ fun DiceAddPlaceholder(
                 painter = painterResource(id = newDie.previewImage.imageRes),
                 contentDescription = stringResource(id = newDie.previewImage.contentDesc),
                 modifier = Modifier
+                    .size(45.dp)
                     .align(Alignment.BottomEnd)
                     .padding(end = 10.dp, bottom = 10.dp)
-                    .clip(MaterialTheme.shapes.extraSmall),
+                    .border(width = 0.5.dp, color = MaterialTheme.colorScheme.onPrimary),
             )
         }
     }
