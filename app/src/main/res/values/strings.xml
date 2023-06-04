@@ -25,6 +25,7 @@
     <string name="bottom_bar_menu_desc">Main menu</string>
     <string name="clear_table_button_text">Clear Board</string>
     <string name="main_drawer_app_header_content_desc">Application menu header</string>
-    <string name="change_default_die_type_content_dec">Change new die type</string>
+    <string name="change_default_die_type">New Die Type</string>
+    <string name="change_default_die_type_content_desc">Change new die type</string>
     <string name="choose_die_type_dialog_title">New Die</string>
 </resources>

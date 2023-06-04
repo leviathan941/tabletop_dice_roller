@@ -25,7 +25,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.leviathan941.tabletopdiceroller.R
@@ -33,7 +32,6 @@ import org.leviathan941.tabletopdiceroller.R
 @Composable
 fun MainBottomBar(
     onMenuClick: () -> Unit,
-    onChangeDiceType: () -> Unit,
     onFloatingButtonClicked: () -> Unit,
 ) {
     BottomAppBar(
@@ -42,15 +40,6 @@ fun MainBottomBar(
                 Icon(
                     imageVector = Icons.Filled.Menu,
                     contentDescription = stringResource(id = R.string.bottom_bar_menu_desc),
-                )
-            }
-
-            IconButton(onClick = onChangeDiceType) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_baseline_flip_24),
-                    contentDescription = stringResource(
-                        id = R.string.change_default_die_type_content_dec
-                    ),
                 )
             }
         },
@@ -64,4 +53,4 @@ fun MainBottomBar(
 
 @Preview
 @Composable
-private fun PreviewMainBottomBar() = MainBottomBar({}, {}, {})
+private fun PreviewMainBottomBar() = MainBottomBar({}, {})

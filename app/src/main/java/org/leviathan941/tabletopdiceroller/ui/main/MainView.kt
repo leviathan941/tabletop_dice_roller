@@ -20,20 +20,15 @@ package org.leviathan941.tabletopdiceroller.ui.main
 
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
-import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ModalDrawerSheet
-import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
-import kotlinx.coroutines.launch
 import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.app.preferences.UiPreferences
 import org.leviathan941.tabletopdiceroller.model.dice.DiceUtils
@@ -45,40 +40,20 @@ import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 fun MainView(activity: ComponentActivity) {
     val viewModel: MainViewModel by activity.viewModels()
 
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-    val coroutineScope = rememberCoroutineScope()
-
+    var dropdownMenuExpended by remember { mutableStateOf(false) }
     var openDiceTypeDialog by remember { mutableStateOf(false) }
 
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        gesturesEnabled = true,
-        drawerContent = {
-            ModalDrawerSheet {
-                MainDrawer {
-                    viewModel.clear()
-                    coroutineScope.launch { drawerState.close() }
-                }
-            }
+    Scaffold(
+        bottomBar = {
+            MainBottomBar(
+                onMenuClick = {
+                    dropdownMenuExpended = true
+                },
+                onFloatingButtonClicked = viewModel::rollAll,
+            )
         },
-    ) {
-        Scaffold(
-            bottomBar = {
-                MainBottomBar(
-                    onMenuClick = {
-                        with(drawerState) {
-                            coroutineScope.launch { if (isClosed) open() else close() }
-                        }
-                    },
-                    onChangeDiceType = {
-                        openDiceTypeDialog = true
-                    },
-                    onFloatingButtonClicked = viewModel::rollAll,
-                )
-            },
-        ) { innerPadding ->
-            DiceRow(mainViewModel = viewModel, contentPadding = innerPadding)
-        }
+    ) { innerPadding ->
+        DiceRow(mainViewModel = viewModel, contentPadding = innerPadding)
     }
 
     val newDiceState = viewModel.uiPrefs.collectAsState(initial = UiPreferences.initial)
@@ -99,5 +74,16 @@ fun MainView(activity: ComponentActivity) {
                 )
             }
         }
+    }
+    DropdownMenu(
+        expanded = dropdownMenuExpended,
+        onDismissRequest = {
+            dropdownMenuExpended = false
+        },
+    ) {
+        MainDropdownMenu(
+            onChangeDiceType = { openDiceTypeDialog = true },
+            onClearClick = { viewModel.clear() }
+        )
     }
 }
