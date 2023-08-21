@@ -24,7 +24,7 @@ object Versions {
     const val ACCOMPANIST = "0.30.1"
     const val ACTIVITY_COMPOSE = "1.7.2"
     const val ANDROID_CORE = "1.10.1"
-    const val ANDROID_PLUGIN = "8.0.2"
+    const val ANDROID_PLUGIN = "8.1.0"
     const val APP_COMPAT = "1.6.1"
     const val COMPOSE = "1.4.3"
     const val COMPOSE_COMPILER = "1.4.7"
