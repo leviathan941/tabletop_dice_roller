@@ -16,29 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.expandablefab
+package org.leviathan941.expandablefab.internal
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
+import org.leviathan941.expandablefab.FabConfiguration
 
-data class LayoutConfiguration(
-    val modifier: Modifier,
-    val spaceBetween: Dp,
+internal data class ExpandableFabConfiguration(
+    val main: FabConfiguration,
+    val expended: List<FabConfiguration>,
 )
-
-data class FabConfiguration(
-    val size: Dp,
-    val action: FabOnClickAction,
-    val content: @Composable () -> Unit,
-)
-
-sealed interface FabOnClickAction {
-    class Expand(
-        val configurations: List<FabConfiguration>,
-    ) : FabOnClickAction
-
-    fun interface Do : FabOnClickAction {
-        operator fun invoke()
-    }
-}

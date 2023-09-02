@@ -31,7 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import org.leviathan941.expandablefab.ExpandableFab
 import org.leviathan941.expandablefab.FabConfiguration
 import org.leviathan941.expandablefab.FabOnClickAction
-import org.leviathan941.expandablefab.GlobalConfiguration
+import org.leviathan941.expandablefab.LayoutConfiguration
 import org.leviathan941.tabletopdiceroller.R
 
 @Composable
@@ -41,7 +41,7 @@ fun MenuFab(
     onClearClick: () -> Unit,
 ) {
     ExpandableFab(
-        globalConfiguration = GlobalConfiguration(
+        layoutConfiguration = LayoutConfiguration(
             modifier = modifier
                 .padding(
                     horizontal = FabHorizontalPaddingDp,

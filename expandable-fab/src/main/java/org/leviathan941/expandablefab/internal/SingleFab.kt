@@ -28,13 +28,13 @@ import androidx.compose.ui.unit.Dp
 
 @Composable
 internal fun SingleFab(
-    size: Dp,
+    modifier: Modifier,
     onClick: () -> Unit,
     content: @Composable () -> Unit,
 ) {
     FloatingActionButton(
         onClick = onClick,
-        modifier = Modifier.size(size),
+        modifier = modifier,
         shape = FloatingActionButtonDefaults.smallShape,
         containerColor = MaterialTheme.colorScheme.tertiary,
         contentColor = MaterialTheme.colorScheme.onTertiary,

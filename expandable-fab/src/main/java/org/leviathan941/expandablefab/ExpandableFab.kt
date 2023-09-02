@@ -18,72 +18,13 @@
 
 package org.leviathan941.expandablefab
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import org.leviathan941.expandablefab.internal.SingleFab
+import org.leviathan941.expandablefab.internal.ExpandableFabInternal
 
 @Composable
 fun ExpandableFab(
-    globalConfiguration: GlobalConfiguration,
+    layoutConfiguration: LayoutConfiguration,
     fabConfiguration: FabConfiguration,
 ) {
-    var mainConfiguration by remember { mutableStateOf(fabConfiguration) }
-    var expandedConfigurations by remember { mutableStateOf(emptyList<FabConfiguration>()) }
-
-    val reset = {
-        mainConfiguration = fabConfiguration
-        expandedConfigurations = emptyList()
-    }
-    val onClickAction = {
-            configuration: FabConfiguration,
-            onExpand: (FabOnClickAction.Expand) -> Unit -> {
-            when (val action = configuration.action) {
-                is FabOnClickAction.Expand -> onExpand(action)
-                is FabOnClickAction.Do -> {
-                    reset()
-                    action()
-                }
-            }
-        }
-    }
-
-    Column(
-        modifier = globalConfiguration.modifier,
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        expandedConfigurations.forEach { configuration ->
-            SingleFab(
-                size = configuration.size,
-                onClick = onClickAction(configuration) { expandAction ->
-                    mainConfiguration = configuration
-                    expandedConfigurations = expandAction.configurations
-                },
-                content = configuration.content,
-            )
-
-            Spacer(modifier = Modifier.size(globalConfiguration.spaceBetween))
-        }
-
-        SingleFab(
-            size = mainConfiguration.size,
-            onClick = onClickAction(mainConfiguration) { expandAction ->
-                if (expandedConfigurations.isEmpty()) {
-                    expandedConfigurations = expandAction.configurations
-                } else {
-                    reset()
-                }
-            },
-            content = mainConfiguration.content,
-        )
-    }
+    ExpandableFabInternal(layoutConfiguration, fabConfiguration)
 }
