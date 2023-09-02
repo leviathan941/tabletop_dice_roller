@@ -61,5 +61,5 @@ internal val expandedFabExitAnimation = slideOutVertically(
 internal fun mainFabRotation(isExpanded: Boolean): State<Float> = animateFloatAsState(
     targetValue = if (isExpanded) 180f else 0f,
     animationSpec = floatAnimationSpec,
-    label = "mainFabRotation",
+    label = "Main expandable fab rotation",
 )

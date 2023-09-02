@@ -18,10 +18,17 @@
 
 package org.leviathan941.tabletopdiceroller.ui.fab
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.coroutines.launch
 import org.leviathan941.tabletopdiceroller.R
 
 @Preview
@@ -30,15 +37,33 @@ fun RollFab(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
 ) {
+    val rotationState = remember { Animatable(0f) }
+    val coroutineScope = rememberCoroutineScope()
+
     MainViewImageFab(
         modifier = modifier
             .padding(
                 horizontal = FabHorizontalPaddingDp,
                 vertical = FabVerticalPaddingDp,
-            ),
+            )
+            .rotate(rotationState.value),
         size = FirstLevelFabSizeDp,
         imageRes = R.drawable.dice_multiple,
         contentDescriptionRes = R.string.roll_fab_desc,
-        onClick = onClick,
+        onClick = {
+            coroutineScope.launch {
+                with(rotationState) {
+                    animateTo(
+                        targetValue = 360f,
+                        animationSpec = spring(
+                            stiffness = Spring.StiffnessHigh,
+                            dampingRatio = Spring.DampingRatioLowBouncy,
+                        ),
+                    )
+                    snapTo(0f)
+                }
+            }
+            onClick()
+        }
     )
 }
