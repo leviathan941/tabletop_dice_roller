@@ -68,6 +68,7 @@ android {
 dependencies {
     implementation(project(":db"))
     implementation(project(":dice-model"))
+    implementation(project(":expandable-fab"))
     implementation(project(":utils"))
 
     implementation(Deps.androidCoreKtx)

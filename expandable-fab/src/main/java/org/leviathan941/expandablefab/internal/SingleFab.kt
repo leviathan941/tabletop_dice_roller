@@ -1,6 +1,6 @@
 /*
  * Tabletop Dice Roller
- * Copyright (C) 2021 Alexey Kuzin
+ * Copyright (C) 2023 Alexey Kuzin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,39 +16,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.ui.main
+package org.leviathan941.expandablefab.internal
 
-import androidx.compose.foundation.Image
-import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
-import org.leviathan941.tabletopdiceroller.R
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 
-@Preview
 @Composable
-fun RollFab(onClick: () -> Unit = {}) {
-    ExtendedFloatingActionButton(
-        text = {
-               Text(
-                   text = stringResource(id = R.string.roll_fab_text),
-                   fontSize = 16.sp,
-               )
-        },
-        icon = {
-            Image(
-                painter = painterResource(id = R.drawable.dice_multiple),
-                contentDescription = stringResource(id = R.string.roll_fab_desc),
-            )
-        },
+internal fun SingleFab(
+    size: Dp,
+    onClick: () -> Unit,
+    content: @Composable () -> Unit,
+) {
+    FloatingActionButton(
         onClick = onClick,
+        modifier = Modifier.size(size),
         shape = FloatingActionButtonDefaults.smallShape,
         containerColor = MaterialTheme.colorScheme.tertiary,
         contentColor = MaterialTheme.colorScheme.onTertiary,
+        content = content,
     )
 }

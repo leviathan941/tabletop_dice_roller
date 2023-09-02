@@ -18,11 +18,9 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -43,15 +41,14 @@ import org.leviathan941.tabletopdiceroller.ui.main.ChooseDieDialog
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @Composable
-fun DiceRow(mainViewModel: MainViewModel, contentPadding: PaddingValues) {
+fun DiceRow(mainViewModel: MainViewModel) {
     val diceState by mainViewModel.diceState.collectAsState()
     val scrollState = rememberScrollState(0)
     var manualChooseSideOf by remember { mutableStateOf<TableDie?>(null) }
 
     FlowRow(
         modifier = Modifier
-            .verticalScroll(scrollState)
-            .padding(contentPadding),
+            .verticalScroll(scrollState),
         mainAxisSize = SizeMode.Expand,
         mainAxisAlignment = FlowMainAxisAlignment.Center,
     ) {

@@ -20,7 +20,9 @@ package org.leviathan941.tabletopdiceroller.ui.main
 
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
-import androidx.compose.material3.DropdownMenu
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -28,32 +30,43 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.app.preferences.UiPreferences
 import org.leviathan941.tabletopdiceroller.model.dice.DiceUtils
 import org.leviathan941.tabletopdiceroller.ui.dice.DiceRow
 import org.leviathan941.tabletopdiceroller.ui.dice.DieDialogButton
+import org.leviathan941.tabletopdiceroller.ui.fab.MenuFab
+import org.leviathan941.tabletopdiceroller.ui.fab.RollFab
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @Composable
 fun MainView(activity: ComponentActivity) {
     val viewModel: MainViewModel by activity.viewModels()
 
-    var dropdownMenuExpended by remember { mutableStateOf(false) }
     var openDiceTypeDialog by remember { mutableStateOf(false) }
 
-    Scaffold(
-        bottomBar = {
-            MainBottomBar(
-                onMenuClick = {
-                    dropdownMenuExpended = true
-                },
-                onFloatingButtonClicked = viewModel::rollAll,
+    Scaffold { innerPadding ->
+        Box(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxHeight()
+        ) {
+            DiceRow(mainViewModel = viewModel)
+            RollFab(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd),
+                onClick = viewModel::rollAll
             )
-        },
-    ) { innerPadding ->
-        DiceRow(mainViewModel = viewModel, contentPadding = innerPadding)
+            MenuFab(
+                modifier = Modifier
+                    .align(Alignment.BottomStart),
+                onChangeDiceType = { openDiceTypeDialog = true },
+                onClearClick = { viewModel.clear() },
+            )
+        }
     }
 
     val newDiceState = viewModel.uiPrefs.collectAsState(initial = UiPreferences.initial)
@@ -74,16 +87,5 @@ fun MainView(activity: ComponentActivity) {
                 )
             }
         }
-    }
-    DropdownMenu(
-        expanded = dropdownMenuExpended,
-        onDismissRequest = {
-            dropdownMenuExpended = false
-        },
-    ) {
-        MainDropdownMenu(
-            onChangeDiceType = { openDiceTypeDialog = true },
-            onClearClick = { viewModel.clear() }
-        )
     }
 }
