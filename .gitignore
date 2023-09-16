@@ -53,6 +53,7 @@ captures/
 .idea/inspectionProfiles/*
 .idea/deploymentTargetDropDown.xml
 .idea/jarRepositories.xml
+.idea/kotlinc.xml
 
 # Keystore files
 # Uncomment the following lines if you do not want to check your keystore files in.
