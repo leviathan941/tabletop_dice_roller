@@ -21,6 +21,16 @@ package org.leviathan941.tabletopdiceroller.ui.dice
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Shape
+import org.leviathan941.tabletopdiceroller.db.DIE_NO_RESULT
+import org.leviathan941.tabletopdiceroller.db.entity.TableDie
+import org.leviathan941.tabletopdiceroller.model.dice.Die
+import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
 @Composable
 internal fun dieShape(): Shape = MaterialTheme.shapes.extraSmall
+
+internal val TableDie.resultImage: ImageResource get() = if (result == DIE_NO_RESULT) {
+    die.previewImage
+} else {
+    die.sideImages[result]
+}

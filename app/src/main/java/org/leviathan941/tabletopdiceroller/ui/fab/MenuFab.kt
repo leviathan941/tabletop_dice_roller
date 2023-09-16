@@ -43,10 +43,7 @@ fun MenuFab(
     ExpandableFab(
         layoutConfiguration = LayoutConfiguration(
             modifier = modifier
-                .padding(
-                    horizontal = FabHorizontalPaddingDp,
-                    vertical = FabVerticalPaddingDp,
-                ),
+                .padding(FabPaddingDp),
             spaceBetween = SpaceBetweenFabsDp,
         ),
         fabConfiguration = FabConfiguration(

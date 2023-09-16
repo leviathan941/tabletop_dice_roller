@@ -23,5 +23,4 @@ import androidx.compose.ui.unit.dp
 val FirstLevelFabSizeDp = 60.dp
 val SecondLevelFabSizeDp = 52.dp
 val SpaceBetweenFabsDp = 18.dp
-val FabVerticalPaddingDp = 36.dp
-val FabHorizontalPaddingDp = 16.dp
+val FabPaddingDp = 16.dp

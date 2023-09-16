@@ -62,8 +62,8 @@ fun DiceView(
                 .padding(all = DIE_PADDING_ALL_DP),
         ) {
             Image(
-                painter = painterResource(id = die.resultImage().imageRes),
-                contentDescription = stringResource(id = die.resultImage().contentDesc),
+                painter = painterResource(id = die.resultImage.imageRes),
+                contentDescription = stringResource(id = die.resultImage.contentDesc),
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(shape = RectangleShape),

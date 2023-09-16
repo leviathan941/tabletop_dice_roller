@@ -24,9 +24,7 @@ import androidx.room.PrimaryKey
 import org.leviathan941.tabletopdiceroller.db.DICE_DB_DIE_COLUMN
 import org.leviathan941.tabletopdiceroller.db.DICE_DB_RESULT_COLUMN
 import org.leviathan941.tabletopdiceroller.db.DICE_DB_TABLE_NAME
-import org.leviathan941.tabletopdiceroller.db.DIE_NO_RESULT
 import org.leviathan941.tabletopdiceroller.model.dice.Die
-import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
 @Entity(tableName = DICE_DB_TABLE_NAME)
 data class TableDie(
@@ -36,10 +34,4 @@ data class TableDie(
     val die: Die,
     @ColumnInfo(name = DICE_DB_RESULT_COLUMN, typeAffinity = ColumnInfo.INTEGER)
     val result: Int
-) {
-    fun resultImage(): ImageResource = if (result == DIE_NO_RESULT) {
-        die.previewImage
-    } else {
-        die.sideImages[result]
-    }
-}
+)

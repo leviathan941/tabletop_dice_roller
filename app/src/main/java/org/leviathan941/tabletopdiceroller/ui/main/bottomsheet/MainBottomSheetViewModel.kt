@@ -16,26 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.expandablefab.internal
+package org.leviathan941.tabletopdiceroller.ui.main.bottomsheet
 
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModel
+import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
-@Composable
-internal fun SingleFab(
-    modifier: Modifier,
-    onClick: () -> Unit,
-    content: @Composable () -> Unit,
-) {
-    FloatingActionButton(
-        onClick = onClick,
-        modifier = modifier,
-        shape = FloatingActionButtonDefaults.smallShape,
-        containerColor = MaterialTheme.colorScheme.tertiary,
-        contentColor = MaterialTheme.colorScheme.onTertiary,
-        content = content,
-    )
+class MainBottomSheetViewModel(
+    private val mainViewModel: MainViewModel,
+) : ViewModel() {
 }

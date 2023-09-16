@@ -42,10 +42,7 @@ fun RollFab(
 
     MainViewImageFab(
         modifier = modifier
-            .padding(
-                horizontal = FabHorizontalPaddingDp,
-                vertical = FabVerticalPaddingDp,
-            )
+            .padding(FabPaddingDp)
             .rotate(rotationState.value),
         size = FirstLevelFabSizeDp,
         imageRes = R.drawable.dice_multiple,
