@@ -27,7 +27,7 @@ interface Die {
     fun roll(): Int
     val range: IntRange
     val type: DieType
-    val resultImages: Map<ImageResource, Int>
+    val valueImages: Map<ImageResource, Int>
 }
 
 sealed class GenericDie(
@@ -40,7 +40,7 @@ sealed class GenericDie(
 
     override val range: IntRange = sideImages.indices
 
-    override val resultImages: Map<ImageResource, Int>
+    override val valueImages: Map<ImageResource, Int>
         get() = sideImages.mapIndexed { index, image -> image to index }.toMap()
 }
 

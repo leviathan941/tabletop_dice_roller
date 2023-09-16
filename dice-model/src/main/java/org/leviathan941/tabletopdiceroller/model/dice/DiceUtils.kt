@@ -19,6 +19,6 @@
 package org.leviathan941.tabletopdiceroller.model.dice
 
 object DiceUtils {
-    fun allDices() =
+    fun allDice() =
         DieType.values().map { it.toDie() }
 }

@@ -53,7 +53,7 @@ class MainViewModel : ViewModel() {
             tableRepository.insertDie(
                 TableDie(
                     die = uiPrefs.first().newDieType.toDie(),
-                    result = DIE_NO_RESULT
+                    value = DIE_NO_RESULT
                 )
             )
         }
@@ -62,14 +62,14 @@ class MainViewModel : ViewModel() {
     fun rollAll() {
         viewModelScope.launch {
             val updatedDices = diceState.value.map {
-                TableDie(id = it.id, die = it.die, result = it.die.roll())
+                TableDie(id = it.id, die = it.die, value = it.die.roll())
             }
             tableRepository.updateDice(updatedDices)
         }
     }
 
     fun roll(tableDie: TableDie) {
-        setDieResult(tableDie, tableDie.die.roll())
+        setDieValue(tableDie, tableDie.die.roll())
     }
 
     fun removeDie(die: TableDie) {
@@ -90,11 +90,11 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun setDieResult(tableDie: TableDie, result: Int) {
+    fun setDieValue(tableDie: TableDie, result: Int) {
         viewModelScope.launch {
             with(tableDie) {
                 tableRepository.updateDie(
-                    TableDie(id = id, die = die, result = result)
+                    TableDie(id = id, die = die, value = result)
                 )
             }
         }

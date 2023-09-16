@@ -98,7 +98,7 @@ fun MainView(activity: ComponentActivity) {
             titleText = stringResource(id = R.string.choose_die_type_dialog_title),
             onDismiss = dismissDialog,
         ) {
-            DiceUtils.allDices().forEach {
+            DiceUtils.allDice().forEach {
                 DieDialogButton(
                     dieImage = it.previewImage,
                     selected = it.type == newDiceState.value.newDieType,

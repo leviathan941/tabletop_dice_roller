@@ -33,5 +33,5 @@ data class TableDie(
     @ColumnInfo(name = DICE_DB_DIE_COLUMN, typeAffinity = ColumnInfo.TEXT)
     val die: Die,
     @ColumnInfo(name = DICE_DB_RESULT_COLUMN, typeAffinity = ColumnInfo.INTEGER)
-    val result: Int
+    val value: Int
 )

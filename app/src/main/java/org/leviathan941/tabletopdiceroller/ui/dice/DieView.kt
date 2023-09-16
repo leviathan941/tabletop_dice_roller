@@ -62,8 +62,8 @@ fun DiceView(
                 .padding(all = DIE_PADDING_ALL_DP),
         ) {
             Image(
-                painter = painterResource(id = die.resultImage.imageRes),
-                contentDescription = stringResource(id = die.resultImage.contentDesc),
+                painter = painterResource(id = die.valueImage.imageRes),
+                contentDescription = stringResource(id = die.valueImage.contentDesc),
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(shape = RectangleShape),
@@ -92,7 +92,7 @@ fun DiceView(
 @Preview
 @Composable
 private fun PreviewDiceView() = DiceView(
-    die = TableDie(die = SixSidedDie(), result = DIE_NO_RESULT),
+    die = TableDie(die = SixSidedDie(), value = DIE_NO_RESULT),
     onDieClick = {},
     onRemoveClick = {},
     onDieLongClick = {},
