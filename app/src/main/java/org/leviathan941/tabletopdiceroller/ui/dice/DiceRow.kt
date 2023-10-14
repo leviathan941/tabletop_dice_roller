@@ -80,13 +80,13 @@ fun DiceRow(mainViewModel: MainViewModel) {
         ChooseDieDialog(
             onDismiss = dismissDialog,
         ) {
-            die.die.valueImages.forEach { (image, index) ->
+            die.die.sideImages.forEachIndexed { value, image ->
                 DieDialogButton(
                     dieImage = image,
-                    selected = image == die.valueImage,
+                    selected = value == die.value,
                     onClick = {
                         dismissDialog()
-                        mainViewModel.setDieValue(die, index)
+                        mainViewModel.setDieValue(die, value)
                     }
                 )
             }

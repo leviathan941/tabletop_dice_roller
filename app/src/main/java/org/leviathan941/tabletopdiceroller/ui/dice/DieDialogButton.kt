@@ -64,5 +64,5 @@ fun DieDialogButton(
 @Preview
 @Composable
 fun DieDialogButtonPreview() {
-    DieDialogButton(dieImage = SixSidedDie().previewImage, selected = true)
+    DieDialogButton(dieImage = SixSidedDie.previewImage, selected = true)
 }

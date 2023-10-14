@@ -24,10 +24,11 @@ import kotlin.random.Random
 interface Die {
     val sideImages: List<ImageResource>
     val previewImage: ImageResource
-    fun roll(): Int
     val range: IntRange
     val type: DieType
-    val valueImages: Map<ImageResource, Int>
+
+    fun roll(): Int
+    fun sameValues(that: Int, other: Int): Boolean
 }
 
 sealed class GenericDie(
@@ -35,13 +36,9 @@ sealed class GenericDie(
     final override val previewImage: ImageResource,
     final override val type: DieType,
     ) : Die {
-
-    override fun roll(): Int = range.random(Random(System.nanoTime()))
-
     override val range: IntRange = sideImages.indices
 
-    override val valueImages: Map<ImageResource, Int>
-        get() = sideImages.mapIndexed { index, image -> image to index }.toMap()
+    override fun roll(): Int = range.random(Random(System.nanoTime()))
 }
 
 /**
@@ -53,7 +50,7 @@ enum class DieType {
     ;
 
     fun toDie(): Die = when (this) {
-        SIX_SIDED -> SixSidedDie()
-        MUNCHKIN_DUNGEON -> MunchkinDungeonDie()
+        SIX_SIDED -> SixSidedDie
+        MUNCHKIN_DUNGEON -> MunchkinDungeonDie
     }
 }

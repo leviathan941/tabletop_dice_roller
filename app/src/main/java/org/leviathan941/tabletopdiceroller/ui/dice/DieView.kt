@@ -92,7 +92,7 @@ fun DiceView(
 @Preview
 @Composable
 private fun PreviewDiceView() = DiceView(
-    die = TableDie(die = SixSidedDie(), value = DIE_NO_RESULT),
+    die = TableDie(die = SixSidedDie, value = DIE_NO_RESULT),
     onDieClick = {},
     onRemoveClick = {},
     onDieLongClick = {},

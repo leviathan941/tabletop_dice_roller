@@ -18,25 +18,28 @@
 
 package org.leviathan941.tabletopdiceroller.model.dice
 
+import org.leviathan941.tabletopdiceroller.model.dice.internal.genericSameValues
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
-class MunchkinDungeonDie : GenericDie(sideResources, previewResource, DieType.MUNCHKIN_DUNGEON) {
-    companion object {
-        private val sideResources = listOf(
-            ImageResource(R.drawable.munchkin_dungeon_die_empty,
-                R.string.munchkin_dungeon_die_empty_content_desc),
-            ImageResource(R.drawable.munchkin_dungeon_die_lightning,
-                R.string.munchkin_dungeon_die_lightning_content_desc),
-            ImageResource(R.drawable.munchkin_dungeon_die_sword,
-                R.string.munchkin_dungeon_die_sword_content_desc),
-            ImageResource(R.drawable.munchkin_dungeon_die_shield,
-                R.string.munchkin_dungeon_die_shield_content_desc),
-            ImageResource(R.drawable.munchkin_dungeon_die_lightning,
-                R.string.munchkin_dungeon_die_lightning_content_desc),
-            ImageResource(R.drawable.munchkin_dungeon_die_double_swords,
-                R.string.munchkin_dungeon_die_double_swords_content_desc)
-        )
-        private val previewResource = ImageResource(
-            R.drawable.munchkin_dungeon_die_preview, R.string.dice_no_result_content_desc)
+private val sideResources = listOf(
+    ImageResource(R.drawable.munchkin_dungeon_die_empty,
+        R.string.munchkin_dungeon_die_empty_content_desc),
+    ImageResource(R.drawable.munchkin_dungeon_die_lightning,
+        R.string.munchkin_dungeon_die_lightning_content_desc),
+    ImageResource(R.drawable.munchkin_dungeon_die_sword,
+        R.string.munchkin_dungeon_die_sword_content_desc),
+    ImageResource(R.drawable.munchkin_dungeon_die_shield,
+        R.string.munchkin_dungeon_die_shield_content_desc),
+    ImageResource(R.drawable.munchkin_dungeon_die_lightning,
+        R.string.munchkin_dungeon_die_lightning_content_desc),
+    ImageResource(R.drawable.munchkin_dungeon_die_double_swords,
+        R.string.munchkin_dungeon_die_double_swords_content_desc)
+)
+private val previewResource = ImageResource(
+    R.drawable.munchkin_dungeon_die_preview, R.string.dice_no_result_content_desc)
+
+object MunchkinDungeonDie : GenericDie(sideResources, previewResource, DieType.MUNCHKIN_DUNGEON) {
+    override fun sameValues(that: Int, other: Int): Boolean {
+        return genericSameValues(that, other) || sideResources[that] == sideResources[other]
     }
 }

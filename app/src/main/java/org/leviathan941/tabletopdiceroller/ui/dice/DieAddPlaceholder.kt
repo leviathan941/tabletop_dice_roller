@@ -83,4 +83,4 @@ fun DiceAddPlaceholder(
 @Preview
 @Composable
 private fun PreviewDiceAddPlaceholder() =
-    DiceAddPlaceholder(SixSidedDie()) {}
+    DiceAddPlaceholder(SixSidedDie) {}
