@@ -39,7 +39,36 @@ private val previewResource = ImageResource(
     R.drawable.munchkin_dungeon_die_preview, R.string.dice_no_result_content_desc)
 
 object MunchkinDungeonDie : GenericDie(sideResources, previewResource, DieType.MUNCHKIN_DUNGEON) {
+    enum class Side {
+        EMPTY,
+        LIGHTNING,
+        SWORD,
+        SHIELD,
+        DOUBLE_SWORDS,
+        ;
+    }
+
     override fun sameValues(that: Int, other: Int): Boolean {
         return genericSameValues(that, other) || sideResources[that] == sideResources[other]
+    }
+
+    fun sideByValue(value: Int): Side {
+        require(value in range) { "Value must be in range $range" }
+        return when (sideResources[value].imageRes) {
+            R.drawable.munchkin_dungeon_die_empty -> Side.EMPTY
+            R.drawable.munchkin_dungeon_die_lightning -> Side.LIGHTNING
+            R.drawable.munchkin_dungeon_die_sword -> Side.SWORD
+            R.drawable.munchkin_dungeon_die_shield -> Side.SHIELD
+            R.drawable.munchkin_dungeon_die_double_swords -> Side.DOUBLE_SWORDS
+            else -> throw IllegalArgumentException("Invalid value: $value")
+        }
+    }
+
+    fun imageBySide(side: Side): ImageResource = when (side) {
+        Side.EMPTY -> sideResources[0]
+        Side.LIGHTNING -> sideResources[1]
+        Side.SWORD -> sideResources[2]
+        Side.SHIELD -> sideResources[3]
+        Side.DOUBLE_SWORDS -> sideResources[5]
     }
 }

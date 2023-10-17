@@ -19,8 +19,29 @@
 package org.leviathan941.tabletopdiceroller.model.dice.internal
 
 import org.leviathan941.tabletopdiceroller.model.dice.Die
+import org.leviathan941.tabletopdiceroller.model.dice.DieValue
+import org.leviathan941.tabletopdiceroller.model.dice.MunchkinDungeonDie
+import org.leviathan941.tabletopdiceroller.model.dice.internal.result.SingleDieResult
+import org.leviathan941.tabletopdiceroller.model.dice.internal.tree.NodeContainer
+import org.leviathan941.tabletopdiceroller.model.dice.result.DieResult
 
 internal fun Die.genericSameValues(that: Int, other: Int): Boolean {
-    check(that in range && other in range) { "Values must be in range $range" }
+    require(that in range && other in range) { "Values must be in range $range" }
     return that == other
 }
+
+internal fun DieValue.sameAs(that: DieValue): Boolean {
+    return die == that.die && die.sameValues(value, that.value)
+}
+
+internal fun DieResult.inTotal(): Int = when (this) {
+        is SingleDieResult -> result * cost
+        else -> result
+}
+
+internal fun DieValue.isLikeSword(): Boolean =
+    MunchkinDungeonDie.sideByValue(value).let {
+        it == MunchkinDungeonDie.Side.SWORD || it == MunchkinDungeonDie.Side.DOUBLE_SWORDS
+    }
+
+internal typealias DieResultNode = NodeContainer<DieResult, DieValue>

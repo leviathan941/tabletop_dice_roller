@@ -39,6 +39,8 @@ sealed class GenericDie(
     override val range: IntRange = sideImages.indices
 
     override fun roll(): Int = range.random(Random(System.nanoTime()))
+
+    override fun toString(): String = "GenericDie(type=$type, range=$range)"
 }
 
 /**
