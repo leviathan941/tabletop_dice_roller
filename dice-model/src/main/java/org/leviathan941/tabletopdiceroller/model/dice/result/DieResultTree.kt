@@ -19,6 +19,7 @@
 package org.leviathan941.tabletopdiceroller.model.dice.result
 
 import org.leviathan941.tabletopdiceroller.model.dice.DieValue
+import org.leviathan941.tabletopdiceroller.model.dice.internal.isNoResult
 import org.leviathan941.tabletopdiceroller.model.dice.internal.tree.DieResultNodeFactory
 import org.leviathan941.tabletopdiceroller.model.dice.internal.tree.NodeContainer
 import org.leviathan941.tabletopdiceroller.model.dice.tree.Node
@@ -28,6 +29,7 @@ class DieResultTree {
     val root: List<Node<DieResult>> get() = _root
 
     fun addValue(value: DieValue) {
+        if (value.isNoResult()) return
         _root.find { it.isCompatibleWith(value) }?.addValue(value)
             ?: _root.add(DieResultNodeFactory.createTotalNode(value))
     }

@@ -46,7 +46,7 @@ import org.leviathan941.tabletopdiceroller.ui.dice.DiceRow
 import org.leviathan941.tabletopdiceroller.ui.dice.DieDialogButton
 import org.leviathan941.tabletopdiceroller.ui.fab.MenuFab
 import org.leviathan941.tabletopdiceroller.ui.fab.RollFab
-import org.leviathan941.tabletopdiceroller.ui.main.bottomsheet.MainBottomSheet
+import org.leviathan941.tabletopdiceroller.ui.main.bottomsheet.DieResultBottomSheet
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -64,10 +64,10 @@ fun MainView(activity: ComponentActivity) {
 
     BottomSheetScaffold(
         sheetContent = {
-            MainBottomSheet(mainViewModel = viewModel)
+            DieResultBottomSheet(mainViewModel = viewModel)
         },
         scaffoldState = bottomSheetScaffoldState,
-        sheetPeekHeight = 0.dp, // TODO: Change to a real value when bottom sheet is implemented
+        sheetPeekHeight = 45.dp,
         sheetContainerColor = MaterialTheme.colorScheme.secondaryContainer,
         sheetContentColor = MaterialTheme.colorScheme.onSecondaryContainer,
     ) { innerPadding ->

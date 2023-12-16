@@ -16,12 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.ui.main.bottomsheet
+package org.leviathan941.tabletopdiceroller.utils
 
-import androidx.lifecycle.ViewModel
-import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
-
-class MainBottomSheetViewModel(
-    private val mainViewModel: MainViewModel,
-) : ViewModel() {
-}
+const val NO_RESULT = -1

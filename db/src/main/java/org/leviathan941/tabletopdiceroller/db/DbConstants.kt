@@ -18,10 +18,12 @@
 
 package org.leviathan941.tabletopdiceroller.db
 
+import org.leviathan941.tabletopdiceroller.utils.NO_RESULT
+
 internal const val DATABASE_NAME = "tabletop_dice_roller_db"
 
 internal const val DICE_DB_TABLE_NAME = "dice"
 internal const val DICE_DB_DIE_COLUMN = "die"
 internal const val DICE_DB_RESULT_COLUMN = "result"
 
-const val DIE_NO_RESULT = -1
+const val DIE_NO_RESULT = NO_RESULT

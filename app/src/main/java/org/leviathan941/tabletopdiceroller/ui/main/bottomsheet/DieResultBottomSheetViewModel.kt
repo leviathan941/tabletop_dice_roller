@@ -18,24 +18,20 @@
 
 package org.leviathan941.tabletopdiceroller.ui.main.bottomsheet
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import org.leviathan941.tabletopdiceroller.db.DIE_NO_RESULT
+import org.leviathan941.tabletopdiceroller.db.entity.TableDie
+import org.leviathan941.tabletopdiceroller.model.dice.DieValue
+import org.leviathan941.tabletopdiceroller.model.dice.result.DieResultTree
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
-@Composable
-fun ColumnScope.MainBottomSheet(mainViewModel: MainViewModel) {
-    Box(
-        modifier = Modifier
-            .align(Alignment.CenterHorizontally)
-    ) {
-        Text(
-            text = "Total Results",
-            style = MaterialTheme.typography.headlineLarge,
-        )
+internal fun MainViewModel.dieResultTree(): Flow<DieResultTree> = diceState.map { dieStates ->
+    DieResultTree().apply {
+        dieStates.forEach { dieState ->
+            addValue(dieState.toDieValue())
+        }
     }
 }
+
+private fun TableDie.toDieValue(): DieValue = DieValue(die, value)

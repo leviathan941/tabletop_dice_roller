@@ -20,6 +20,7 @@ package org.leviathan941.tabletopdiceroller.model.dice.internal.tree
 
 import org.leviathan941.tabletopdiceroller.model.dice.DieValue
 import org.leviathan941.tabletopdiceroller.model.dice.internal.DieResultNode
+import org.leviathan941.tabletopdiceroller.model.dice.internal.cost
 import org.leviathan941.tabletopdiceroller.model.dice.internal.result.SingleDieResult
 import org.leviathan941.tabletopdiceroller.model.dice.internal.sameAs
 
@@ -27,13 +28,13 @@ internal class SingleDieNode(
     private val dieValue: DieValue,
 ) : DieResultNode {
 
-    private var number = 0
+    private var number = 1
 
     override val results: List<SingleDieResult>
         get() = listOf(
             SingleDieResult(
                 dieValue,
-                cost = 1,
+                cost = dieValue.cost,
                 result = number,
             )
         )

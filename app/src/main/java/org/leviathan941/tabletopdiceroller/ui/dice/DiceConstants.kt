@@ -22,5 +22,6 @@ import androidx.compose.ui.unit.dp
 
 val DIE_VIEW_SIZE_DP = 120.dp
 val DIE_PADDING_ALL_DP = 13.dp
+val DIE_RESULT_IMAGE_SIZE_DP = 45.dp
 
 const val MAX_DICE_COUNT = 200

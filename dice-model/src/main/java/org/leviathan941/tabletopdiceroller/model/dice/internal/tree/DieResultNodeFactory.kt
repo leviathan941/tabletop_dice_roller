@@ -22,6 +22,7 @@ import org.leviathan941.tabletopdiceroller.model.dice.DieType
 import org.leviathan941.tabletopdiceroller.model.dice.DieValue
 import org.leviathan941.tabletopdiceroller.model.dice.internal.DieResultNode
 import org.leviathan941.tabletopdiceroller.model.dice.internal.isLikeSword
+import org.leviathan941.tabletopdiceroller.model.dice.internal.isNoResult
 
 internal object DieResultNodeFactory {
 

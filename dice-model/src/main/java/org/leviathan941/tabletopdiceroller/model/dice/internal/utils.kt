@@ -19,14 +19,18 @@
 package org.leviathan941.tabletopdiceroller.model.dice.internal
 
 import org.leviathan941.tabletopdiceroller.model.dice.Die
+import org.leviathan941.tabletopdiceroller.model.dice.DieType
 import org.leviathan941.tabletopdiceroller.model.dice.DieValue
 import org.leviathan941.tabletopdiceroller.model.dice.MunchkinDungeonDie
 import org.leviathan941.tabletopdiceroller.model.dice.internal.result.SingleDieResult
 import org.leviathan941.tabletopdiceroller.model.dice.internal.tree.NodeContainer
 import org.leviathan941.tabletopdiceroller.model.dice.result.DieResult
+import org.leviathan941.tabletopdiceroller.utils.NO_RESULT
 
 internal fun Die.genericSameValues(that: Int, other: Int): Boolean {
-    require(that in range && other in range) { "Values must be in range $range" }
+    require(that in range && other in range) {
+        "Values $that and $other must be in range $range"
+    }
     return that == other
 }
 
@@ -39,9 +43,25 @@ internal fun DieResult.inTotal(): Int = when (this) {
         else -> result
 }
 
-internal fun DieValue.isLikeSword(): Boolean =
-    MunchkinDungeonDie.sideByValue(value).let {
-        it == MunchkinDungeonDie.Side.SWORD || it == MunchkinDungeonDie.Side.DOUBLE_SWORDS
+internal fun DieValue.isLikeSword(): Boolean {
+    return (die.type == DieType.MUNCHKIN_DUNGEON) &&
+            MunchkinDungeonDie.sideByValue(value).let {
+                it == MunchkinDungeonDie.Side.SWORD || it == MunchkinDungeonDie.Side.DOUBLE_SWORDS
+            }
+}
+
+internal fun DieValue.isNoResult(): Boolean {
+    return value == NO_RESULT ||
+            (die.type == DieType.MUNCHKIN_DUNGEON &&
+                    MunchkinDungeonDie.sideByValue(value) == MunchkinDungeonDie.Side.EMPTY)
+}
+
+internal val DieValue.cost: Int get() = when (die.type) {
+    DieType.SIX_SIDED -> value + 1
+    DieType.MUNCHKIN_DUNGEON -> when (MunchkinDungeonDie.sideByValue(value)) {
+        MunchkinDungeonDie.Side.DOUBLE_SWORDS -> 2
+        else -> 1
     }
+}
 
 internal typealias DieResultNode = NodeContainer<DieResult, DieValue>
