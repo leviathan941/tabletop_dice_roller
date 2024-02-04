@@ -33,6 +33,8 @@ internal class MultipleDieNode(
     private val _children: MutableList<DieResultNode> = mutableListOf()
     override val children: List<DieResultNode> get() = _children
 
+    override val order: Int get() = die.type.ordinal
+
     override fun addValue(value: DieSide, number: Int) {
         require(isCompatibleWith(value)) {
             "Value $value is not compatible with node $this"

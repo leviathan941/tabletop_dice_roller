@@ -28,5 +28,5 @@ internal class SingleDieResult(
     override val result: Int,
 ) : DieResult {
     override val preview: ImageResource
-        get() = with(dieSide) { die.sideImages[side] }
+        get() = with(dieSide) { die.sideImages[sideValue] }
 }

@@ -22,6 +22,8 @@ import org.leviathan941.tabletopdiceroller.model.dice.DieSide
 import org.leviathan941.tabletopdiceroller.model.dice.tree.Expandable
 import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 
-internal interface DieResultNode : NodeContainer<DieResult, DieSide>, Expandable {
+internal interface DieResultNode :
+    NodeContainer<DieResult, DieSide>,
+    Expandable {
     override val children: List<DieResultNode>
 }

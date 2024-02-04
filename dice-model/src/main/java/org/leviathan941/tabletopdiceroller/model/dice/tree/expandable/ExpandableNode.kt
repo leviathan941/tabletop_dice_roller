@@ -22,7 +22,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import org.leviathan941.tabletopdiceroller.model.dice.tree.Expandable
 import org.leviathan941.tabletopdiceroller.model.dice.tree.Node
 
-interface ExpandableNode<Result> : Expandable, Node<Result> {
+interface ExpandableNode<Result> :
+    Node<Result>,
+    Expandable, 
+    Comparable<ExpandableNode<Result>>
+{
     val isExpanded: MutableStateFlow<Boolean>
 
     override val children: List<ExpandableNode<Result>>

@@ -50,39 +50,47 @@ class DieExpandableTree(
         }
     }
 
-    private inner class ExpandableDieResultNode(
-        private val resultNode: Node<DieResult>,
-        previouslyExpanded: Set<ExpandableNode<DieResult>>,
-    ) : ExpandableNode<DieResult> {
-
-        override val isExpanded = MutableStateFlow(
-            previouslyExpanded.any { it.isCompatibleWith(this) }
-        )
-
-        override val isExpandable: Boolean get() =
-            resultNode is DieResultNode && resultNode.isExpandable
-        override val results: List<DieResult> get() = resultNode.results
-
-        override val children: List<ExpandableDieResultNode> =
-            mutableListOf<ExpandableDieResultNode>().apply {
-                resultNode.children.forEach { node ->
-                    add(ExpandableDieResultNode(node, previouslyExpanded))
-                }
-            }
-
-        override fun isCompatibleWith(other: Node<DieResult>): Boolean =
-            other is ExpandableDieResultNode && other.resultNode.isCompatibleWith(this.resultNode)
-
-        override fun toString(): String {
-            return "ExpandableDieResultNode(resultNode=$resultNode, isExpanded=$isExpanded)"
-        }
-    }
-
-    private class ExpandableDieResultRoot(
-        override val children: List<ExpandableNode<DieResult>>
-    ) : Root<ExpandableNode<DieResult>>
-
     companion object {
         val Empty get() = DieExpandableTree(DieResultTree(), emptySet())
     }
+}
+
+private class ExpandableDieResultRoot(
+    private val _children: List<ExpandableNode<DieResult>>
+) : Root<ExpandableNode<DieResult>> {
+    override val children: List<ExpandableNode<DieResult>>
+        get() = _children.sorted()
+}
+
+private class ExpandableDieResultNode(
+    private val resultNode: Node<DieResult>,
+    previouslyExpanded: Set<ExpandableNode<DieResult>>,
+) : ExpandableNode<DieResult> {
+
+    override val isExpanded = MutableStateFlow(
+        previouslyExpanded.any { it.isCompatibleWith(this) }
+    )
+
+    override val isExpandable: Boolean get() =
+        resultNode is DieResultNode && resultNode.isExpandable
+    override val results: List<DieResult> get() = resultNode.results
+
+    override val children: List<ExpandableDieResultNode> =
+        mutableListOf<ExpandableDieResultNode>().apply {
+            resultNode.children.forEach { node ->
+                add(ExpandableDieResultNode(node, previouslyExpanded))
+            }
+        }.sorted()
+
+    override val order: Int get() = resultNode.order
+
+    override fun isCompatibleWith(other: Node<DieResult>): Boolean =
+        other is ExpandableDieResultNode && other.resultNode.isCompatibleWith(this.resultNode)
+
+    override fun toString(): String {
+        return "ExpandableDieResultNode(resultNode=$resultNode, isExpanded=$isExpanded)"
+    }
+
+    override fun compareTo(other: ExpandableNode<DieResult>): Int =
+        order.compareTo(other.order)
 }

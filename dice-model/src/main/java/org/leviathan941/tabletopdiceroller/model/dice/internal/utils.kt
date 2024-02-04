@@ -35,7 +35,7 @@ internal fun Die.genericSameValues(that: Int, other: Int): Boolean {
 }
 
 internal fun DieSide.sameAs(that: DieSide): Boolean {
-    return die == that.die && die.sameValues(side, that.side)
+    return die == that.die && die.sameValues(sideValue, that.sideValue)
 }
 
 internal fun DieResult.inTotal(): Int = when (this) {
@@ -49,7 +49,7 @@ internal fun DieResult.inTotal(): Int = when (this) {
 
 internal fun DieSide.isLikeSword(): Boolean {
     return (die.type == DieType.MUNCHKIN_DUNGEON) &&
-            MunchkinDungeonDie.sideByValue(side).let {
+            MunchkinDungeonDie.sideByValue(sideValue).let {
                 it == MunchkinDungeonDie.Side.SWORD || it == MunchkinDungeonDie.Side.DOUBLE_SWORDS
             }
 }
@@ -63,8 +63,8 @@ internal fun DieResultNode.isValuable(): Boolean =
     results.any { it.isValuable() }
 
 internal val DieSide.cost: Int get() = when (die.type) {
-    DieType.SIX_SIDED -> side + 1
-    DieType.MUNCHKIN_DUNGEON -> when (MunchkinDungeonDie.sideByValue(side)) {
+    DieType.SIX_SIDED -> sideValue + 1
+    DieType.MUNCHKIN_DUNGEON -> when (MunchkinDungeonDie.sideByValue(sideValue)) {
         MunchkinDungeonDie.Side.DOUBLE_SWORDS -> 2
         MunchkinDungeonDie.Side.EMPTY -> 0
         else -> 1

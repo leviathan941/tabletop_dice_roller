@@ -44,6 +44,9 @@ internal class MunchkinSwordsDieNode : DieResultNode {
     private val _children: MutableList<DieResultNode> = mutableListOf()
     override val children: List<DieResultNode> get() = _children
 
+    override val order: Int
+        get() = MunchkinDungeonDie.Side.SWORD.ordinal
+
     override fun isCompatibleWith(value: DieSide): Boolean =
         value.die == MunchkinDungeonDie && value.isLikeSword()
 

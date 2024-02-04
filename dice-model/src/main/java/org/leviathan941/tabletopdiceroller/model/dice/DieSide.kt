@@ -20,5 +20,5 @@ package org.leviathan941.tabletopdiceroller.model.dice
 
 data class DieSide(
     val die: Die,
-    val side: Int,
+    val sideValue: Int,
 )

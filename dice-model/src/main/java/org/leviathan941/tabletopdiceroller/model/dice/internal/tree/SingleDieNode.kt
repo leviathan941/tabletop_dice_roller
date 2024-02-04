@@ -19,6 +19,8 @@
 package org.leviathan941.tabletopdiceroller.model.dice.internal.tree
 
 import org.leviathan941.tabletopdiceroller.model.dice.DieSide
+import org.leviathan941.tabletopdiceroller.model.dice.DieType
+import org.leviathan941.tabletopdiceroller.model.dice.MunchkinDungeonDie
 import org.leviathan941.tabletopdiceroller.model.dice.internal.cost
 import org.leviathan941.tabletopdiceroller.model.dice.internal.result.SingleDieResult
 import org.leviathan941.tabletopdiceroller.model.dice.internal.sameAs
@@ -26,7 +28,7 @@ import org.leviathan941.tabletopdiceroller.model.dice.tree.Node
 import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 
 internal class SingleDieNode(
-    private val dieSide: DieSide,
+    val dieSide: DieSide,
     private var number: Int,
 ) : DieResultNode {
 
@@ -43,6 +45,11 @@ internal class SingleDieNode(
 
     override val children: List<DieResultNode>
         get() = emptyList()
+
+    override val order: Int get() = when (dieSide.die.type) {
+        DieType.SIX_SIDED -> dieSide.sideValue
+        DieType.MUNCHKIN_DUNGEON -> MunchkinDungeonDie.sideByValue(dieSide.sideValue).ordinal
+    }
 
     override fun addValue(value: DieSide, number: Int) {
         require(isCompatibleWith(value)) {
