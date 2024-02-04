@@ -18,15 +18,15 @@
 
 package org.leviathan941.tabletopdiceroller.model.dice.internal.result
 
-import org.leviathan941.tabletopdiceroller.model.dice.DieValue
-import org.leviathan941.tabletopdiceroller.model.dice.result.DieResult
+import org.leviathan941.tabletopdiceroller.model.dice.DieSide
+import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
 internal class SingleDieResult(
-    private val dieValue: DieValue,
+    private val dieSide: DieSide,
     val cost: Int,
     override val result: Int,
 ) : DieResult {
     override val preview: ImageResource
-        get() = with(dieValue) { die.sideImages[value] }
+        get() = with(dieSide) { die.sideImages[side] }
 }

@@ -21,4 +21,5 @@ package org.leviathan941.tabletopdiceroller.model.dice.tree
 interface Node<Result> {
     val results: List<Result>
     val children: List<Node<Result>>
+    fun isCompatibleWith(other: Node<Result>): Boolean
 }

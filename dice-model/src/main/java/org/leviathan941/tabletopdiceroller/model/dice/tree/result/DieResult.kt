@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.model.dice.result
+package org.leviathan941.tabletopdiceroller.model.dice.tree.result
 
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 

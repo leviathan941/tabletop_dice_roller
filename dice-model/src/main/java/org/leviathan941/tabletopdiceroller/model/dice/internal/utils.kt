@@ -19,12 +19,12 @@
 package org.leviathan941.tabletopdiceroller.model.dice.internal
 
 import org.leviathan941.tabletopdiceroller.model.dice.Die
+import org.leviathan941.tabletopdiceroller.model.dice.DieSide
 import org.leviathan941.tabletopdiceroller.model.dice.DieType
-import org.leviathan941.tabletopdiceroller.model.dice.DieValue
 import org.leviathan941.tabletopdiceroller.model.dice.MunchkinDungeonDie
 import org.leviathan941.tabletopdiceroller.model.dice.internal.result.SingleDieResult
-import org.leviathan941.tabletopdiceroller.model.dice.internal.tree.NodeContainer
-import org.leviathan941.tabletopdiceroller.model.dice.result.DieResult
+import org.leviathan941.tabletopdiceroller.model.dice.internal.tree.DieResultNode
+import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 import org.leviathan941.tabletopdiceroller.utils.NO_RESULT
 
 internal fun Die.genericSameValues(that: Int, other: Int): Boolean {
@@ -34,34 +34,39 @@ internal fun Die.genericSameValues(that: Int, other: Int): Boolean {
     return that == other
 }
 
-internal fun DieValue.sameAs(that: DieValue): Boolean {
-    return die == that.die && die.sameValues(value, that.value)
+internal fun DieSide.sameAs(that: DieSide): Boolean {
+    return die == that.die && die.sameValues(side, that.side)
 }
 
 internal fun DieResult.inTotal(): Int = when (this) {
-        is SingleDieResult -> result * cost
+        is SingleDieResult -> if (isValuable()) {
+            result * cost
+        } else {
+            NO_RESULT
+        }
         else -> result
 }
 
-internal fun DieValue.isLikeSword(): Boolean {
+internal fun DieSide.isLikeSword(): Boolean {
     return (die.type == DieType.MUNCHKIN_DUNGEON) &&
-            MunchkinDungeonDie.sideByValue(value).let {
+            MunchkinDungeonDie.sideByValue(side).let {
                 it == MunchkinDungeonDie.Side.SWORD || it == MunchkinDungeonDie.Side.DOUBLE_SWORDS
             }
 }
 
-internal fun DieValue.isNoResult(): Boolean {
-    return value == NO_RESULT ||
-            (die.type == DieType.MUNCHKIN_DUNGEON &&
-                    MunchkinDungeonDie.sideByValue(value) == MunchkinDungeonDie.Side.EMPTY)
+internal fun DieResult.isValuable(): Boolean = when(this) {
+    is SingleDieResult -> cost > 0 && result != NO_RESULT
+    else -> result != NO_RESULT
 }
 
-internal val DieValue.cost: Int get() = when (die.type) {
-    DieType.SIX_SIDED -> value + 1
-    DieType.MUNCHKIN_DUNGEON -> when (MunchkinDungeonDie.sideByValue(value)) {
+internal fun DieResultNode.isValuable(): Boolean =
+    results.any { it.isValuable() }
+
+internal val DieSide.cost: Int get() = when (die.type) {
+    DieType.SIX_SIDED -> side + 1
+    DieType.MUNCHKIN_DUNGEON -> when (MunchkinDungeonDie.sideByValue(side)) {
         MunchkinDungeonDie.Side.DOUBLE_SWORDS -> 2
+        MunchkinDungeonDie.Side.EMPTY -> 0
         else -> 1
     }
 }
-
-internal typealias DieResultNode = NodeContainer<DieResult, DieValue>

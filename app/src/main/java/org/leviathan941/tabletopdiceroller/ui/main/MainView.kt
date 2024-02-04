@@ -70,6 +70,7 @@ fun MainView(activity: ComponentActivity) {
         sheetPeekHeight = 45.dp,
         sheetContainerColor = MaterialTheme.colorScheme.secondaryContainer,
         sheetContentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+        sheetSwipeEnabled = true,
     ) { innerPadding ->
         Box(
             modifier = Modifier

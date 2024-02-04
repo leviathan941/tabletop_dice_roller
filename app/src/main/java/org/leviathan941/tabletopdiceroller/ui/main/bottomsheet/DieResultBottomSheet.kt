@@ -19,32 +19,60 @@
 package org.leviathan941.tabletopdiceroller.ui.main.bottomsheet
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.leviathan941.tabletopdiceroller.model.dice.result.DieResultTree
+import org.leviathan941.tabletopdiceroller.model.dice.tree.expandable.DieExpandableTree
+import org.leviathan941.tabletopdiceroller.model.dice.tree.expandable.ExpandableNode
+import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @Composable
 fun ColumnScope.DieResultBottomSheet(mainViewModel: MainViewModel) {
-    val resultTree by mainViewModel.dieResultTree().collectAsState(initial = DieResultTree())
+    val resultTree by mainViewModel.resultModel.resultTree.collectAsState(
+        initial = DieExpandableTree.Empty
+    )
+    val scrollState = rememberScrollState()
 
-    Column(
+    Box(
         modifier = Modifier
-            .align(Alignment.CenterHorizontally)
-            .padding(bottom = 15.dp),
-        verticalArrangement = Arrangement.spacedBy(5.dp),
+            .fillMaxHeight(0.7f),
     ) {
-        resultTree.root.forEach { node ->
-            DieResultRow(
-                results = node.results,
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .verticalScroll(scrollState),
+            verticalArrangement = Arrangement.spacedBy(5.dp),
+        ) {
+            DieResultRows(
+                nodes = resultTree.root.children,
             )
+        }
+    }
+}
+
+@Composable
+private fun ColumnScope.DieResultRows(
+    nodes: List<ExpandableNode<DieResult>>,
+) {
+    nodes.forEach { node ->
+        val isExpanded by node.isExpanded.collectAsState(initial = node.isExpanded.value)
+        DieResultRow(
+            results = node.results,
+            isExpandable = node.isExpandable,
+            isExpanded = isExpanded,
+            onExpand = { node.isExpanded.value = node.isExpanded.value.not() },
+        )
+        if (isExpanded) {
+            DieResultRows(node.children)
         }
     }
 }

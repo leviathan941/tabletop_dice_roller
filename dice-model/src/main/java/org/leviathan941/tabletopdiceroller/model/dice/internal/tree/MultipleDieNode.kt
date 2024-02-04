@@ -19,27 +19,37 @@
 package org.leviathan941.tabletopdiceroller.model.dice.internal.tree
 
 import org.leviathan941.tabletopdiceroller.model.dice.Die
-import org.leviathan941.tabletopdiceroller.model.dice.DieValue
-import org.leviathan941.tabletopdiceroller.model.dice.internal.DieResultNode
-import org.leviathan941.tabletopdiceroller.model.dice.result.DieResult
+import org.leviathan941.tabletopdiceroller.model.dice.DieSide
+import org.leviathan941.tabletopdiceroller.model.dice.internal.isValuable
+import org.leviathan941.tabletopdiceroller.model.dice.tree.Node
+import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 
 internal class MultipleDieNode(
     private val die: Die,
 ) : DieResultNode {
     override val results: List<DieResult>
-        get() = children.map { it.results }.flatten()
+        get() = children.map { it.results }.flatten().filter { it.isValuable() }
 
     private val _children: MutableList<DieResultNode> = mutableListOf()
     override val children: List<DieResultNode> get() = _children
 
-    override fun addValue(value: DieValue) {
+    override fun addValue(value: DieSide, number: Int) {
         require(isCompatibleWith(value)) {
             "Value $value is not compatible with node $this"
         }
-        _children.find { it.isCompatibleWith(value) }?.addValue(value)
-            ?: _children.add(DieResultNodeFactory.createSingleNode(value))
+        _children.find { it.isCompatibleWith(value) }?.addValue(value, number)
+            ?: _children.add(DieResultNodeFactory.createSingleNode(value, number))
     }
 
-    override fun isCompatibleWith(value: DieValue): Boolean =
+    override fun isCompatibleWith(value: DieSide): Boolean =
         value.die == die
+
+    override fun isCompatibleWith(other: Node<DieResult>): Boolean =
+        other is MultipleDieNode && other.die == die
+
+    override val isExpandable: Boolean get() = _children.any { it.isExpandable || it.isValuable() }
+
+    override fun toString(): String {
+        return "MultipleDieNode(dieType=${die.type}, children=$_children)"
+    }
 }

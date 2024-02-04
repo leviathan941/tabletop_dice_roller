@@ -16,9 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.model.dice
+package org.leviathan941.tabletopdiceroller.model.dice.tree.expandable
 
-data class DieValue(
-    val die: Die,
-    val value: Int,
-)
+import kotlinx.coroutines.flow.MutableStateFlow
+import org.leviathan941.tabletopdiceroller.model.dice.tree.Expandable
+import org.leviathan941.tabletopdiceroller.model.dice.tree.Node
+
+interface ExpandableNode<Result> : Expandable, Node<Result> {
+    val isExpanded: MutableStateFlow<Boolean>
+
+    override val children: List<ExpandableNode<Result>>
+}

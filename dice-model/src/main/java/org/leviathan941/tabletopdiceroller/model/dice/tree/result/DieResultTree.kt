@@ -16,21 +16,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.model.dice.result
+package org.leviathan941.tabletopdiceroller.model.dice.tree.result
 
-import org.leviathan941.tabletopdiceroller.model.dice.DieValue
-import org.leviathan941.tabletopdiceroller.model.dice.internal.isNoResult
+import org.leviathan941.tabletopdiceroller.model.dice.DieSide
+import org.leviathan941.tabletopdiceroller.model.dice.internal.tree.DieResultNode
 import org.leviathan941.tabletopdiceroller.model.dice.internal.tree.DieResultNodeFactory
-import org.leviathan941.tabletopdiceroller.model.dice.internal.tree.NodeContainer
 import org.leviathan941.tabletopdiceroller.model.dice.tree.Node
+import org.leviathan941.tabletopdiceroller.model.dice.tree.Root
 
 class DieResultTree {
-    private val _root: MutableList<NodeContainer<DieResult, DieValue>> = mutableListOf()
-    val root: List<Node<DieResult>> get() = _root
+    private val _root: MutableList<DieResultNode> = mutableListOf()
+    val root: Root<Node<DieResult>> get() = DieResultRoot(_root)
 
-    fun addValue(value: DieValue) {
-        if (value.isNoResult()) return
-        _root.find { it.isCompatibleWith(value) }?.addValue(value)
-            ?: _root.add(DieResultNodeFactory.createTotalNode(value))
+    fun addValue(dieSide: DieSide) {
+        add(dieSide, number = 1)
     }
+
+    @Suppress("SameParameterValue")
+    private fun add(dieSide: DieSide, number: Int) {
+        _root.find { it.isCompatibleWith(dieSide) }?.addValue(dieSide, number)
+            ?: _root.add(DieResultNodeFactory.createTotalNode(dieSide, number))
+    }
+
+    private class DieResultRoot(
+        override val children: List<DieResultNode>
+    ) : Root<DieResultNode>
 }

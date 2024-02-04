@@ -18,29 +18,27 @@
 
 package org.leviathan941.tabletopdiceroller.model.dice.internal.tree
 
+import org.leviathan941.tabletopdiceroller.model.dice.DieSide
 import org.leviathan941.tabletopdiceroller.model.dice.DieType
-import org.leviathan941.tabletopdiceroller.model.dice.DieValue
-import org.leviathan941.tabletopdiceroller.model.dice.internal.DieResultNode
 import org.leviathan941.tabletopdiceroller.model.dice.internal.isLikeSword
-import org.leviathan941.tabletopdiceroller.model.dice.internal.isNoResult
 
 internal object DieResultNodeFactory {
 
-    fun createTotalNode(value: DieValue): DieResultNode = when (value.die.type) {
+    fun createTotalNode(value: DieSide, number: Int): DieResultNode = when (value.die.type) {
         DieType.SIX_SIDED -> TotalDieNode(value.die)
         DieType.MUNCHKIN_DUNGEON -> MultipleDieNode(value.die)
     }.apply {
-        addValue(value)
+        addValue(value, number)
     }
 
-    fun createSingleNode(value: DieValue): DieResultNode = when (value.die.type) {
-        DieType.SIX_SIDED -> SingleDieNode(value)
+    fun createSingleNode(value: DieSide, number: Int): DieResultNode = when (value.die.type) {
+        DieType.SIX_SIDED -> SingleDieNode(value, number)
         DieType.MUNCHKIN_DUNGEON -> if (value.isLikeSword()) {
             MunchkinSwordsDieNode().apply {
-                addValue(value)
+                addValue(value, number)
             }
         } else {
-            SingleDieNode(value)
+            SingleDieNode(value, number)
         }
     }
 }

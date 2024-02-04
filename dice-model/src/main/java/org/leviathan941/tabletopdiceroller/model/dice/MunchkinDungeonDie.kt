@@ -53,7 +53,7 @@ object MunchkinDungeonDie : GenericDie(sideResources, previewResource, DieType.M
     }
 
     fun sideByValue(value: Int): Side {
-        require(value in range) { "Value must be in range $range" }
+        require(value in range) { "Value $value must be in range $range" }
         return when (sideResources[value].imageRes) {
             R.drawable.munchkin_dungeon_die_empty -> Side.EMPTY
             R.drawable.munchkin_dungeon_die_lightning -> Side.LIGHTNING

@@ -18,37 +18,48 @@
 
 package org.leviathan941.tabletopdiceroller.model.dice.internal.tree
 
-import org.leviathan941.tabletopdiceroller.model.dice.DieValue
-import org.leviathan941.tabletopdiceroller.model.dice.internal.DieResultNode
+import org.leviathan941.tabletopdiceroller.model.dice.DieSide
 import org.leviathan941.tabletopdiceroller.model.dice.internal.cost
 import org.leviathan941.tabletopdiceroller.model.dice.internal.result.SingleDieResult
 import org.leviathan941.tabletopdiceroller.model.dice.internal.sameAs
+import org.leviathan941.tabletopdiceroller.model.dice.tree.Node
+import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 
 internal class SingleDieNode(
-    private val dieValue: DieValue,
+    private val dieSide: DieSide,
+    private var number: Int,
 ) : DieResultNode {
 
-    private var number = 1
-
     override val results: List<SingleDieResult>
-        get() = listOf(
-            SingleDieResult(
-                dieValue,
-                cost = dieValue.cost,
-                result = number,
+        get() = if (number > 0) {
+            listOf(
+                SingleDieResult(
+                    dieSide,
+                    cost = dieSide.cost,
+                    result = number,
+                )
             )
-        )
+        } else emptyList()
 
     override val children: List<DieResultNode>
         get() = emptyList()
 
-    override fun addValue(value: DieValue) {
+    override fun addValue(value: DieSide, number: Int) {
         require(isCompatibleWith(value)) {
             "Value $value is not compatible with node $this"
         }
-        number++
+        this.number += number
     }
 
-    override fun isCompatibleWith(value: DieValue): Boolean =
-        dieValue.sameAs(value)
+    override fun isCompatibleWith(value: DieSide): Boolean =
+        dieSide.sameAs(value)
+
+    override fun isCompatibleWith(other: Node<DieResult>): Boolean =
+        other is SingleDieNode && this.isCompatibleWith(other.dieSide)
+
+    override val isExpandable: Boolean get() = false
+
+    override fun toString(): String {
+        return "SingleDieNode(dieSide=$dieSide, number=$number)"
+    }
 }

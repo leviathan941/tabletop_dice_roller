@@ -16,12 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.leviathan941.tabletopdiceroller.model.dice.internal.result
+package org.leviathan941.tabletopdiceroller.model.dice
 
-import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
-import org.leviathan941.tabletopdiceroller.utils.ImageResource
-
-internal class TotalDieResult(
-    override val preview: ImageResource,
-    override val result: Int,
-) : DieResult
+data class DieSide(
+    val die: Die,
+    val side: Int,
+)

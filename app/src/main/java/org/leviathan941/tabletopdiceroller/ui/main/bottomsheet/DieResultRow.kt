@@ -33,34 +33,36 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.leviathan941.tabletopdiceroller.model.dice.result.DieResult
+import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 import org.leviathan941.tabletopdiceroller.ui.dice.DIE_RESULT_IMAGE_SIZE_DP
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun DieResultRow(
     results: List<DieResult>,
-    modifier: Modifier = Modifier,
+    isExpandable: Boolean = false,
     isExpanded: Boolean = false,
     onExpand: (() -> Unit)? = null,
 ) {
     Row(
-        modifier = modifier
+        modifier = Modifier
             .clickable { onExpand?.invoke() }
             .fillMaxWidth(),
     ) {
-        val expandImageVector = if (isExpanded) {
-            Icons.Filled.KeyboardArrowDown
-        } else {
-            Icons.Filled.KeyboardArrowRight
+        if (isExpandable) {
+            val expandImageVector = if (isExpanded) {
+                Icons.Filled.KeyboardArrowDown
+            } else {
+                Icons.Filled.KeyboardArrowRight
+            }
+            Image(
+                modifier = Modifier
+                    .size(DIE_RESULT_IMAGE_SIZE_DP)
+                    .align(Alignment.CenterVertically),
+                imageVector = expandImageVector,
+                contentDescription = null
+            )
         }
-        Image(
-            modifier = Modifier
-                .size(DIE_RESULT_IMAGE_SIZE_DP)
-                .align(Alignment.CenterVertically),
-            imageVector = expandImageVector,
-            contentDescription = null
-        )
 
         FlowRow(
             horizontalArrangement = Arrangement.spacedBy(20.dp),

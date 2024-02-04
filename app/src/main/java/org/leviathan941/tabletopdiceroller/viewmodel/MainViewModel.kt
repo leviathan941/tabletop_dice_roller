@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -29,6 +30,7 @@ import org.leviathan941.tabletopdiceroller.app.Singletons
 import org.leviathan941.tabletopdiceroller.db.DIE_NO_RESULT
 import org.leviathan941.tabletopdiceroller.db.entity.TableDie
 import org.leviathan941.tabletopdiceroller.model.dice.DieType
+import org.leviathan941.tabletopdiceroller.ui.main.bottomsheet.DieResultBottomSheetModel
 
 class MainViewModel : ViewModel() {
 
@@ -36,14 +38,16 @@ class MainViewModel : ViewModel() {
     private val prefsRepository = Singletons.prefsRepository
 
     private val _diceState = MutableStateFlow(emptyList<TableDie>())
-    val diceState: StateFlow<List<TableDie>> = _diceState
+    val diceState: StateFlow<List<TableDie>> = _diceState.asStateFlow()
 
     val uiPrefs = prefsRepository.uiPreferences
+    val resultModel: DieResultBottomSheetModel = DieResultBottomSheetModel()
 
     init {
         viewModelScope.launch {
             tableRepository.loadAllDice().collectLatest {
                 _diceState.value = it.reversed()
+                resultModel.setResultsTree(it)
             }
         }
     }

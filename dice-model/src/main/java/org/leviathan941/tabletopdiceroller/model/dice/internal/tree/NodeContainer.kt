@@ -22,6 +22,6 @@ import org.leviathan941.tabletopdiceroller.model.dice.tree.Node
 
 internal interface NodeContainer<Result, Value> : Node<Result> {
     override val children: List<NodeContainer<Result, Value>>
-    fun addValue(value: Value)
+    fun addValue(value: Value, number: Int)
     fun isCompatibleWith(value: Value): Boolean
 }
