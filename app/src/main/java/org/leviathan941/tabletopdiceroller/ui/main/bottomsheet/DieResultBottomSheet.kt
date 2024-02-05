@@ -36,7 +36,7 @@ import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @Composable
-fun ColumnScope.DieResultBottomSheet(mainViewModel: MainViewModel) {
+fun DieResultBottomSheet(mainViewModel: MainViewModel) {
     val resultTree by mainViewModel.resultModel.resultTree.collectAsState(
         initial = DieExpandableTree.Empty
     )
@@ -62,17 +62,22 @@ fun ColumnScope.DieResultBottomSheet(mainViewModel: MainViewModel) {
 @Composable
 private fun ColumnScope.DieResultRows(
     nodes: List<ExpandableNode<DieResult>>,
+    depthLevel: Int = 0,
 ) {
     nodes.forEach { node ->
         val isExpanded by node.isExpanded.collectAsState(initial = node.isExpanded.value)
         DieResultRow(
             results = node.results,
+            depthLevel = depthLevel,
             isExpandable = node.isExpandable,
             isExpanded = isExpanded,
             onExpand = { node.isExpanded.value = node.isExpanded.value.not() },
         )
         if (isExpanded) {
-            DieResultRows(node.children)
+            DieResultRows(
+                nodes = node.children,
+                depthLevel = depthLevel + 1
+            )
         }
     }
 }

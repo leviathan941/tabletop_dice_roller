@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -32,14 +33,20 @@ import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.leviathan941.tabletopdiceroller.model.dice.MunchkinDungeonDie
+import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDie
 import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
+import org.leviathan941.tabletopdiceroller.ui.dice.DIE_RESULT_DEPTH_LEVEL_SIZE
 import org.leviathan941.tabletopdiceroller.ui.dice.DIE_RESULT_IMAGE_SIZE_DP
+import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun DieResultRow(
     results: List<DieResult>,
+    depthLevel: Int = 0,
     isExpandable: Boolean = false,
     isExpanded: Boolean = false,
     onExpand: (() -> Unit)? = null,
@@ -47,7 +54,8 @@ fun DieResultRow(
     Row(
         modifier = Modifier
             .clickable { onExpand?.invoke() }
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(start = (depthLevel * DIE_RESULT_DEPTH_LEVEL_SIZE).dp),
     ) {
         if (isExpandable) {
             val expandImageVector = if (isExpanded) {
@@ -73,3 +81,28 @@ fun DieResultRow(
         }
     }
 }
+
+@Composable
+@Preview
+private fun DieResultRowPreview() = DieResultRow(
+    results = listOf(
+        DieResultPreview(
+            preview = SixSidedDie.previewImage,
+            result = 10,
+        ),
+        DieResultPreview(
+            preview = MunchkinDungeonDie.imageBySide(
+                MunchkinDungeonDie.Side.DOUBLE_SWORDS
+            ),
+            result = 3,
+        ),
+    ),
+    isExpandable = true,
+    isExpanded = false,
+    onExpand = null,
+)
+
+private class DieResultPreview(
+    override val preview: ImageResource,
+    override val result: Int,
+) : DieResult
