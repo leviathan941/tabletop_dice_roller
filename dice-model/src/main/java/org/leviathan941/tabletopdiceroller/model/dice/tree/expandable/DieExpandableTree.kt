@@ -68,7 +68,7 @@ private class ExpandableDieResultNode(
 ) : ExpandableNode<DieResult> {
 
     override val isExpanded = MutableStateFlow(
-        previouslyExpanded.any { it.isCompatibleWith(this) }
+        isExpandable && previouslyExpanded.any { it.isCompatibleWith(this) }
     )
 
     override val isExpandable: Boolean get() =

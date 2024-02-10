@@ -19,6 +19,7 @@
 package org.leviathan941.tabletopdiceroller.model.dice.internal.tree
 
 import org.leviathan941.tabletopdiceroller.model.dice.DieSide
+import org.leviathan941.tabletopdiceroller.model.dice.internal.isValuable
 import org.leviathan941.tabletopdiceroller.model.dice.tree.Expandable
 import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 
@@ -26,4 +27,7 @@ internal interface DieResultNode :
     NodeContainer<DieResult, DieSide>,
     Expandable {
     override val children: List<DieResultNode>
+
+    override val isExpandable: Boolean
+        get() = children.any { it.isExpandable } || children.count { it.isValuable() } > 1
 }

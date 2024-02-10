@@ -49,8 +49,6 @@ internal class MultipleDieNode(
     override fun isCompatibleWith(other: Node<DieResult>): Boolean =
         other is MultipleDieNode && other.die == die
 
-    override val isExpandable: Boolean get() = _children.any { it.isExpandable || it.isValuable() }
-
     override fun toString(): String {
         return "MultipleDieNode(dieType=${die.type}, children=$_children)"
     }

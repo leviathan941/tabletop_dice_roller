@@ -51,11 +51,16 @@ fun DieResultRow(
     isExpanded: Boolean = false,
     onExpand: (() -> Unit)? = null,
 ) {
+    val startPadding = if (depthLevel == 0 && !isExpandable) {
+        DIE_RESULT_IMAGE_SIZE_DP
+    } else {
+        (depthLevel * DIE_RESULT_DEPTH_LEVEL_SIZE).dp
+    }
     Row(
         modifier = Modifier
             .clickable { onExpand?.invoke() }
             .fillMaxWidth()
-            .padding(start = (depthLevel * DIE_RESULT_DEPTH_LEVEL_SIZE).dp),
+            .padding(start = startPadding),
     ) {
         if (isExpandable) {
             val expandImageVector = if (isExpanded) {

@@ -19,16 +19,17 @@
 package org.leviathan941.tabletopdiceroller.ui.main.bottomsheet
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.leviathan941.tabletopdiceroller.model.dice.tree.expandable.DieExpandableTree
 import org.leviathan941.tabletopdiceroller.model.dice.tree.expandable.ExpandableNode
@@ -42,10 +43,12 @@ fun DieResultBottomSheet(mainViewModel: MainViewModel) {
     )
     val scrollState = rememberScrollState()
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxHeight(0.7f),
     ) {
+        Divider(color = Color.DarkGray, thickness = 1.dp)
+
         Column(
             modifier = Modifier
                 .fillMaxHeight()
@@ -65,13 +68,17 @@ private fun ColumnScope.DieResultRows(
     depthLevel: Int = 0,
 ) {
     nodes.forEach { node ->
-        val isExpanded by node.isExpanded.collectAsState(initial = node.isExpanded.value)
+        val isExpanded by node.isExpanded.collectAsState()
         DieResultRow(
             results = node.results,
             depthLevel = depthLevel,
             isExpandable = node.isExpandable,
             isExpanded = isExpanded,
-            onExpand = { node.isExpanded.value = node.isExpanded.value.not() },
+            onExpand = {
+                if (node.isExpandable) {
+                    node.isExpanded.value = node.isExpanded.value.not()
+                }
+            },
         )
         if (isExpanded) {
             DieResultRows(

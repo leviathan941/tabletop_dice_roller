@@ -64,8 +64,6 @@ internal class SingleDieNode(
     override fun isCompatibleWith(other: Node<DieResult>): Boolean =
         other is SingleDieNode && this.isCompatibleWith(other.dieSide)
 
-    override val isExpandable: Boolean get() = false
-
     override fun toString(): String {
         return "SingleDieNode(dieSide=$dieSide, number=$number)"
     }

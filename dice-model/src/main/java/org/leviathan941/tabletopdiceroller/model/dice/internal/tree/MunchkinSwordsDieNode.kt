@@ -22,7 +22,6 @@ import org.leviathan941.tabletopdiceroller.model.dice.DieSide
 import org.leviathan941.tabletopdiceroller.model.dice.MunchkinDungeonDie
 import org.leviathan941.tabletopdiceroller.model.dice.internal.inTotal
 import org.leviathan941.tabletopdiceroller.model.dice.internal.isLikeSword
-import org.leviathan941.tabletopdiceroller.model.dice.internal.isValuable
 import org.leviathan941.tabletopdiceroller.model.dice.internal.result.TotalDieResult
 import org.leviathan941.tabletopdiceroller.model.dice.tree.Node
 import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
@@ -30,16 +29,16 @@ import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 // TODO: Make this class more generic. Maybe something like stackable die node?
 internal class MunchkinSwordsDieNode : DieResultNode {
     override val results: List<DieResult>
-        get() = _children.map { it.results }.flatten().sumOf { it.inTotal() }.let { total ->
-            total.takeIf { it > 0 }?.let {
-                listOf(
-                    TotalDieResult(
+        get() = _children.map { it.results }.flatten()
+            .sumOf { it.inTotal() }.let { total ->
+                total.takeIf { it > 0 }?.let {
+                    listOf(TotalDieResult(
                         MunchkinDungeonDie.imageBySide(MunchkinDungeonDie.Side.SWORD),
                         result = total,
+                        )
                     )
-                )
-            } ?: emptyList()
-        }
+                } ?: emptyList()
+            }
 
     private val _children: MutableList<DieResultNode> = mutableListOf()
     override val children: List<DieResultNode> get() = _children
@@ -60,8 +59,6 @@ internal class MunchkinSwordsDieNode : DieResultNode {
 
     override fun isCompatibleWith(other: Node<DieResult>): Boolean =
         other is MunchkinSwordsDieNode
-
-    override val isExpandable: Boolean get() = _children.any { it.isValuable() }
 
     override fun toString(): String {
         return "MunchkinSwordsDieNode(children=$_children)"

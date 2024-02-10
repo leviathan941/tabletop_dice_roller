@@ -31,15 +31,21 @@ internal class TotalDieNode(
 ) : DieResultNode {
     override val results: List<DieResult>
         get() = children.map { it.results }.flatten()
-            .sumOf { it.inTotal() }
-            .takeIf { it > 0 }?.let { totalResult ->
-                listOf(
-                    TotalDieResult(
-                        die.previewImage,
-                        result = totalResult,
-                    )
-                )
-            } ?: emptyList()
+            .filter { it.isValuable() }.let { valuableResults ->
+                when (valuableResults.size) {
+                    0 -> emptyList()
+                    1 -> listOf(valuableResults.first())
+                    else -> valuableResults.sumOf { it.inTotal() }
+                    .takeIf { it > 0 }?.let { totalResult ->
+                        listOf(
+                            TotalDieResult(
+                                die.previewImage,
+                                result = totalResult,
+                            )
+                        )
+                    } ?: emptyList()
+            }
+        }
 
     private val _children = mutableListOf<DieResultNode>()
     override val children: List<DieResultNode> get() = _children
@@ -59,8 +65,6 @@ internal class TotalDieNode(
 
     override fun isCompatibleWith(other: Node<DieResult>): Boolean =
         other is TotalDieNode && other.die == die
-
-    override val isExpandable: Boolean get() = _children.any { it.isExpandable || it.isValuable() }
 
     override fun toString(): String {
         return "TotalDieNode(dieType=${die.type}, children=$_children)"
