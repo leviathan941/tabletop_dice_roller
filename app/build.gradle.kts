@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 import org.leviathan941.tabletopdiceroller.AndroidSdk
 import org.leviathan941.tabletopdiceroller.Application
 import org.leviathan941.tabletopdiceroller.dependency.Deps
@@ -88,7 +86,6 @@ dependencies {
 
     implementation(Deps.activityCompose)
 
-    implementation(Deps.accompanist.flowLayout)
     implementation(Deps.accompanist.material3ThemeAdapter)
 
     implementation(Deps.dataStorePreferences)

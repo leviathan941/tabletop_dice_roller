@@ -25,7 +25,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -64,7 +64,7 @@ fun DieResultBottomSheet(mainViewModel: MainViewModel) {
             style = MaterialTheme.typography.headlineSmall,
         )
 
-        Divider(
+        HorizontalDivider(
             color = MaterialTheme.colorScheme.onSecondaryContainer,
             thickness = 1.dp
         )

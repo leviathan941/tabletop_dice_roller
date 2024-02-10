@@ -18,6 +18,9 @@
 
 package org.leviathan941.tabletopdiceroller.ui.dice
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -32,14 +35,12 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.flowlayout.FlowMainAxisAlignment
-import com.google.accompanist.flowlayout.FlowRow
-import com.google.accompanist.flowlayout.SizeMode
 import org.leviathan941.tabletopdiceroller.app.preferences.UiPreferences
 import org.leviathan941.tabletopdiceroller.db.entity.TableDie
 import org.leviathan941.tabletopdiceroller.ui.main.ChooseDieDialog
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun DiceRow(mainViewModel: MainViewModel) {
     val diceState by mainViewModel.diceState.collectAsState()
@@ -49,8 +50,7 @@ fun DiceRow(mainViewModel: MainViewModel) {
     FlowRow(
         modifier = Modifier
             .verticalScroll(scrollState),
-        mainAxisSize = SizeMode.Expand,
-        mainAxisAlignment = FlowMainAxisAlignment.Center,
+        horizontalArrangement = Arrangement.Center,
     ) {
         Spacer(modifier = Modifier
             .height(10.dp)

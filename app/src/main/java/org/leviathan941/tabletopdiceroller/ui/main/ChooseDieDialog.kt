@@ -18,12 +18,15 @@
 
 package org.leviathan941.tabletopdiceroller.ui.main
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AlertDialogDefaults
+import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -32,18 +35,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.flowlayout.FlowMainAxisAlignment
-import com.google.accompanist.flowlayout.FlowRow
-import com.google.accompanist.flowlayout.SizeMode
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun ChooseDieDialog(
     titleText: String = "",
     onDismiss: () -> Unit = {},
     content: @Composable () -> Unit = {},
 ) {
-    AlertDialog(
+    BasicAlertDialog(
         onDismissRequest = onDismiss,
     ) {
         Surface(
@@ -64,12 +64,16 @@ fun ChooseDieDialog(
                     )
                 }
                 FlowRow(
-                    mainAxisSize = SizeMode.Wrap,
-                    mainAxisAlignment = FlowMainAxisAlignment.SpaceEvenly,
-                    mainAxisSpacing = 20.dp,
-                    crossAxisSpacing = 20.dp,
+                    horizontalArrangement = Arrangement.spacedBy(
+                        space = 20.dp,
+                        alignment = Alignment.CenterHorizontally
+                    ),
+                    verticalArrangement = Arrangement.spacedBy(
+                        space = 20.dp,
+                        alignment = Alignment.CenterVertically
+                    ),
                     modifier = Modifier.padding(all = 20.dp),
-                    content = content
+                    content = { content() }
                 )
             }
         }
