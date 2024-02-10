@@ -31,7 +31,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDie
 import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 import org.leviathan941.tabletopdiceroller.ui.dice.DIE_RESULT_IMAGE_SIZE_DP
 import org.leviathan941.tabletopdiceroller.ui.dice.dieShape
@@ -59,4 +61,13 @@ fun DieResultView(result: DieResult) {
             style = MaterialTheme.typography.headlineLarge,
         )
     }
+}
+
+@Preview
+@Composable
+fun DieResultViewPreview() {
+    DieResultView(DieResultPreview(
+        preview = SixSidedDie.sideImages[5],
+        result = 6,
+    ))
 }

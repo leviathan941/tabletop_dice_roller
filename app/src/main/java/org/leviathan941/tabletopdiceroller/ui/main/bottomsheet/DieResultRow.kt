@@ -107,7 +107,7 @@ private fun DieResultRowPreview() = DieResultRow(
     onExpand = null,
 )
 
-private class DieResultPreview(
+internal class DieResultPreview(
     override val preview: ImageResource,
     override val result: Int,
 ) : DieResult

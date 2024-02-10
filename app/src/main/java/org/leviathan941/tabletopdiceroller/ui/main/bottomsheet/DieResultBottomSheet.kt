@@ -22,17 +22,23 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.model.dice.tree.expandable.DieExpandableTree
 import org.leviathan941.tabletopdiceroller.model.dice.tree.expandable.ExpandableNode
+import org.leviathan941.tabletopdiceroller.model.dice.tree.isEmpty
 import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
@@ -47,6 +53,18 @@ fun DieResultBottomSheet(mainViewModel: MainViewModel) {
         modifier = Modifier
             .fillMaxHeight(0.7f),
     ) {
+        Text(
+            modifier = Modifier.padding(horizontal = 15.dp, vertical = 2.dp),
+            text = stringResource(
+                id = if (resultTree.root.isEmpty()) {
+                    R.string.result_bottom_sheet_title_no_results
+                } else {
+                    R.string.result_bottom_sheet_title
+                }
+            ),
+            style = MaterialTheme.typography.headlineSmall,
+        )
+
         Divider(color = Color.DarkGray, thickness = 1.dp)
 
         Column(

@@ -27,4 +27,6 @@
     <string name="change_default_die_type_content_desc">Change new die type</string>
     <string name="choose_die_type_dialog_title">New Die</string>
     <string name="main_menu_fab_desc">Open menu</string>
+    <string name="result_bottom_sheet_title_no_results">There will be results</string>
+    <string name="result_bottom_sheet_title">Results</string>
 </resources>

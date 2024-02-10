@@ -21,3 +21,5 @@ package org.leviathan941.tabletopdiceroller.model.dice.tree
 interface Root<out NodeType> {
     val children: List<NodeType>
 }
+
+fun Root<*>.isEmpty(): Boolean = children.isEmpty()
