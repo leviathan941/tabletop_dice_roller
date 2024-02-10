@@ -29,16 +29,20 @@ import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 // TODO: Make this class more generic. Maybe something like stackable die node?
 internal class MunchkinSwordsDieNode : DieResultNode {
     override val results: List<DieResult>
-        get() = _children.map { it.results }.flatten()
-            .sumOf { it.inTotal() }.let { total ->
-                total.takeIf { it > 0 }?.let {
-                    listOf(TotalDieResult(
-                        MunchkinDungeonDie.imageBySide(MunchkinDungeonDie.Side.SWORD),
-                        result = total,
+        get() = _children.map { it.results }.flatten().let { results ->
+            when (results.size) {
+                0 -> emptyList()
+                1 -> results
+                else -> results.sumOf { it.inTotal() }.let { total ->
+                    total.takeIf { it > 0 }?.let {
+                        TotalDieResult(
+                            MunchkinDungeonDie.imageBySide(MunchkinDungeonDie.Side.SWORD),
+                            result = total,
                         )
-                    )
-                } ?: emptyList()
+                    }?.let { listOf(it) } ?: emptyList()
+                }
             }
+        }
 
     private val _children: MutableList<DieResultNode> = mutableListOf()
     override val children: List<DieResultNode> get() = _children
