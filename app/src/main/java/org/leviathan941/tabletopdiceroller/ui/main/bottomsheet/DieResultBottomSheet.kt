@@ -32,7 +32,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.leviathan941.tabletopdiceroller.R
@@ -65,7 +64,10 @@ fun DieResultBottomSheet(mainViewModel: MainViewModel) {
             style = MaterialTheme.typography.headlineSmall,
         )
 
-        Divider(color = Color.DarkGray, thickness = 1.dp)
+        Divider(
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            thickness = 1.dp
+        )
 
         Column(
             modifier = Modifier

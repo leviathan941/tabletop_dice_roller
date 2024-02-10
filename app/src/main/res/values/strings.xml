@@ -29,4 +29,5 @@
     <string name="main_menu_fab_desc">Open menu</string>
     <string name="result_bottom_sheet_title_no_results">There will be results</string>
     <string name="result_bottom_sheet_title">Results</string>
+    <string name="result_bottom_sheet_expand_arrow_desc">Expand results</string>
 </resources>

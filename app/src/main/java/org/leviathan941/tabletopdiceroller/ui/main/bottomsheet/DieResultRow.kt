@@ -30,11 +30,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.model.dice.MunchkinDungeonDie
 import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDie
 import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
@@ -73,7 +77,10 @@ fun DieResultRow(
                     .size(DIE_RESULT_IMAGE_SIZE_DP)
                     .align(Alignment.CenterVertically),
                 imageVector = expandImageVector,
-                contentDescription = null
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSecondaryContainer),
+                contentDescription = stringResource(
+                    id = R.string.result_bottom_sheet_expand_arrow_desc
+                ),
             )
         }
 
