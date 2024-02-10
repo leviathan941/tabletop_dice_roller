@@ -8,7 +8,7 @@ Android application for rolling different types of dice.
 It helps when you need to (re-)roll multiple dices during a tabletop game session.
 
 ## Licence
-Copyright (C) 2021-2023 Alexey Kuzin. All rights reserved.
+Copyright (C) 2021-2024 Alexey Kuzin. All rights reserved.
 
 This project's code is governed by [GPL v3.0](https://www.gnu.org/licenses/gpl-3.0.html) licence. For details see the file
 titled GPLv3 in the project root folder.
