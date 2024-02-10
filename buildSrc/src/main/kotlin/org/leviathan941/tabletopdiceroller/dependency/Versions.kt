@@ -21,19 +21,19 @@ package org.leviathan941.tabletopdiceroller.dependency
 import org.gradle.api.JavaVersion
 
 object Versions {
-    const val ACCOMPANIST = "0.30.1"
-    const val ACTIVITY_COMPOSE = "1.7.2"
-    const val ANDROID_CORE = "1.10.1"
-    const val ANDROID_PLUGIN = "8.1.0"
+    const val ACCOMPANIST = "0.34.0"
+    const val ACTIVITY_COMPOSE = "1.8.2"
+    const val ANDROID_CORE = "1.12.0"
+    const val ANDROID_PLUGIN = "8.2.2"
     const val APP_COMPAT = "1.6.1"
-    const val COMPOSE = "1.4.3"
-    const val COMPOSE_COMPILER = "1.4.8"
-    const val COMPOSE_MATERIAL_3 = "1.1.1"
+    const val COMPOSE = "1.6.1"
+    const val COMPOSE_COMPILER = "1.5.9"
+    const val COMPOSE_MATERIAL_3 = "1.2.0"
     const val DATA_STORE = "1.0.0"
-    const val KOTLIN_PLUGIN = "1.8.22"
-    const val LIFECYCLE = "2.6.1"
-    const val MATERIAL = "1.9.0"
-    const val ROOM = "2.5.2"
+    const val KOTLIN_PLUGIN = "1.9.22"
+    const val LIFECYCLE = "2.7.0"
+    const val MATERIAL = "1.11.0"
+    const val ROOM = "2.6.1"
 
     val JAVA_SRC_COMPAT = JavaVersion.VERSION_11
     val JAVA_TARGET_COMPAT = JavaVersion.VERSION_11
