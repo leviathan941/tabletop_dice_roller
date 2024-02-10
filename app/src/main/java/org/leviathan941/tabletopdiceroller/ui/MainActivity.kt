@@ -21,14 +21,14 @@ package org.leviathan941.tabletopdiceroller.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.google.accompanist.themeadapter.material3.Mdc3Theme
+import org.leviathan941.tabletopdiceroller.ui.main.AppTheme
 import org.leviathan941.tabletopdiceroller.ui.main.MainView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Mdc3Theme {
+            AppTheme {
                 MainView(this)
             }
         }

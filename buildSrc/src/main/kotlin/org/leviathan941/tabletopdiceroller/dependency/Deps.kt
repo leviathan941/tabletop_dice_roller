@@ -24,7 +24,6 @@ object Plugins {
 }
 
 object Deps {
-    val accompanist = AccompanistDependency(Versions.ACCOMPANIST)
     val activityCompose by lazy { "androidx.activity:activity-compose:${Versions.ACTIVITY_COMPOSE}" }
     val androidCoreKtx by lazy { "androidx.core:core-ktx:${Versions.ANDROID_CORE}" }
     val appCompat by lazy { "androidx.appcompat:appcompat:${Versions.APP_COMPAT}" }
@@ -53,9 +52,4 @@ class LifecycleDependency(private val version: String) {
 class RoomDependency(private val version: String) {
     val compiler by lazy { "androidx.room:room-compiler:$version" }
     val ktx by lazy { "androidx.room:room-ktx:$version" }
-}
-
-class AccompanistDependency(private val version: String) {
-    val flowLayout by lazy { "com.google.accompanist:accompanist-flowlayout:$version" }
-    val material3ThemeAdapter by lazy { "com.google.accompanist:accompanist-themeadapter-material3:$version" }
 }

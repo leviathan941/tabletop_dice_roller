@@ -86,8 +86,6 @@ dependencies {
 
     implementation(Deps.activityCompose)
 
-    implementation(Deps.accompanist.material3ThemeAdapter)
-
     implementation(Deps.dataStorePreferences)
 
     debugImplementation(Deps.compose.uiTooling)
