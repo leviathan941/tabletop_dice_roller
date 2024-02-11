@@ -80,7 +80,7 @@ private class ExpandableDieResultNode(
             resultNode.children.forEach { node ->
                 add(ExpandableDieResultNode(node, previouslyExpanded))
             }
-        }.sorted()
+        }.sortedDescending()
 
     override val order: Int get() = resultNode.order
 
