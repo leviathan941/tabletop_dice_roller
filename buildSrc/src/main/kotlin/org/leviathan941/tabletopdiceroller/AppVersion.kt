@@ -36,6 +36,6 @@ class AppVersion {
     companion object {
         const val MAJOR = "0"
         const val MINOR = "16" // from 0 to 99
-        const val PATCH = "0" // from 0 to 99
+        const val PATCH = "1" // from 0 to 99
     }
 }
