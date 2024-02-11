@@ -85,7 +85,12 @@ fun DieResultRow(
         }
 
         FlowRow(
-            horizontalArrangement = Arrangement.spacedBy(20.dp),
+            modifier = Modifier.padding(vertical = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(
+                space = 20.dp,
+                alignment = Alignment.Start,
+            ),
+            verticalArrangement = Arrangement.spacedBy(space = 2.dp),
         ) {
             results.forEach { result ->
                 DieResultView(result = result)
