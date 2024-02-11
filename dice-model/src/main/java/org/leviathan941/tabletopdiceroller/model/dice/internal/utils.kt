@@ -66,7 +66,6 @@ internal val DieSide.cost: Int get() = when (die.type) {
     DieType.SIX_SIDED -> sideValue + 1
     DieType.MUNCHKIN_DUNGEON -> when (MunchkinDungeonDie.sideByValue(sideValue)) {
         MunchkinDungeonDie.Side.DOUBLE_SWORDS -> 2
-        MunchkinDungeonDie.Side.EMPTY -> 0
         else -> 1
     }
 }
