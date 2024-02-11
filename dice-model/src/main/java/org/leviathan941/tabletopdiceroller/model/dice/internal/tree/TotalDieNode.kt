@@ -39,7 +39,8 @@ internal class TotalDieNode(
                     .takeIf { it > 0 }?.let { totalResult ->
                         listOf(
                             TotalDieResult(
-                                die.previewImage,
+                                die,
+                                preview = die.previewImage,
                                 result = totalResult,
                             )
                         )

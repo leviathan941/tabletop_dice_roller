@@ -36,7 +36,8 @@ internal class MunchkinSwordsDieNode : DieResultNode {
                 else -> results.sumOf { it.inTotal() }.let { total ->
                     total.takeIf { it > 0 }?.let {
                         TotalDieResult(
-                            MunchkinDungeonDie.imageBySide(MunchkinDungeonDie.Side.SWORD),
+                            die = MunchkinDungeonDie,
+                            preview = MunchkinDungeonDie.imageBySide(MunchkinDungeonDie.Side.SWORD),
                             result = total,
                         )
                     }?.let { listOf(it) } ?: emptyList()

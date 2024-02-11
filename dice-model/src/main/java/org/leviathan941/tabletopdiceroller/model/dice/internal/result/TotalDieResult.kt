@@ -18,10 +18,12 @@
 
 package org.leviathan941.tabletopdiceroller.model.dice.internal.result
 
+import org.leviathan941.tabletopdiceroller.model.dice.Die
 import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
 internal class TotalDieResult(
+    val die: Die,
     override val preview: ImageResource,
     override val result: Int,
 ) : DieResult
