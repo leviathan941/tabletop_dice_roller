@@ -21,7 +21,6 @@ package org.leviathan941.tabletopdiceroller.ui.main.bottomsheet
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -40,9 +39,7 @@ import org.leviathan941.tabletopdiceroller.ui.dice.dieShape
 
 @Composable
 fun DieResultView(result: DieResult) {
-    Row(
-        modifier = Modifier.padding(vertical = 8.dp),
-    ) {
+    Row {
         Image(
             modifier = Modifier
                 .size(DIE_RESULT_IMAGE_SIZE_DP)

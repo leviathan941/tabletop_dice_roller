@@ -23,7 +23,7 @@ import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
 internal class SingleDieResult(
-    private val dieSide: DieSide,
+    val dieSide: DieSide,
     val cost: Int,
     override val result: Int,
 ) : DieResult {
