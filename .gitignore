@@ -56,6 +56,9 @@ captures/
 .idea/kotlinc.xml
 .idea/git_toolbox_prj.xml
 .idea/migrations.xml
+.idea/AndroidProjectSystem.xml
+.idea/deploymentTargetSelector.xml
+.idea/runConfigurations.xml
 
 # Keystore files
 # Uncomment the following lines if you do not want to check your keystore files in.
