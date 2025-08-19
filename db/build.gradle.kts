@@ -1,6 +1,5 @@
 import org.leviathan941.tabletopdiceroller.AndroidSdk
-import org.leviathan941.tabletopdiceroller.dependency.Deps
-import org.leviathan941.tabletopdiceroller.dependency.Versions
+import org.leviathan941.tabletopdiceroller.JvmVersions
 
 /*
  * Tabletop Dice Roller
@@ -21,9 +20,16 @@ import org.leviathan941.tabletopdiceroller.dependency.Versions
  */
 
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.room)
+}
+
+java {
+    toolchain {
+        languageVersion.set(JvmVersions.JAVA_LANG)
+    }
 }
 
 android {
@@ -32,20 +38,10 @@ android {
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK_VERSION
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += ("room.schemaLocation" to "$projectDir/db_schemas")
-            }
-        }
     }
 
-    compileOptions {
-        sourceCompatibility = Versions.JAVA_SRC_COMPAT
-        targetCompatibility = Versions.JAVA_TARGET_COMPAT
-    }
-    kotlin {
-        jvmToolchain(Versions.KOTLIN_JVM)
+    room {
+        schemaDirectory("$projectDir/db_schemas")
     }
 }
 
@@ -53,8 +49,8 @@ dependencies {
     implementation(project(":dice-model"))
     implementation(project(":utils"))
 
-    implementation(Deps.androidCoreKtx)
+    implementation(libs.androidx.core.ktx)
 
-    implementation(Deps.room.ktx)
-    kapt(Deps.room.compiler)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 }

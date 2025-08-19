@@ -22,6 +22,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
 data class ImageResource(
-    @DrawableRes val imageRes: Int,
-    @StringRes val contentDesc: Int
+    @param:DrawableRes val imageRes: Int,
+    @param:StringRes val contentDesc: Int,
 )

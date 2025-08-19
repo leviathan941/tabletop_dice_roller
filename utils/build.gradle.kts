@@ -1,6 +1,5 @@
 import org.leviathan941.tabletopdiceroller.AndroidSdk
-import org.leviathan941.tabletopdiceroller.dependency.Deps
-import org.leviathan941.tabletopdiceroller.dependency.Versions
+import org.leviathan941.tabletopdiceroller.JvmVersions
 
 /*
  * Tabletop Dice Roller
@@ -21,8 +20,14 @@ import org.leviathan941.tabletopdiceroller.dependency.Versions
  */
 
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+}
+
+java {
+    toolchain {
+        languageVersion.set(JvmVersions.JAVA_LANG)
+    }
 }
 
 android {
@@ -32,17 +37,8 @@ android {
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK_VERSION
     }
-
-    compileOptions {
-        sourceCompatibility = Versions.JAVA_SRC_COMPAT
-        targetCompatibility = Versions.JAVA_TARGET_COMPAT
-    }
-    kotlin {
-        jvmToolchain(Versions.KOTLIN_JVM)
-    }
 }
 
 dependencies {
-    api(Deps.androidCoreKtx)
-    api(Deps.compose.ui)
+    api(libs.androidx.core.ktx)
 }

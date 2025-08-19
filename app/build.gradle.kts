@@ -1,13 +1,19 @@
 import org.leviathan941.tabletopdiceroller.AndroidSdk
 import org.leviathan941.tabletopdiceroller.Application
-import org.leviathan941.tabletopdiceroller.dependency.Deps
-import org.leviathan941.tabletopdiceroller.dependency.Versions
+import org.leviathan941.tabletopdiceroller.JvmVersions
 
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    kotlin("plugin.parcelize")
-    kotlin("kapt")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.compose.compiler)
+}
+
+java {
+    toolchain {
+        languageVersion.set(JvmVersions.JAVA_LANG)
+    }
 }
 
 android {
@@ -26,7 +32,7 @@ android {
             useSupportLibrary = true
         }
 
-        setProperty("archivesBaseName", "${Application.BASE_NAME}-${Application.version.name}")
+        base.archivesName.set("${Application.BASE_NAME}-${Application.version.name}")
     }
 
     buildTypes {
@@ -35,26 +41,16 @@ android {
             isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
         getByName("debug") {
             versionNameSuffix = "-SNAPSHOT"
         }
     }
-    compileOptions {
-        sourceCompatibility = Versions.JAVA_SRC_COMPAT
-        targetCompatibility = Versions.JAVA_TARGET_COMPAT
-    }
-    kotlin {
-        jvmToolchain(Versions.KOTLIN_JVM)
-    }
     buildFeatures {
         compose = true
         buildConfig = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER
     }
     packaging {
         resources {
@@ -69,24 +65,24 @@ dependencies {
     implementation(project(":expandable-fab"))
     implementation(project(":utils"))
 
-    implementation(Deps.androidCoreKtx)
-    implementation(Deps.appCompat)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
 
-    implementation(Deps.material)
+    implementation(libs.google.material)
 
-    implementation(Deps.composeCompiler)
-    implementation(Deps.compose.ui)
-    implementation(Deps.compose.runtimeLivedata)
-    implementation(Deps.composeMaterial3)
-    implementation(Deps.compose.uiToolingPreview)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.runtime.livedata)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.ui.tooling.preview)
 
-    implementation(Deps.lifecycle.livedataKtx)
-    implementation(Deps.lifecycle.viewModelKtx)
-    implementation(Deps.lifecycle.viewModelSavedState)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.savedstate)
 
-    implementation(Deps.activityCompose)
+    implementation(libs.compose.activity)
 
-    implementation(Deps.dataStorePreferences)
+    implementation(libs.datastore.preferences)
 
-    debugImplementation(Deps.compose.uiTooling)
+    debugImplementation(libs.compose.ui.tooling)
 }

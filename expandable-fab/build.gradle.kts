@@ -1,6 +1,5 @@
 import org.leviathan941.tabletopdiceroller.AndroidSdk
-import org.leviathan941.tabletopdiceroller.dependency.Deps
-import org.leviathan941.tabletopdiceroller.dependency.Versions
+import org.leviathan941.tabletopdiceroller.JvmVersions
 
 /*
  * Tabletop Dice Roller
@@ -21,9 +20,16 @@ import org.leviathan941.tabletopdiceroller.dependency.Versions
  */
 
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.compose.compiler)
+}
+
+java {
+    toolchain {
+        languageVersion.set(JvmVersions.JAVA_LANG)
+    }
 }
 
 android {
@@ -34,27 +40,16 @@ android {
         minSdk = AndroidSdk.MIN_SDK_VERSION
     }
 
-    compileOptions {
-        sourceCompatibility = Versions.JAVA_SRC_COMPAT
-        targetCompatibility = Versions.JAVA_TARGET_COMPAT
-    }
-    kotlin {
-        jvmToolchain(Versions.KOTLIN_JVM)
-    }
-
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER
     }
 }
 
 dependencies {
-    api(Deps.compose.ui)
+    api(libs.compose.ui)
 
-    implementation(Deps.composeCompiler)
-    implementation(Deps.composeMaterial3)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.material3)
 
-    debugImplementation(Deps.compose.uiTooling)
+    debugImplementation(libs.compose.ui.tooling)
 }
