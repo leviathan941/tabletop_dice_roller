@@ -26,8 +26,8 @@ import androidx.compose.ui.Modifier
 
 @Composable
 internal fun SingleFab(
-    modifier: Modifier,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
     FloatingActionButton(

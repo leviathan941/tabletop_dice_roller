@@ -37,8 +37,9 @@ import org.leviathan941.tabletopdiceroller.R
 @Composable
 fun MenuFab(
     modifier: Modifier = Modifier,
-    onChangeDiceType: () -> Unit,
-    onClearClick: () -> Unit,
+    onChangeDiceType: () -> Unit = {},
+    onClearClick: () -> Unit = {},
+    onResultBottomSheetClick: () -> Unit = {},
 ) {
     ExpandableFab(
         layoutConfiguration = LayoutConfiguration(
@@ -52,15 +53,16 @@ fun MenuFab(
                 listOf(
                     changeDiceTypeFabConfiguration(onChangeDiceType),
                     clearFabConfiguration(onClearClick),
-                )
+                    resultBottomSheetFabConfiguration(onResultBottomSheetClick),
+                ),
             ),
             content = {
                 Icon(
                     imageVector = Icons.Filled.Menu,
-                    contentDescription = stringResource(id = R.string.main_menu_fab_desc)
+                    contentDescription = stringResource(id = R.string.main_menu_fab_desc),
                 )
-            }
-        )
+            },
+        ),
     )
 }
 
@@ -71,9 +73,7 @@ private fun PreviewMenuFab() = MenuFab(
     onClearClick = {},
 )
 
-private fun clearFabConfiguration(
-    onClick: () -> Unit,
-) = FabConfiguration(
+private fun clearFabConfiguration(onClick: () -> Unit = {}) = FabConfiguration(
     size = SecondLevelFabSizeDp,
     action = FabOnClickAction.Do { onClick() },
     content = {
@@ -81,20 +81,29 @@ private fun clearFabConfiguration(
             imageVector = Icons.Filled.Delete,
             contentDescription = stringResource(id = R.string.clear_table_button_text),
         )
-    }
+    },
 )
 
-private fun changeDiceTypeFabConfiguration(
-    onClick: () -> Unit,
-) = FabConfiguration(
+private fun changeDiceTypeFabConfiguration(onClick: () -> Unit) = FabConfiguration(
     size = SecondLevelFabSizeDp,
     action = FabOnClickAction.Do { onClick() },
     content = {
         Icon(
             painter = painterResource(id = R.drawable.ic_baseline_flip_24),
             contentDescription = stringResource(
-                id = R.string.change_default_die_type_content_desc
+                id = R.string.change_default_die_type_content_desc,
             ),
         )
-    }
+    },
+)
+
+private fun resultBottomSheetFabConfiguration(onClick: () -> Unit) = FabConfiguration(
+    size = SecondLevelFabSizeDp,
+    action = FabOnClickAction.Do { onClick() },
+    content = {
+        Icon(
+            painter = painterResource(id = R.drawable.bar_chart_24),
+            contentDescription = stringResource(id = R.string.result_bottom_sheet_title),
+        )
+    },
 )

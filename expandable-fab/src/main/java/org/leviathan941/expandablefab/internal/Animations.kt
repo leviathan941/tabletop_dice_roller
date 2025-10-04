@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.IntOffset
 
 private val floatAnimationSpec: FiniteAnimationSpec<Float> = spring(
     stiffness = Spring.StiffnessLow,
-    dampingRatio = Spring.DampingRatioLowBouncy
+    dampingRatio = Spring.DampingRatioLowBouncy,
 )
 
 private val intOffsetAnimationSpec: FiniteAnimationSpec<IntOffset> = spring(

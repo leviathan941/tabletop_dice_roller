@@ -57,8 +57,8 @@ class MainViewModel : ViewModel() {
             tableRepository.insertDie(
                 TableDie(
                     die = uiPrefs.first().newDieType.toDie(),
-                    value = DIE_NO_RESULT
-                )
+                    value = DIE_NO_RESULT,
+                ),
             )
         }
     }
@@ -94,11 +94,14 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun setDieValue(tableDie: TableDie, result: Int) {
+    fun setDieValue(
+        tableDie: TableDie,
+        result: Int,
+    ) {
         viewModelScope.launch {
             with(tableDie) {
                 tableRepository.updateDie(
-                    TableDie(id = id, die = die, value = result)
+                    TableDie(id = id, die = die, value = result),
                 )
             }
         }

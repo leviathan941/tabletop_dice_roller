@@ -23,6 +23,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -34,11 +35,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.app.preferences.UiPreferences
 import org.leviathan941.tabletopdiceroller.model.dice.DiceUtils
@@ -51,23 +54,28 @@ import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainView(activity: ComponentActivity) {
+fun MainView(
+    activity: ComponentActivity,
+    modifier: Modifier = Modifier,
+) {
     val viewModel: MainViewModel by activity.viewModels()
 
     var openDiceTypeDialog by remember { mutableStateOf(false) }
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = rememberStandardBottomSheetState(
-            initialValue = SheetValue.PartiallyExpanded,
-            skipHiddenState = true,
-        )
+            initialValue = SheetValue.Hidden,
+            skipHiddenState = false,
+        ),
     )
+    val coroutineScope = rememberCoroutineScope()
 
     BottomSheetScaffold(
+        modifier = modifier.safeDrawingPadding(),
         sheetContent = {
             DieResultBottomSheet(mainViewModel = viewModel)
         },
         scaffoldState = bottomSheetScaffoldState,
-        sheetPeekHeight = 45.dp,
+        sheetPeekHeight = 0.dp,
         sheetContainerColor = MaterialTheme.colorScheme.secondaryContainer,
         sheetContentColor = MaterialTheme.colorScheme.onSecondaryContainer,
         sheetSwipeEnabled = true,
@@ -75,19 +83,31 @@ fun MainView(activity: ComponentActivity) {
         Box(
             modifier = Modifier
                 .padding(innerPadding)
-                .fillMaxHeight()
+                .fillMaxHeight(),
         ) {
             DiceRow(mainViewModel = viewModel)
             RollFab(
                 modifier = Modifier
                     .align(Alignment.BottomEnd),
-                onClick = viewModel::rollAll
+                onClick = viewModel::rollAll,
             )
             MenuFab(
                 modifier = Modifier
                     .align(Alignment.BottomStart),
                 onChangeDiceType = { openDiceTypeDialog = true },
                 onClearClick = { viewModel.clear() },
+                onResultBottomSheetClick = {
+                    coroutineScope.launch {
+                        with(bottomSheetScaffoldState.bottomSheetState) {
+                            when (currentValue) {
+                                SheetValue.Hidden,
+                                SheetValue.PartiallyExpanded,
+                                -> expand()
+                                SheetValue.Expanded -> hide()
+                            }
+                        }
+                    }
+                },
             )
         }
     }
@@ -106,7 +126,7 @@ fun MainView(activity: ComponentActivity) {
                     onClick = {
                         viewModel.changeNewDieType(it.type)
                         dismissDialog()
-                    }
+                    },
                 )
             }
         }

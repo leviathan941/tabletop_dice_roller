@@ -52,15 +52,17 @@ internal fun ExpandableFabInternal(
     }
     val onClickAction = {
             configuration: FabConfiguration,
-            onExpand: (FabOnClickAction.Expand) -> Unit -> {
-        when (val action = configuration.action) {
-            is FabOnClickAction.Expand -> onExpand(action)
-            is FabOnClickAction.Do -> {
-                reset()
-                action()
+            onExpand: (FabOnClickAction.Expand) -> Unit,
+        ->
+        {
+            when (val action = configuration.action) {
+                is FabOnClickAction.Expand -> onExpand(action)
+                is FabOnClickAction.Do -> {
+                    reset()
+                    action()
+                }
             }
         }
-    }
     }
 
     // Animations
@@ -95,7 +97,6 @@ internal fun ExpandableFabInternal(
                     )
                 }
             }
-
         }
 
         SingleFab(

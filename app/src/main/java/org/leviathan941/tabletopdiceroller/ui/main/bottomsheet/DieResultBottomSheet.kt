@@ -41,16 +41,21 @@ import org.leviathan941.tabletopdiceroller.model.dice.tree.isEmpty
 import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
 import org.leviathan941.tabletopdiceroller.viewmodel.MainViewModel
 
+private const val BOTTOM_SHEET_FRACTION = 0.7f
+
 @Composable
-fun DieResultBottomSheet(mainViewModel: MainViewModel) {
+fun DieResultBottomSheet(
+    mainViewModel: MainViewModel,
+    modifier: Modifier = Modifier,
+) {
     val resultTree by mainViewModel.resultModel.resultTree.collectAsState(
-        initial = DieExpandableTree.Empty
+        initial = DieExpandableTree.Empty,
     )
     val scrollState = rememberScrollState()
 
     Column(
-        modifier = Modifier
-            .fillMaxHeight(0.7f),
+        modifier = modifier
+            .fillMaxHeight(BOTTOM_SHEET_FRACTION),
     ) {
         Text(
             modifier = Modifier.padding(horizontal = 15.dp, vertical = 2.dp),
@@ -59,14 +64,14 @@ fun DieResultBottomSheet(mainViewModel: MainViewModel) {
                     R.string.result_bottom_sheet_title_no_results
                 } else {
                     R.string.result_bottom_sheet_title
-                }
+                },
             ),
             style = MaterialTheme.typography.headlineSmall,
         )
 
         HorizontalDivider(
             color = MaterialTheme.colorScheme.onSecondaryContainer,
-            thickness = 1.dp
+            thickness = 1.dp,
         )
 
         Column(
@@ -103,7 +108,7 @@ private fun ColumnScope.DieResultRows(
         if (isExpanded) {
             DieResultRows(
                 nodes = node.children,
-                depthLevel = depthLevel + 1
+                depthLevel = depthLevel + 1,
             )
         }
     }

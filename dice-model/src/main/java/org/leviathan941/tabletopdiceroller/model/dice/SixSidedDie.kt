@@ -22,22 +22,39 @@ import org.leviathan941.tabletopdiceroller.model.dice.internal.genericSameValues
 import org.leviathan941.tabletopdiceroller.utils.ImageResource
 
 private val sideResources = listOf(
-    ImageResource(R.drawable.six_sided_die_one,
-        R.string.six_sided_die_one_content_desc),
-    ImageResource(R.drawable.six_sided_die_two,
-        R.string.six_sided_die_two_content_desc),
-    ImageResource(R.drawable.six_sided_die_three,
-        R.string.six_sided_die_three_content_desc),
-    ImageResource(R.drawable.six_sided_die_four,
-        R.string.six_sided_die_four_content_desc),
-    ImageResource(R.drawable.six_sided_die_five,
-        R.string.six_sided_die_five_content_desc),
-    ImageResource(R.drawable.six_sided_die_six,
-        R.string.six_sided_die_six_content_desc)
+    ImageResource(
+        R.drawable.six_sided_die_one,
+        R.string.six_sided_die_one_content_desc,
+    ),
+    ImageResource(
+        R.drawable.six_sided_die_two,
+        R.string.six_sided_die_two_content_desc,
+    ),
+    ImageResource(
+        R.drawable.six_sided_die_three,
+        R.string.six_sided_die_three_content_desc,
+    ),
+    ImageResource(
+        R.drawable.six_sided_die_four,
+        R.string.six_sided_die_four_content_desc,
+    ),
+    ImageResource(
+        R.drawable.six_sided_die_five,
+        R.string.six_sided_die_five_content_desc,
+    ),
+    ImageResource(
+        R.drawable.six_sided_die_six,
+        R.string.six_sided_die_six_content_desc,
+    ),
 )
 private val previewResource = ImageResource(
-    R.drawable.six_sided_die_preview, R.string.dice_no_result_content_desc)
+    R.drawable.six_sided_die_preview,
+    R.string.dice_no_result_content_desc,
+)
 
 object SixSidedDie : GenericDie(sideResources, previewResource, DieType.SIX_SIDED) {
-    override fun sameValues(that: Int, other: Int): Boolean = genericSameValues(that, other)
+    override fun sameValues(
+        that: Int,
+        other: Int,
+    ): Boolean = genericSameValues(that, other)
 }
