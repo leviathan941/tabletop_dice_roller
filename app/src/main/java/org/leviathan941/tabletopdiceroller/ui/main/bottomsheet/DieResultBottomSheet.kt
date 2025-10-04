@@ -34,7 +34,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import org.leviathan941.tabletopdiceroller.R
+import org.leviaphan.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.model.dice.tree.expandable.DieExpandableTree
 import org.leviathan941.tabletopdiceroller.model.dice.tree.expandable.ExpandableNode
 import org.leviathan941.tabletopdiceroller.model.dice.tree.isEmpty

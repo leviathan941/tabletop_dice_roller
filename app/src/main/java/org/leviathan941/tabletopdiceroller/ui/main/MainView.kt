@@ -42,7 +42,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
-import org.leviathan941.tabletopdiceroller.R
+import org.leviaphan.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.app.preferences.UiPreferences
 import org.leviathan941.tabletopdiceroller.model.dice.DiceUtils
 import org.leviathan941.tabletopdiceroller.ui.dice.DiceRow

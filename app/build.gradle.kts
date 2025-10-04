@@ -17,7 +17,7 @@ java {
 }
 
 android {
-    namespace = "org.leviathan941.tabletopdiceroller"
+    namespace = "org.leviaphan.tabletopdiceroller"
     compileSdk = AndroidSdk.COMPILE_SDK_VERSION
 
     defaultConfig {

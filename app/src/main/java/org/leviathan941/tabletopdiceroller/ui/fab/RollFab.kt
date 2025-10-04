@@ -29,9 +29,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.launch
-import org.leviathan941.tabletopdiceroller.R
+import org.leviaphan.tabletopdiceroller.R
 
-@Preview
 @Composable
 fun RollFab(
     modifier: Modifier = Modifier,
@@ -61,6 +60,10 @@ fun RollFab(
                 }
             }
             onClick()
-        }
+        },
     )
 }
+
+@Preview
+@Composable
+private fun RollFabPreview() = RollFab()

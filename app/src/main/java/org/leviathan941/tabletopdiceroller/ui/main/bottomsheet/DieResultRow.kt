@@ -38,7 +38,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.leviathan941.tabletopdiceroller.R
+import org.leviaphan.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.model.dice.MunchkinDungeonDie
 import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDie
 import org.leviathan941.tabletopdiceroller.model.dice.tree.result.DieResult
@@ -50,10 +50,11 @@ import org.leviathan941.tabletopdiceroller.utils.ImageResource
 @Composable
 fun DieResultRow(
     results: List<DieResult>,
+    modifier: Modifier = Modifier,
     depthLevel: Int = 0,
     isExpandable: Boolean = false,
     isExpanded: Boolean = false,
-    onExpand: (() -> Unit)? = null,
+    onExpand: () -> Unit = {},
 ) {
     val startPadding = if (depthLevel == 0 && !isExpandable) {
         DIE_RESULT_IMAGE_SIZE_DP
@@ -61,8 +62,8 @@ fun DieResultRow(
         (depthLevel * DIE_RESULT_DEPTH_LEVEL_SIZE).dp
     }
     Row(
-        modifier = Modifier
-            .clickable { onExpand?.invoke() }
+        modifier = modifier
+            .clickable { onExpand.invoke() }
             .fillMaxWidth()
             .padding(start = startPadding),
     ) {
@@ -79,7 +80,7 @@ fun DieResultRow(
                 imageVector = expandImageVector,
                 colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSecondaryContainer),
                 contentDescription = stringResource(
-                    id = R.string.result_bottom_sheet_expand_arrow_desc
+                    id = R.string.result_bottom_sheet_expand_arrow_desc,
                 ),
             )
         }
@@ -109,14 +110,13 @@ private fun DieResultRowPreview() = DieResultRow(
         ),
         DieResultPreview(
             preview = MunchkinDungeonDie.imageBySide(
-                MunchkinDungeonDie.Side.DOUBLE_SWORDS
+                MunchkinDungeonDie.Side.DOUBLE_SWORDS,
             ),
             result = 3,
         ),
     ),
     isExpandable = true,
     isExpanded = false,
-    onExpand = null,
 )
 
 internal class DieResultPreview(

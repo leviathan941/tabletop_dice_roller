@@ -37,18 +37,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.leviathan941.tabletopdiceroller.R
+import org.leviaphan.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.model.dice.Die
 import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDie
 
 @Composable
 fun DiceAddPlaceholder(
     newDie: Die,
-    onClick: () -> Unit
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
 ) {
     ElevatedButton(
         onClick = onClick,
-        modifier = Modifier
+        modifier = modifier
             .size(DIE_VIEW_SIZE_DP)
             .padding(all = DIE_PADDING_ALL_DP),
         contentPadding = PaddingValues(0.dp),
@@ -82,5 +83,6 @@ fun DiceAddPlaceholder(
 
 @Preview
 @Composable
-private fun PreviewDiceAddPlaceholder() =
-    DiceAddPlaceholder(SixSidedDie) {}
+private fun PreviewDiceAddPlaceholder() = DiceAddPlaceholder(
+    newDie = SixSidedDie,
+) {}
