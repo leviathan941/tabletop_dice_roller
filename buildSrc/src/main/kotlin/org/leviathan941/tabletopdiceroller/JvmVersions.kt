@@ -19,5 +19,5 @@ package org.leviathan941.tabletopdiceroller
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 
 object JvmVersions {
-    val JAVA_LANG = JavaLanguageVersion.of(17)
+    val JAVA_LANG = JavaLanguageVersion.of(21)
 }
