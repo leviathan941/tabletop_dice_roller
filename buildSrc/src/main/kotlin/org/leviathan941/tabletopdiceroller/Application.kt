@@ -21,6 +21,6 @@ package org.leviathan941.tabletopdiceroller
 object Application {
     @Suppress("MemberVisibilityCanBePrivate")
     const val BASE_NAME = "tabletopdiceroller"
-    const val ID = "org.leviathan941.$BASE_NAME"
+    const val ID = "org.leviaphan.$BASE_NAME"
     val version = AppVersion()
 }

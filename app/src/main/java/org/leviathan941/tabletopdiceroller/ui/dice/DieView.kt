@@ -40,7 +40,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.leviaphan.tabletopdiceroller.R
+import org.leviathan941.tabletopdiceroller.R
 import org.leviathan941.tabletopdiceroller.db.DIE_NO_RESULT
 import org.leviathan941.tabletopdiceroller.db.entity.TableDie
 import org.leviathan941.tabletopdiceroller.model.dice.SixSidedDie

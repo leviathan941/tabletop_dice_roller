@@ -28,11 +28,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import org.leviaphan.tabletopdiceroller.R
 import org.leviathan941.expandablefab.ExpandableFab
 import org.leviathan941.expandablefab.FabConfiguration
 import org.leviathan941.expandablefab.FabOnClickAction
 import org.leviathan941.expandablefab.LayoutConfiguration
+import org.leviathan941.tabletopdiceroller.R
 
 @Composable
 fun MenuFab(

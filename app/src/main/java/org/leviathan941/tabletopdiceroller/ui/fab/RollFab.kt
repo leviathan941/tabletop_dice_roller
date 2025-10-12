@@ -29,7 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.launch
-import org.leviaphan.tabletopdiceroller.R
+import org.leviathan941.tabletopdiceroller.R
 
 @Composable
 fun RollFab(
