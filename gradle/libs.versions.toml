@@ -5,13 +5,13 @@ appcompat = "1.7.1"
 googleMaterial = "1.13.0"
 lifecycle = "2.9.4"
 composeActivity = "1.11.0"
-composeBom = "2025.09.01"
+composeBom = "2025.10.00"
 composeMaterial3 = "1.4.0"
 composeMaterialIconsCore = "1.7.8"
 dataStore = "1.1.7"
 kotlinPlugin = "2.2.20"
 ksp = "2.2.20-2.0.3"
-room = "2.8.1"
+room = "2.8.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
